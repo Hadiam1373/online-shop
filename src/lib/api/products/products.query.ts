@@ -6,6 +6,7 @@ import {
   UseMutationOptions,
 } from "@tanstack/react-query";
 import { createProduct, getProducts } from "./products.api";
+import { ICreateProductProps } from "./products.dto";
 
 type ResponseType = Awaited<ReturnType<typeof getProducts>>;
 
@@ -29,15 +30,17 @@ export const useProductsQuery = (props: {
 
 export const createProductMutationOptions = (props: {
   mutationOptions?: Omit<UseMutationOptions<ResponsePostType>, "mutationFn">;
+  params: ICreateProductProps;
 }) => {
   return {
-    mutationFn: createProduct,
+    mutationFn: () => createProduct(props.params),
     ...props.mutationOptions,
   };
 };
 
 export const useCreateProductMutation = (props: {
   mutationOptions?: Omit<UseMutationOptions<ResponsePostType>, "mutationFn">;
+  params: ICreateProductProps;
 }) => {
   return useMutation(createProductMutationOptions(props));
 };

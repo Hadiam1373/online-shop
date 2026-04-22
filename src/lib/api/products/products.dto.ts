@@ -22,3 +22,14 @@ export interface IProducts {
 export interface IProductsResponse {
   products: IProducts[];
 }
+
+export interface ICreateProductProps {
+  name: string;
+  description: string;
+  price: number;
+  discountPrice: number;
+  stock: number;
+  images: string[];
+  categoryId: string;
+  attributes: Record<string, string>;
+}
