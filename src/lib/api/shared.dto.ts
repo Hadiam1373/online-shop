@@ -7,3 +7,7 @@ export interface ApiResponse<T> {
     pages: number;
   };
 }
+
+export interface ApiPostResponse{
+  message: string;
+} 
