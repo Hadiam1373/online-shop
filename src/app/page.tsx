@@ -5,7 +5,7 @@ export default function Home() {
   const { data: products } = useProductsQuery({});
   console.log(products);
   return (
-    <div>
+    <div className="container">
       <Button variant="default">Hello World</Button>
     </div>
   );
