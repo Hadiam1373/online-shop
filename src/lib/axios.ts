@@ -1,18 +1,18 @@
-import axios from 'axios';
+import axios from "axios";
+import { cookieWrapper } from "./cookie";
 
 const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   timeout: 10000,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = typeof window !== 'undefined'
-      ? localStorage.getItem('token')
-      : null;
+    const token =
+      typeof window !== "undefined" ? cookieWrapper.get("token") : null;
 
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -20,18 +20,18 @@ axiosInstance.interceptors.request.use(
 
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => Promise.reject(error),
 );
 
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      console.log('Unauthorized!');
+      console.log("Unauthorized!");
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export default axiosInstance;
