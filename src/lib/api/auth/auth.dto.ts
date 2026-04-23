@@ -14,6 +14,19 @@ export interface ILoginResponse {
   };
 }
 
+export interface IRegisterResponse {
+  message: string;
+  accessToken: string;
+  refreshToken: string;
+  user: {
+    id: string;
+    email: string;
+    phone: string;
+    address: string;
+    role: "ADMIN" | "USER";
+  };
+}
+
 export interface IRegisterParams {
   email: string;
   password: string;

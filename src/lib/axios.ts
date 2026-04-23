@@ -75,7 +75,7 @@ axiosInstance.interceptors.response.use(
         cookieWrapper.delete("accessToken");
         cookieWrapper.delete("refreshToken");
 
-        window.location.href = "/login";
+        window.location.href = "/auth/login";
 
         return Promise.reject(err);
       } finally {

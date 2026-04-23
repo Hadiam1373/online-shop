@@ -6,6 +6,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { object, string } from "yup";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { uselogin } from "@/lib/api/auth/auth.query";
+import { ILoginParams } from "@/lib/api/auth";
 
 const loginFormSchema = object({
   email: string().required("Email is required").email("Invalid email format"),
@@ -13,12 +15,12 @@ const loginFormSchema = object({
 });
 
 const LoginPage = () => {
+  const { mutate: login } = uselogin();
   const methods = useForm({
     resolver: yupResolver(loginFormSchema),
   });
 
-  const onSubmit: SubmitHandler<any> = (data) =>
-    console.log(data, methods.formState.errors.form?.message);
+  const onSubmit: SubmitHandler<ILoginParams> = (data) => login(data);
   return (
     <Card className="px-6 mx-4">
       <h1 className="text-2xl text-center font-bold">Welcome to Online Shop</h1>
