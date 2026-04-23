@@ -47,7 +47,7 @@ const DesktopHeader = () => {
     </header>
   );
 };
-``;
+;
 
 const MobileHeader = () => {
   return (

@@ -40,7 +40,7 @@ export default function RootLayout({
       )}
     >
       <Providers>
-        <body className="min-h-full flex flex-col">
+        <body className="min-h-full">
           <Header />
           {children}
         </body>
