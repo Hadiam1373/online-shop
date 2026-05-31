@@ -1,4 +1,4 @@
 export interface IOtpFormData {
-    otp?:string,
-    phone:string,
+  phone?: string;
+  otp?: string;
 }

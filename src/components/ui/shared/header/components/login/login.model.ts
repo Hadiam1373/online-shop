@@ -10,18 +10,26 @@ export const useLoginModel = () => {
         resolver: yupResolver(otpSchema),
     });
     const onSubmit: SubmitHandler<IOtpFormData> = data => {
-        console.log('Form Data:', data);
         if (loginStep === 0) {
-            // Simulate sending OTP
-            console.log('Sending OTP to phone number:', data.phone);
+            if (!data.phone) {
+                methods.setError('phone', {
+                    message: 'Phone number is required',
+                });
+                return;
+            }
+
             setLoginStep(1);
-        } else if (loginStep === 1) {
-            // Simulate verifying OTP
-            console.log('Verifying OTP:', data.otp);
-            // Reset form and go back to step 0 after verification
-            methods.reset();
-            setLoginStep(0);
+            return;
         }
+
+        if (!data.otp) {
+            methods.setError('otp', {
+                message: 'OTP is required',
+            });
+            return;
+        }
+
+        console.log(data);
     };
 
     return {
