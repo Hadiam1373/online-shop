@@ -33,3 +33,12 @@ export interface IRegisterParams {
   phone: string;
   address: string;
 }
+
+export interface IOtpBody{
+  phone: string;
+}
+
+export interface IVerifyOtpBody{
+  phone: string;
+  code: string;
+}

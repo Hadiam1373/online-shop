@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { object, string } from "yup";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { uselogin } from "@/lib/api/auth/auth.query";
+import { useLogin } from "@/lib/api/auth/auth.query";
 import { ILoginParams } from "@/lib/api/auth";
 
 const loginFormSchema = object({
@@ -15,7 +15,7 @@ const loginFormSchema = object({
 });
 
 const LoginPage = () => {
-  const { mutate: login } = uselogin();
+  const { mutate: login } = useLogin();
   const methods = useForm({
     resolver: yupResolver(loginFormSchema),
   });
@@ -29,7 +29,7 @@ const LoginPage = () => {
         className="flex flex-col gap-4 mt-6"
       >
         <Input
-          {...methods.register("email")}
+        {...methods.register("email")}
           type="email"
           placeholder="Email"
           error={methods.formState.errors.email?.message}

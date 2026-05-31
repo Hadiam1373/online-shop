@@ -1,10 +1,12 @@
 import {
-    useMutation
+  mutationOptions,
+  useMutation, UseMutationOptions, UseQueryOptions
 } from "@tanstack/react-query";
-import { login, register } from "./auth.api";
-import { ILoginParams, IRegisterParams } from "./auth.dto";
+import {login, register, requestOTP, verifyOTP} from "./auth.api";
+import {ILoginParams, IOtpBody, IRegisterParams, IVerifyOtpBody} from "./auth.dto";
 
-export const uselogin = () => {
+
+export const useLogin = () => {
   return useMutation({
     mutationFn: (params: ILoginParams) => login(params),
     mutationKey: ["login"],
@@ -17,3 +19,19 @@ export const useRegister = () => {
     mutationKey: ["register"],
   });
 };
+
+const useOtpRequest = () => {
+  return useMutation({
+    mutationKey:['otp'],
+    mutationFn:(params: IOtpBody) => requestOTP(params),
+  })
+}
+
+const useOtpVerify = () => {
+  return useMutation({
+    mutationKey:['otp'],
+    mutationFn:(params: IVerifyOtpBody) => verifyOTP(params),
+  })
+}
+
+
