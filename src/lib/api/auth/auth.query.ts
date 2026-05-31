@@ -20,14 +20,14 @@ export const useRegister = () => {
   });
 };
 
-const useOtpRequest = () => {
+export const useOtpRequest = () => {
   return useMutation({
     mutationKey:['otp'],
     mutationFn:(params: IOtpBody) => requestOTP(params),
   })
 }
 
-const useOtpVerify = () => {
+export const useOtpVerify = () => {
   return useMutation({
     mutationKey:['otp'],
     mutationFn:(params: IVerifyOtpBody) => verifyOTP(params),
