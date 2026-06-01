@@ -41,7 +41,6 @@ export const useLoginModel = () => {
             const res = await verifyOtp({ code: data.otp, phone: data.phone! });
             cookieWrapper.set('accessToken', res.accessToken, { path: '/' });
             cookieWrapper.set('refreshToken', res.refreshToken, { path: '/' });
-            alert('OTP verified successfully!');
             setLoginStep(0);
             methods.reset();
         } catch (error) {

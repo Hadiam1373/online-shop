@@ -2,8 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ShoppingCart } from 'lucide-react';
-import { Login } from '../login';
-import { cookieWrapper } from '@/lib/cookie';
+import { Login } from '@/components/login';
 
 export const DesktopHeader: React.FC = () => {
     return (

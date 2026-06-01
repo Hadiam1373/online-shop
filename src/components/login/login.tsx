@@ -4,16 +4,16 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Button } from '@/components/ui/button';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 import { REGEXP_ONLY_DIGITS } from 'input-otp';
-import { useLoginModel } from '@/components/ui/shared/header/components/login/login.model';
 import { Input } from '@/components/ui/input';
 import { cookieWrapper } from '@/lib/cookie';
+import { useLoginModel } from '@/components/login/login.model';
+import { Profile } from '@/components/profile';
 
 export const Login: React.FC = () => {
     const isLogin = cookieWrapper.get('accessToken') ? true : false;
-    console.log('isLogin', isLogin);
     const { methods, onSubmit, loginStep } = useLoginModel();
     if (isLogin) {
-        return 'Profile';
+        return <Profile />;
     }
     return (
         <Dialog>
