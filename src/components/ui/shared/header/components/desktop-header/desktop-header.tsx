@@ -7,9 +7,9 @@ import { cookieWrapper } from '@/lib/cookie';
 
 export const DesktopHeader: React.FC = () => {
     return (
-        <header className='w-full h-16 bg-background grid grid-cols-2 items-center px-12 shadow'>
+        <header className='w-full h-24 bg-background grid grid-cols-2 items-center px-12 shadow'>
             <div>
-                <img width={100} src='/logo-s.png' alt='Logo' className='h-16' />
+                <img width={100} src='/image/logo.png' alt='Logo' className='h-auto' />
             </div>
             <div className='flex items-center justify-end gap-4'>
                 <Link href='/'>
