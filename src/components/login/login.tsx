@@ -4,9 +4,10 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Button } from '@/components/ui/button';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 import { REGEXP_ONLY_DIGITS } from 'input-otp';
-import { useLoginModel } from '@/components/ui/shared/header/components/login/login.model';
 import { Input } from '@/components/ui/input';
 import { cookieWrapper } from '@/lib/cookie';
+import { useLoginModel } from '@/components/login/login.model';
+import { Profile } from '@/components/profile';
 
 export const Login: React.FC = () => {
     const [isLogin, setIsLogin] = React.useState<boolean | null>(null);
@@ -15,8 +16,6 @@ export const Login: React.FC = () => {
     }, []);
 
     const { methods, onSubmit, loginStep } = useLoginModel();
-
-    // Avoid rendering server/client different content before hydration
     if (isLogin === null) return null;
     if (isLogin) return 'Profile';
     return (
