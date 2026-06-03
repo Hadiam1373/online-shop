@@ -10,24 +10,23 @@ import { useLoginModel } from '@/components/login/login.model';
 import { Profile } from '@/components/profile';
 
 export const Login: React.FC = () => {
-    const [isLogin, setIsLogin] = React.useState<boolean | null>(null);
-    React.useEffect(() => {
-        setIsLogin(!!cookieWrapper.get('accessToken'));
-    }, []);
-
-    const { methods, onSubmit, loginStep } = useLoginModel();
+    const { methods, onSubmit, loginStep, openModal, setOpenModal, isLogin } = useLoginModel();
     if (isLogin === null) return null;
-    if (isLogin) return 'Profile';
+    if (isLogin) return <Profile />;
     return (
-        <Dialog>
+        <Dialog open={openModal}>
             <DialogTrigger asChild>
-                <Button variant='outline'>Login</Button>
+                <Button variant='outline' onClick={() => setOpenModal(true)}>
+                    ورود
+                </Button>
             </DialogTrigger>
             <DialogContent className='sm:max-w-md'>
                 <DialogHeader>
-                    <DialogTitle>Login</DialogTitle>
+                    <DialogTitle>ورود</DialogTitle>
                     <DialogDescription>
-                        {loginStep === 0 ? 'Enter your phone number to receive an OTP' : 'Enter the OTP sent to your phone'}
+                        {loginStep === 0
+                            ? 'شماره تلفن خود را وارد کنید تا OTP دریافت کنید'
+                            : 'OTP ارسال شده به تلفن همراه خود را وارد کنید'}
                     </DialogDescription>
                 </DialogHeader>
                 <form onSubmit={methods.handleSubmit(onSubmit)}>
@@ -36,7 +35,7 @@ export const Login: React.FC = () => {
                             <Input
                                 {...methods.register('phone')}
                                 type='tel'
-                                placeholder='Phone Number'
+                                placeholder='شماره تلفن'
                                 error={methods.formState.errors.phone?.message}
                                 autoComplete='tel'
                             />
@@ -58,8 +57,8 @@ export const Login: React.FC = () => {
                                 </InputOTPGroup>
                             </InputOTP>
                         ) : null}
-                        <Button variant='default' type='submit' className='ml-4'>
-                            {loginStep === 0 ? 'Send OTP' : 'Verify OTP'}
+                        <Button variant='default' type='submit' className='ms-4'>
+                            {loginStep === 0 ? 'ارسال OTP' : 'تأیید OTP'}
                         </Button>
                     </div>
                 </form>

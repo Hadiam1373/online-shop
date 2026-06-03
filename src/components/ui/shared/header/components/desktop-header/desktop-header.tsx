@@ -13,12 +13,12 @@ export const DesktopHeader: React.FC = () => {
             <div className='flex items-center justify-end gap-4'>
                 <Link href='/'>
                     <Button variant='link' size='sm'>
-                        Home
+                        صفحه اصلی
                     </Button>
                 </Link>
                 <Link href='/products'>
                     <Button variant='link' size='sm'>
-                        Products
+                        محصولات
                     </Button>
                 </Link>
                 <ShoppingCart />

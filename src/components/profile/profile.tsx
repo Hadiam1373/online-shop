@@ -8,7 +8,9 @@ import {
     DropdownMenuLabel,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { useRouter } from 'next/navigation';
 export const Profile: React.FC = () => {
+    const navigate = useRouter();
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -16,9 +18,10 @@ export const Profile: React.FC = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuGroup>
-                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                    <DropdownMenuItem>Profile</DropdownMenuItem>
-                    <DropdownMenuItem>Billing</DropdownMenuItem>
+                    <DropdownMenuLabel>حساب کاربری من</DropdownMenuLabel>
+                    <DropdownMenuItem onClick={() => navigate.push('/user-dashboard')}>پروفایل</DropdownMenuItem>
+                    <DropdownMenuItem>علاقه‌مندی‌ها</DropdownMenuItem>
+                    <DropdownMenuItem>سفارشات</DropdownMenuItem>
                 </DropdownMenuGroup>
             </DropdownMenuContent>
         </DropdownMenu>
