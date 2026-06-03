@@ -9,12 +9,14 @@ import { Input } from '@/components/ui/input';
 import { cookieWrapper } from '@/lib/cookie';
 
 export const Login: React.FC = () => {
-    const isLogin = cookieWrapper.get('accessToken') ? true : false;
-    console.log('isLogin', isLogin);
+    const [isLogin, setIsLogin] = React.useState<boolean | null>(null);
+    React.useEffect(() => {
+        setIsLogin(!!cookieWrapper.get('accessToken'));
+    }, []);
+
     const { methods, onSubmit, loginStep } = useLoginModel();
-    if (isLogin) {
-        return 'Profile';
-    }
+    if (isLogin === null) return null;
+    if (isLogin) return 'Profile';
     return (
         <Dialog>
             <DialogTrigger asChild>
