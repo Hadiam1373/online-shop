@@ -63,3 +63,10 @@ export interface IResponseOtpVerify {
         role: userRole;
     };
 }
+
+export interface ICompeleteUserSignUpBody {
+    phone: string;
+    email: string;
+    password: string;
+    address: string;
+}

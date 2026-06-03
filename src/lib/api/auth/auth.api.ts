@@ -22,3 +22,8 @@ export const verifyOTP = async (params: IVerifyOtpBody) => {
     const response = await axiosInstance.post<IResponseOtpVerify>(BaseUrl + '/verify-otp', { code: params.code, phone: params.phone });
     return response.data;
 };
+
+export const compeleteUserRegister = async() => {
+     const response = await axiosInstance.post<IResponseOtpVerify>(BaseUrl + '/complete-registration', { code: params.code, phone: params.phone });
+    return response.data;
+}
