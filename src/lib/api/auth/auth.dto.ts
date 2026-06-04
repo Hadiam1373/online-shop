@@ -64,7 +64,7 @@ export interface IResponseOtpVerify {
     };
 }
 
-export interface ICompeleteUserSignUpBody {
+export interface ICompleteUserSignUpBody {
     phone: string;
     email: string;
     password: string;

@@ -1,5 +1,15 @@
 import axiosInstance from '@/lib/axios';
-import { ILoginParams, ILoginResponse, IOtpBody, IRegisterParams, IRegisterResponse, IResponseOtpRequest, IResponseOtpVerify, IVerifyOtpBody } from './auth.dto';
+import {
+    ICompleteUserSignUpBody,
+    ILoginParams,
+    ILoginResponse,
+    IOtpBody,
+    IRegisterParams,
+    IRegisterResponse,
+    IResponseOtpRequest,
+    IResponseOtpVerify,
+    IVerifyOtpBody,
+} from './auth.dto';
 
 const BaseUrl = '/auth';
 
@@ -23,7 +33,7 @@ export const verifyOTP = async (params: IVerifyOtpBody) => {
     return response.data;
 };
 
-export const compeleteUserRegister = async() => {
-     const response = await axiosInstance.post<IResponseOtpVerify>(BaseUrl + '/complete-registration', { code: params.code, phone: params.phone });
+export const completeUserRegister = async (params: ICompleteUserSignUpBody) => {
+    const response = await axiosInstance.post<IResponseOtpVerify>(BaseUrl + '/complete-registration', params);
     return response.data;
-}
+};

@@ -55,13 +55,17 @@ axiosInstance.interceptors.response.use(
             try {
                 const refreshToken = cookieWrapper.get('refreshToken');
 
-                const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/refresh`, { refreshToken });
+                if (!refreshToken) {
+                    throw new Error('No refresh token available');
+                }
+
+                const res = await axiosInstance.post('/auth/refresh', { refreshToken });
 
                 const newAccessToken = res.data.accessToken;
 
                 cookieWrapper.set('accessToken', newAccessToken);
 
-                axiosInstance.defaults.headers.Authorization = `Bearer ${newAccessToken}`;
+                axiosInstance.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
 
                 processQueue(null, newAccessToken);
 

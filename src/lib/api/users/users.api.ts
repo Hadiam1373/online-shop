@@ -1,11 +1,14 @@
 import axiosInstance from '@/lib/axios';
-import { ApiResponse } from '../shared.dto';
-import { IUserProfileResponse } from './users.dto';
+import { IUpdateUserProfile, IUserProfileResponse } from './users.dto';
 
-const BaseUrl = '/users';
+const BaseUrl = '/users/profile';
 
 export const getUserProfile = async () => {
-    const response = await axiosInstance.get<ApiResponse<IUserProfileResponse>>(BaseUrl);
+    const response = await axiosInstance.get<IUserProfileResponse>(BaseUrl);
     return response.data;
 };
 
+export const updateUserProfile = async (params: IUpdateUserProfile) => {
+    const response = await axiosInstance.put<IUserProfileResponse>(BaseUrl);
+    return response.data;
+};

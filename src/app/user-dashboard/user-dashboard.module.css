@@ -3,7 +3,42 @@
 .sidebar {
     @apply mt-10 flex flex-col gap-5;
 }
-
 .sidebar--item {
     @apply border rounded-sm p-2 mx-2 cursor-pointer hover:bg-accent;
+}
+.form_wrapper {
+    @apply px-6 mx-4;
+}
+.form_wrapper form {
+    @apply flex flex-col gap-4 mt-6;
+}
+.form_wrapper--inputs {
+    @apply grid grid-cols-1 gap-6 items-baseline justify-between;
+    @apply sm:grid-cols-2;
+}
+
+.form_wrapper--submit_wrapper {
+    @apply flex justify-end;
+}
+.form_wrapper--submit {
+    @apply w-[100px];
+}
+
+.form_wrapper--table table {
+    @apply w-full;
+}
+
+.form_wrapper--table table tr {
+    @apply h-12;
+}
+.form_wrapper--table table thead tr:nth-child(odd) {
+    @apply bg-sidebar-accent;
+}
+
+.form_wrapper--table table thead tr:nth-child(odd) {
+    @apply bg-sidebar-accent;
+}
+
+.form_wrapper--table table tr td {
+    @apply text-center;
 }
