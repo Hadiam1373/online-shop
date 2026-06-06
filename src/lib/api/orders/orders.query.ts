@@ -14,14 +14,20 @@ export const useCreateOrder = (props?: {
     mutationOptions?: Omit<UseMutationOptions<any, unknown, IOrderCreate>, 'mutationKey' | 'mutationFn'>;
 }) => useMutation(createOrderOptions(props));
 
-export const getOrdersOptions = (props?: { queryOptions?: Omit<UseQueryOptions<IOrderListResponse>, 'queryKey'> }) =>
+export const getOrdersOptions = (props?: {
+    queryOptions?: Omit<UseQueryOptions<IOrderListResponse>, 'queryKey'>;
+    params: { page: number; limit: number };
+}) =>
     queryOptions({
         queryKey: ['orders'] as const,
-        queryFn: () => getOrders(),
+        queryFn: () => getOrders({ limit: props?.params?.limit!, page: props?.params?.page! }),
         ...(props?.queryOptions || {}),
     });
 
-export const useGetOrders = (props?: { queryOptions?: Omit<UseQueryOptions<IOrderListResponse>, 'queryKey'> }) => {
+export const useGetOrders = (props?: {
+    queryOptions?: Omit<UseQueryOptions<IOrderListResponse>, 'queryKey'>;
+    params: { page: number; limit: number };
+}) => {
     return useQuery(getOrdersOptions(props));
 };
 

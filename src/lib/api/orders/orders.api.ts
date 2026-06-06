@@ -8,7 +8,7 @@ export const createOrder = async (payload: IOrderCreate): Promise<any> => {
     return res.data;
 };
 
-export const getOrders = async (params?: any): Promise<IOrderListResponse> => {
+export const getOrders = async (params: { page: number; limit: number }): Promise<IOrderListResponse> => {
     const res = await axiosInstance.get(Base, { params });
     return res.data;
 };

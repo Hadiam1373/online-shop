@@ -8,7 +8,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Typography } from '@/components/ui/typography';
 
 const Orders = () => {
-    const { orders, isPending, currentOrderStatus, handleCancelOrder, openModal, setOpenModal } = useOrders();
+    const { orders, isPending, currentOrderStatus, handleCancelOrder, openModal, setOpenModal, page, setPage } = useOrders();
     return (
         <div className={styles['form_wrapper']}>
             <HeaderTitle title='سفارشات کاربر' />
@@ -76,6 +76,7 @@ const Orders = () => {
                         </tbody>
                     </table>
                 )}
+                <div className='flex w-full justify-center items-center'></div>
             </div>
         </div>
     );
