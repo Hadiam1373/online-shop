@@ -6,10 +6,10 @@ import {
   UseQueryOptions,
 } from "@tanstack/react-query";
 import { getMyReviews, createReview } from "./reviews.api";
-import { IReviewInput } from "./reviews.dto";
+import { IReviewInput, IUserReviewsResponse } from "./reviews.dto";
 
 export const getMyReviewsOptions = (props?: {
-  queryOptions?: Omit<UseQueryOptions<any>, "queryKey">;
+  queryOptions?: Omit<UseQueryOptions<IUserReviewsResponse>, "queryKey">;
 }) => {
   return queryOptions({
     queryKey: ["my-reviews"] as const,
@@ -19,7 +19,7 @@ export const getMyReviewsOptions = (props?: {
 };
 
 export const useGetMyReviews = (props?: {
-  queryOptions?: Omit<UseQueryOptions<any>, "queryKey">;
+  queryOptions?: Omit<UseQueryOptions<IUserReviewsResponse>, "queryKey">;
 }) => {
   return useQuery(getMyReviewsOptions(props));
 };

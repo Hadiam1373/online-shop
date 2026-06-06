@@ -13,10 +13,14 @@ import {
   updateCartItem,
   removeCartItem,
 } from "./cart.api";
-import { ICartItemInput } from "./cart.dto";
+import {
+  ICartItemInput,
+  ICartResponse,
+  ICartCalculateResponse,
+} from "./cart.dto";
 
 export const getCartOptions = (props?: {
-  queryOptions?: Omit<UseQueryOptions<any>, "queryKey">;
+  queryOptions?: Omit<UseQueryOptions<ICartResponse>, "queryKey">;
 }) =>
   queryOptions({
     queryKey: ["cart"] as const,
@@ -25,7 +29,7 @@ export const getCartOptions = (props?: {
   });
 
 export const useGetCart = (props?: {
-  queryOptions?: Omit<UseQueryOptions<any>, "queryKey">;
+  queryOptions?: Omit<UseQueryOptions<ICartResponse>, "queryKey">;
 }) => {
   return useQuery(getCartOptions(props));
 };

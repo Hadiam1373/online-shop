@@ -6,7 +6,7 @@ import {
   UseQueryOptions,
 } from "@tanstack/react-query";
 import { createOrder, getOrders, getOrder } from "./orders.api";
-import { IOrderCreate, IOrder } from "./orders.dto";
+import { IOrderCreate, IOrder, IOrderListResponse } from "./orders.dto";
 
 export const createOrderOptions = (props?: {
   mutationOptions?: Omit<
@@ -27,7 +27,7 @@ export const useCreateOrder = (props?: {
 }) => useMutation(createOrderOptions(props));
 
 export const getOrdersOptions = (props?: {
-  queryOptions?: Omit<UseQueryOptions<any>, "queryKey">;
+  queryOptions?: Omit<UseQueryOptions<IOrderListResponse>, "queryKey">;
 }) =>
   queryOptions({
     queryKey: ["orders"] as const,
@@ -36,7 +36,7 @@ export const getOrdersOptions = (props?: {
   });
 
 export const useGetOrders = (props?: {
-  queryOptions?: Omit<UseQueryOptions<any>, "queryKey">;
+  queryOptions?: Omit<UseQueryOptions<IOrderListResponse>, "queryKey">;
 }) => {
   return useQuery(getOrdersOptions(props));
 };
