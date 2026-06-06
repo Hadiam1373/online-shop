@@ -4,7 +4,7 @@
     @apply mt-10 flex flex-col gap-5;
 }
 .sidebar--item {
-    @apply border rounded-sm p-2 mx-2 cursor-pointer hover:bg-accent;
+    @apply p-2 mx-2 rounded-lg cursor-pointer text-background;
 }
 .form_wrapper {
     @apply px-6 mx-4;

@@ -23,38 +23,38 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <SidebarProvider dir='rtl'>
             <Sidebar>
                 <SidebarHeader>
-                    <Typography variant='subtitle1' className='border-b border-secondary py-2 text-center'>
-                        محصولات زیبایی نگار
+                    <Typography variant='subtitle1' className='border-b border-secondary py-3 text-center text-background'>
+                        پروفایل کاربر
                     </Typography>
                 </SidebarHeader>
                 <SidebarContent className={style['sidebar']}>
                     <div
                         onClick={() => route.push('/user-dashboard')}
-                        className={cn(style['sidebar--item'], path === '/user-dashboard' && 'bg-accent')}
+                        className={cn(style['sidebar--item'], path === '/user-dashboard' && 'bg-destructive')}
                     >
                         <Typography>مشخصات </Typography>
                     </div>
                     <div
                         onClick={() => route.push('/user-dashboard/orders')}
-                        className={cn(style['sidebar--item'], path === '/user-dashboard/orders' && 'bg-accent')}
+                        className={cn(style['sidebar--item'], path === '/user-dashboard/orders' && 'bg-destructive')}
                     >
                         <Typography>سفارشات </Typography>
                     </div>
                     <div
                         onClick={() => route.push('/user-dashboard/comments')}
-                        className={cn(style['sidebar--item'], path === '/user-dashboard/comments' && 'bg-accent')}
+                        className={cn(style['sidebar--item'], path === '/user-dashboard/comments' && 'bg-destructive')}
                     >
                         <Typography>نظر ها </Typography>
                     </div>
                     <div
                         onClick={() => route.push('/user-dashboard/whishlist')}
-                        className={cn(style['sidebar--item'], path === '/user-dashboard/whishlist' && 'bg-accent')}
+                        className={cn(style['sidebar--item'], path === '/user-dashboard/whishlist' && 'bg-destructive')}
                     >
                         <Typography> علاقه مندی ها </Typography>
                     </div>
                     <div
                         onClick={() => route.push('/user-dashboard/security')}
-                        className={cn(style['sidebar--item'], path === '/user-dashboard/security' && 'bg-accent')}
+                        className={cn(style['sidebar--item'], path === '/user-dashboard/security' && 'bg-destructive')}
                     >
                         <Typography> امنیت حساب </Typography>
                     </div>

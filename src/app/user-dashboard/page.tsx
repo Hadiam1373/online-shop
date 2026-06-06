@@ -34,7 +34,12 @@ const UserDashboard: React.FC = () => {
                         autoComplete='tel'
                     />
                     <div className={styles['form_wrapper--submit_wrapper']}>
-                        <Button className={styles['form_wrapper--submit']} type='submit' disabled={methods.formState.isSubmitting}>
+                        <Button
+                            variant='outline'
+                            className={styles['form_wrapper--submit']}
+                            type='submit'
+                            disabled={methods.formState.isSubmitting}
+                        >
                             ثبت
                         </Button>
                     </div>
