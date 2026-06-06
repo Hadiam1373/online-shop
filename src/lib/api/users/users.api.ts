@@ -9,6 +9,6 @@ export const getUserProfile = async () => {
 };
 
 export const updateUserProfile = async (params: IUpdateUserProfile) => {
-    const response = await axiosInstance.put<IUserProfileResponse>(BaseUrl);
+    const response = await axiosInstance.put<IUserProfileResponse>(BaseUrl, params);
     return response.data;
 };

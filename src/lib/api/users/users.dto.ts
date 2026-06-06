@@ -17,7 +17,6 @@ export interface IUpdateProfileParams {
 }
 
 export interface IUpdateUserProfile {
-    phone: string;
     email: string;
     address: string;
 }

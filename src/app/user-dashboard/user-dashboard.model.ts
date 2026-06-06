@@ -26,7 +26,6 @@ export const useProfileInfo = () => {
         updateProfile({
             address: data?.address,
             email: data?.email,
-            phone: data?.phone,
         });
     return {
         profileData,

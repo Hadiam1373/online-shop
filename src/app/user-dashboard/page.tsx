@@ -32,6 +32,7 @@ const UserDashboard: React.FC = () => {
                         placeholder='تلفن'
                         error={methods.formState.errors.phone?.message}
                         autoComplete='tel'
+                        disabled
                     />
                     <div className={styles['form_wrapper--submit_wrapper']}>
                         <Button
