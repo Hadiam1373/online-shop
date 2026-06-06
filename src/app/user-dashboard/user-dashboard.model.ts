@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { IUserInfoForm } from './user-dashboard.dto';
 import { registerFormSchema } from './user-dashboard.schema';
-import { useGetProfile, useUpdateUserProfile } from '@/lib/api';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useGetProfile, useUpdateUserProfile } from '@/lib/api/users/users.query';
 
 export const useProfileInfo = () => {
-    const { data: profileData } = useGetProfile({});
+    const { data: profileData } = useGetProfile();
     const { mutate: updateProfile } = useUpdateUserProfile();
     const methods = useForm({
         resolver: yupResolver(registerFormSchema),

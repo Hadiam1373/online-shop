@@ -2,45 +2,123 @@ import {
   queryOptions,
   useMutation,
   useQuery,
-  UseQueryOptions,
   UseMutationOptions,
+  UseQueryOptions,
 } from "@tanstack/react-query";
-import { createProduct, getProducts } from "./products.api";
-import { ICreateProductProps } from "./products.dto";
+import {
+  getProducts,
+  getProduct,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+} from "./products.api";
+import { IProduct, IProductInput } from "./products.dto";
 
-type ResponseType = Awaited<ReturnType<typeof getProducts>>;
+type ListResponse = IProduct[];
+type ItemResponse = IProduct;
 
-type ResponsePostType = Awaited<ReturnType<typeof createProduct>>;
-
-export const productsQueryOptions = (props: {
-  queryOptions?: Omit<UseQueryOptions<ResponseType>, "queryKey">;
+export const getProductsOptions = (props?: {
+  queryOptions?: Omit<UseQueryOptions<ListResponse>, "queryKey">;
 }) => {
-  return queryOptions<ResponseType>({
-    queryKey: ["products"],
-    queryFn: getProducts,
-    ...props.queryOptions,
+  return queryOptions({
+    queryKey: ["products"] as const,
+    queryFn: () => getProducts(),
+    ...(props?.queryOptions || {}),
   });
 };
 
-export const useProductsQuery = (props: {
-  queryOptions?: Omit<UseQueryOptions<ResponseType>, "queryKey">;
+export const useGetProducts = (props?: {
+  queryOptions?: Omit<UseQueryOptions<ListResponse>, "queryKey">;
 }) => {
-  return useQuery(productsQueryOptions(props));
+  return useQuery(getProductsOptions(props));
 };
 
-export const createProductMutationOptions = (props: {
-  mutationOptions?: Omit<UseMutationOptions<ResponsePostType>, "mutationFn">;
-  params: ICreateProductProps;
-}) => {
-  return {
-    mutationFn: () => createProduct(props.params),
-    ...props.mutationOptions,
-  };
+export const getProductOptions = (
+  id: string,
+  props?: {
+    queryOptions?: Omit<UseQueryOptions<ItemResponse>, "queryKey">;
+  },
+) => {
+  return queryOptions({
+    queryKey: ["product", id] as const,
+    queryFn: () => getProduct(id),
+    ...(props?.queryOptions || {}),
+  });
 };
 
-export const useCreateProductMutation = (props: {
-  mutationOptions?: Omit<UseMutationOptions<ResponsePostType>, "mutationFn">;
-  params: ICreateProductProps;
-}) => {
-  return useMutation(createProductMutationOptions(props));
+export const useGetProduct = (
+  id: string,
+  props?: {
+    queryOptions?: Omit<UseQueryOptions<ItemResponse>, "queryKey">;
+  },
+) => {
+  return useQuery(getProductOptions(id, props));
 };
+
+export const createProductOptions = (props?: {
+  mutationOptions?: Omit<
+    UseMutationOptions<IProduct, unknown, IProductInput>,
+    "mutationKey" | "mutationFn"
+  >;
+}) => ({
+  mutationKey: ["create-product"] as const,
+  mutationFn: (payload: IProductInput) => createProduct(payload),
+  ...(props?.mutationOptions || {}),
+});
+
+export const useCreateProduct = (props?: {
+  mutationOptions?: Omit<
+    UseMutationOptions<IProduct, unknown, IProductInput>,
+    "mutationKey" | "mutationFn"
+  >;
+}) => useMutation(createProductOptions(props));
+
+export const updateProductOptions = (props?: {
+  mutationOptions?: Omit<
+    UseMutationOptions<
+      IProduct,
+      unknown,
+      { id: string; payload: Partial<IProductInput> }
+    >,
+    "mutationKey" | "mutationFn"
+  >;
+}) => ({
+  mutationKey: ["update-product"] as const,
+  mutationFn: ({
+    id,
+    payload,
+  }: {
+    id: string;
+    payload: Partial<IProductInput>;
+  }) => updateProduct(id, payload),
+  ...(props?.mutationOptions || {}),
+});
+
+export const useUpdateProduct = (props?: {
+  mutationOptions?: Omit<
+    UseMutationOptions<
+      IProduct,
+      unknown,
+      { id: string; payload: Partial<IProductInput> }
+    >,
+    "mutationKey" | "mutationFn"
+  >;
+}) => useMutation(updateProductOptions(props));
+
+export const deleteProductOptions = (props?: {
+  mutationOptions?: Omit<
+    UseMutationOptions<any, unknown, string>,
+    "mutationKey" | "mutationFn"
+  >;
+}) => ({
+  mutationKey: ["delete-product"] as const,
+  mutationFn: (id: string) => deleteProduct(id),
+  ...(props?.mutationOptions || {}),
+});
+
+export const useDeleteProduct = (props?: {
+  mutationOptions?: Omit<
+    UseMutationOptions<any, unknown, string>,
+    "mutationKey" | "mutationFn"
+  >;
+}) => useMutation(deleteProductOptions(props));

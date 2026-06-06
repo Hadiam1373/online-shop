@@ -3,12 +3,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { otpSchema } from './login.schema';
 import { IOtpFormData } from './login.dto';
 import { useEffect, useState } from 'react';
-import { useOtpRequest, useOtpVerify } from '@/lib/api/auth';
 import { cookieWrapper } from '@/lib/cookie';
+import { useRequestOtp, useVerifyOtp } from '@/lib/api/auth/auth.query';
 
 export const useLoginModel = () => {
-    const { mutateAsync: requestOtp } = useOtpRequest();
-    const { mutateAsync: verifyOtp } = useOtpVerify();
+    const { mutate: requestOtp } = useRequestOtp();
+    const { mutateAsync: verifyOtp } = useVerifyOtp();
     const [loginStep, setLoginStep] = useState<number>(0);
     const [openModal, setOpenModal] = useState(false);
     const methods = useForm({
@@ -23,9 +23,8 @@ export const useLoginModel = () => {
                 return;
             }
             try {
-                const res = await requestOtp({ phone: data.phone });
+                const res = requestOtp({ phone: data?.phone });
                 setLoginStep(1);
-                alert(res.otp);
             } catch (error) {
                 console.error('Error requesting OTP:', error);
             }

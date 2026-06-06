@@ -1,35 +1,24 @@
-export interface IProducts {
+export interface IProduct {
   id: string;
   name: string;
-  description: string;
+  description?: string;
   price: number;
-  discountPrice: number;
+  discountPrice?: number;
   stock: number;
   images: string[];
   categoryId: string;
-  attributes: Record<string, string>;
+  attributes?: Record<string, any>;
   createdAt: string;
   updatedAt: string;
-  category: {
-    id: string;
-    name: string;
-    description: string;
-    parentId: string;
-    createdAt: string;
-  };
 }
 
-export interface IProductsResponse {
-  products: IProducts[];
-}
-
-export interface ICreateProductProps {
+export interface IProductInput {
   name: string;
-  description: string;
+  description?: string;
   price: number;
-  discountPrice: number;
+  discountPrice?: number;
   stock: number;
   images: string[];
   categoryId: string;
-  attributes: Record<string, string>;
+  attributes?: Record<string, any>;
 }

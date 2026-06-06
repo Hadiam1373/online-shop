@@ -1,72 +1,52 @@
-export interface ILoginParams {
-    email: string;
-    password: string;
-}
-
-type userRole = 'ADMIN' | 'USER' | 'OPERATOR';
-
-export interface ILoginResponse {
-    message: string;
-    accessToken: string;
-    refreshToken: string;
-    user: {
-        id: string;
-        email: string;
-        role: userRole;
-    };
-}
-
-export interface IRegisterResponse {
-    message: string;
-    accessToken: string;
-    refreshToken: string;
-    user: {
-        id: string;
-        email: string;
-        phone: string;
-        address: string;
-        role: userRole;
-    };
-}
-
 export interface IRegisterParams {
-    email: string;
-    password: string;
-    phone: string;
-    address: string;
+  phone: string;
+  email?: string;
+  password?: string;
+  address?: string;
 }
 
-export interface IOtpBody {
-    phone: string;
+export interface IAuthLoginParams {
+  email: string;
+  password: string;
 }
 
-export interface IVerifyOtpBody {
+export interface IAuthLoginResponse {
+  accessToken: string;
+  refreshToken?: string;
+  user?: {
+    id: string;
     phone: string;
-    code: string;
+    email?: string | null;
+    address?: string | null;
+    role?: string;
+  };
 }
 
-export interface IResponseOtpRequest {
-    message: string;
-    otp: string;
-    phone: string;
+export interface IOtpRequest {
+  phone: string;
+}
+export interface IOtpVerify {
+  phone: string;
+  code: string;
 }
 
-export interface IResponseOtpVerify {
-    message: string;
-    accessToken: string;
-    refreshToken: string;
-    user: {
-        id: string;
-        phone: string;
-        email: null;
-        address: null;
-        role: userRole;
-    };
+export interface ICompleteRegistration {
+  phone: string;
+  email?: string;
+  password?: string;
+  address?: string;
 }
 
-export interface ICompleteUserSignUpBody {
-    phone: string;
-    email: string;
-    password: string;
-    address: string;
+export interface IRefreshParams {
+  refreshToken: string;
+}
+
+export interface IPasswordResetRequest {
+  phone: string;
+}
+export interface IPasswordResetConfirm {
+  phone: string;
+  code: string;
+  newPassword: string;
+  confirmPassword: string;
 }

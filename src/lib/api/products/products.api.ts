@@ -1,17 +1,32 @@
 import axiosInstance from "@/lib/axios";
-import { ApiPostResponse, ApiResponse } from "../shared.dto";
-import { ICreateProductProps, IProductsResponse } from "./products.dto";
+import { IProduct, IProductInput } from "./products.dto";
 
-const BaseUrl = "/products";
+const Base = "/api/products";
 
 export const getProducts = async () => {
-  const response =
-    await axiosInstance.get<ApiResponse<IProductsResponse>>(BaseUrl);
-  return response.data;
+  const res = await axiosInstance.get<IProduct[]>(Base);
+  return res.data;
 };
 
-export const createProduct = async (props:ICreateProductProps) => {
-  const response =
-    await axiosInstance.post<ApiPostResponse>(BaseUrl, props);
-  return response.data;
+export const getProduct = async (id: string) => {
+  const res = await axiosInstance.get<IProduct>(`${Base}/${id}`);
+  return res.data;
+};
+
+export const createProduct = async (payload: IProductInput) => {
+  const res = await axiosInstance.post<IProduct>(Base, payload);
+  return res.data;
+};
+
+export const updateProduct = async (
+  id: string,
+  payload: Partial<IProductInput>,
+) => {
+  const res = await axiosInstance.put<IProduct>(`${Base}/${id}`, payload);
+  return res.data;
+};
+
+export const deleteProduct = async (id: string) => {
+  const res = await axiosInstance.delete(`${Base}/${id}`);
+  return res.data;
 };
