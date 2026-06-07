@@ -315,6 +315,11 @@
     }
     body {
         @apply bg-background text-foreground;
+        font-family:
+            'Anjoman',
+            -apple-system,
+            Arial,
+            sans-serif;
     }
     html {
         @apply font-sans;

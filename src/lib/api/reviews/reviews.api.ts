@@ -12,3 +12,13 @@ export const createReview = async (payload: IReviewInput): Promise<any> => {
     const res = await axiosInstance.post(Base, payload);
     return res.data;
 };
+
+export const deleteReview = async (reviewId: string): Promise<any> => {
+    const res = await axiosInstance.delete(`${Base}/${reviewId}`);
+    return res.data;
+}
+
+export const editReview = async (reviewId: string, payload: IReviewInput): Promise<any> => {
+    const res = await axiosInstance.put(`${Base}/${reviewId}`, payload);
+    return res.data;
+}

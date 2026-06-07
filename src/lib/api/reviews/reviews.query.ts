@@ -1,5 +1,5 @@
 import { queryOptions, useMutation, useQuery, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
-import { getMyReviews, createReview } from './reviews.api';
+import { getMyReviews, createReview, deleteReview, editReview } from './reviews.api';
 import { IGetMyReviewsParams, IReviewInput, IUserReviewsResponse } from './reviews.dto';
 
 export const getMyReviewsOptions = (props?: { queryOptions?: Omit<UseQueryOptions<IUserReviewsResponse>, 'queryKey'> ,  params?: IGetMyReviewsParams;}) => {
@@ -28,3 +28,27 @@ export const createReviewOptions = (props?: {
 export const useCreateReview = (props?: {
     mutationOptions?: Omit<UseMutationOptions<any, unknown, IReviewInput>, 'mutationKey' | 'mutationFn'>;
 }) => useMutation(createReviewOptions(props));
+
+export const deleteReviewOptions = (props?: {
+    mutationOptions?: Omit<UseMutationOptions<any, unknown, string>, 'mutationKey' | 'mutationFn'>;
+}) => ({
+    mutationKey: ['delete-review'] as const,
+    mutationFn: (reviewId: string) => deleteReview(reviewId),
+    ...(props?.mutationOptions || {}),
+});
+
+export const useDeleteReview = (props?: {
+    mutationOptions?: Omit<UseMutationOptions<any, unknown, string>, 'mutationKey' | 'mutationFn'>;
+}) => useMutation(deleteReviewOptions(props));
+
+export const editReviewOptions = (props?: {
+    mutationOptions?: Omit<UseMutationOptions<any, unknown, { reviewId: string; payload: IReviewInput }>, 'mutationKey' | 'mutationFn'>;
+}) => ({
+    mutationKey: ['edit-review'] as const,
+    mutationFn: ({ reviewId, payload }: { reviewId: string; payload: IReviewInput }) => editReview(reviewId, payload),
+    ...(props?.mutationOptions || {}),
+});
+
+export const useEditReview = (props?: {
+    mutationOptions?: Omit<UseMutationOptions<any, unknown, { reviewId: string; payload: IReviewInput }>, 'mutationKey' | 'mutationFn'>;
+}) => useMutation(editReviewOptions(props));
