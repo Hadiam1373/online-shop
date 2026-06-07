@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Typography } from '@/components/ui/typography';
 import { Pagination } from '@/components/ui/pagination';
+import { Empty, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty';
+import { BookOpen } from 'lucide-react';
 
 const Orders = () => {
     const { orders, isPending, currentOrderStatus, handleCancelOrder, openModal, setOpenModal, page, setPage } = useOrders();
@@ -24,6 +26,17 @@ const Orders = () => {
                             </div>
                         ))}
                     </div>
+                ) : !orders?.data?.length ? (
+                    <Empty>
+                        <EmptyHeader>
+                            <EmptyMedia variant='icon'>
+                                <BookOpen />
+                            </EmptyMedia>
+                            <EmptyTitle>
+                                <Typography>سفارشی موجود نیست</Typography>
+                            </EmptyTitle>
+                        </EmptyHeader>
+                    </Empty>
                 ) : (
                     <table>
                         <thead>
