@@ -1,6 +1,35 @@
+'use client';
+
 import { Typography } from '@/components/ui/typography';
+import styles from '../user-dashboard.module.css';
+import { userSecurityData } from './security.model';
+import { HeaderTitle } from '@/components';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 const Security = () => {
-    return <Typography>امنیت کاربر</Typography>;
+    const { methods, onSubmit } = userSecurityData();
+    return (
+        <div className={styles['form_wrapper']}>
+            <HeaderTitle title='امنیت حساب کاربری' />
+            <Typography variant='subtitle1' className='mb-4'>
+                در این بخش می‌توانید رمز عبور حساب کاربری خود را تغییر دهید. لطفاً برای حفظ امنیت حساب خود، از رمز عبور قوی استفاده کنید و
+                آن را با کسی به اشتراک نگذارید.
+            </Typography>
+            <form onSubmit={methods.handleSubmit(onSubmit)} className='flex flex-col gap-4 mt-4'>
+                <div className='grid grid-cols-3 gap-4'>
+                    <Input type='password' placeholder='رمز عبور فعلی' {...methods.register('currentPassword')} />
+                    <Input type='password' placeholder='رمز عبور جدید' {...methods.register('newPassword')} />
+                    <Input type='password' placeholder='تکرار رمز عبور جدید' {...methods.register('confirmPassword')} />
+                </div>
+                <div className='flex gap-2 mt-2'>
+                    <Button type='submit' disabled={!methods.formState.isDirty}>
+                        ذخیره تغییرات
+                    </Button>
+                    <Button variant='secondary'>انصراف</Button>
+                </div>
+            </form>
+        </div>
+    );
 };
 export default Security;
