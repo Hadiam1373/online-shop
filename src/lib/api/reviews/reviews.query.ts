@@ -1,43 +1,30 @@
-import {
-  queryOptions,
-  useMutation,
-  useQuery,
-  UseMutationOptions,
-  UseQueryOptions,
-} from "@tanstack/react-query";
-import { getMyReviews, createReview } from "./reviews.api";
-import { IReviewInput, IUserReviewsResponse } from "./reviews.dto";
+import { queryOptions, useMutation, useQuery, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
+import { getMyReviews, createReview } from './reviews.api';
+import { IGetMyReviewsParams, IReviewInput, IUserReviewsResponse } from './reviews.dto';
 
-export const getMyReviewsOptions = (props?: {
-  queryOptions?: Omit<UseQueryOptions<IUserReviewsResponse>, "queryKey">;
-}) => {
-  return queryOptions({
-    queryKey: ["my-reviews"] as const,
-    queryFn: () => getMyReviews(),
-    ...(props?.queryOptions || {}),
-  });
+export const getMyReviewsOptions = (props?: { queryOptions?: Omit<UseQueryOptions<IUserReviewsResponse>, 'queryKey'> ,  params?: IGetMyReviewsParams;}) => {
+    return queryOptions({
+        queryKey: ['my-reviews'] as const,
+        queryFn: () => getMyReviews(props?.params),
+        ...(props?.queryOptions || {}),
+    });
 };
 
 export const useGetMyReviews = (props?: {
-  queryOptions?: Omit<UseQueryOptions<IUserReviewsResponse>, "queryKey">;
+    queryOptions?: Omit<UseQueryOptions<IUserReviewsResponse>, 'queryKey'>;
+    params?: IGetMyReviewsParams;
 }) => {
-  return useQuery(getMyReviewsOptions(props));
+    return useQuery(getMyReviewsOptions(props));
 };
 
 export const createReviewOptions = (props?: {
-  mutationOptions?: Omit<
-    UseMutationOptions<any, unknown, IReviewInput>,
-    "mutationKey" | "mutationFn"
-  >;
+    mutationOptions?: Omit<UseMutationOptions<any, unknown, IReviewInput>, 'mutationKey' | 'mutationFn'>;
 }) => ({
-  mutationKey: ["create-review"] as const,
-  mutationFn: (payload: IReviewInput) => createReview(payload),
-  ...(props?.mutationOptions || {}),
+    mutationKey: ['create-review'] as const,
+    mutationFn: (payload: IReviewInput) => createReview(payload),
+    ...(props?.mutationOptions || {}),
 });
 
 export const useCreateReview = (props?: {
-  mutationOptions?: Omit<
-    UseMutationOptions<any, unknown, IReviewInput>,
-    "mutationKey" | "mutationFn"
-  >;
+    mutationOptions?: Omit<UseMutationOptions<any, unknown, IReviewInput>, 'mutationKey' | 'mutationFn'>;
 }) => useMutation(createReviewOptions(props));

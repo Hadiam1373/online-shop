@@ -35,3 +35,8 @@ export interface IUserReviewsResponse {
   data: IReview[];
   pagination: IPaginationMeta;
 }
+
+export interface IGetMyReviewsParams {
+    page: number;
+    limit: number;
+}

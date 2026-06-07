@@ -1,5 +1,5 @@
 import axiosInstance from '@/lib/axios';
-import { IOrderCreate, IOrder, IOrderListResponse } from './orders.dto';
+import { IOrderCreate, IOrder, IOrderListResponse, IGetOrdersParams } from './orders.dto';
 
 const Base = '/api/orders';
 
@@ -8,7 +8,7 @@ export const createOrder = async (payload: IOrderCreate): Promise<any> => {
     return res.data;
 };
 
-export const getOrders = async (params: { page: number; limit: number }): Promise<IOrderListResponse> => {
+export const getOrders = async (params: IGetOrdersParams): Promise<IOrderListResponse> => {
     const res = await axiosInstance.get(Base, { params });
     return res.data;
 };

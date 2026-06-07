@@ -1,6 +1,6 @@
 import { queryOptions, useMutation, useQuery, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
 import { createOrder, getOrders, getOrder, cancelOrder } from './orders.api';
-import { IOrderCreate, IOrder, IOrderListResponse } from './orders.dto';
+import { IOrderCreate, IOrder, IOrderListResponse, IGetOrdersParams } from './orders.dto';
 
 export const createOrderOptions = (props?: {
     mutationOptions?: Omit<UseMutationOptions<any, unknown, IOrderCreate>, 'mutationKey' | 'mutationFn'>;
@@ -16,17 +16,17 @@ export const useCreateOrder = (props?: {
 
 export const getOrdersOptions = (props?: {
     queryOptions?: Omit<UseQueryOptions<IOrderListResponse>, 'queryKey'>;
-    params: { page: number; limit: number };
+    params: IGetOrdersParams;
 }) =>
     queryOptions({
-        queryKey: ['orders'] as const,
-        queryFn: () => getOrders({ limit: props?.params?.limit!, page: props?.params?.page! }),
+        queryKey: ['orders', props?.params] as const,
+        queryFn: () => getOrders(props?.params || { page: 1, limit: 10 }),
         ...(props?.queryOptions || {}),
     });
 
 export const useGetOrders = (props?: {
     queryOptions?: Omit<UseQueryOptions<IOrderListResponse>, 'queryKey'>;
-    params: { page: number; limit: number };
+    params: IGetOrdersParams;
 }) => {
     return useQuery(getOrdersOptions(props));
 };

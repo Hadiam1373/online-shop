@@ -5,8 +5,9 @@ import { Card } from '@/components/ui/card';
 import { Typography } from '@/components/ui/typography';
 import { useComments } from './comments.model';
 import { Skeleton } from '@/components/ui/skeleton';
+import Pagination from '@/components/ui/pagination';
 const Comments = () => {
-    const { comments, isPending } = useComments();
+    const { comments, isPending, page, setPage } = useComments();
     return (
         <div className={styles['form_wrapper']}>
             <HeaderTitle title='نظرات کاربر' />
@@ -32,6 +33,9 @@ const Comments = () => {
                     </div>
                 </Card>
             ))}
+            <div className='flex w-full justify-center items-center mt-10'>
+                <Pagination currentPage={page} onPageChange={setPage} totalPages={comments?.pagination?.pages || 1} />
+            </div>
         </div>
     );
 };

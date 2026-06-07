@@ -3,14 +3,15 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
 export const useWishlist = () => {
+    const [page, setPage] = useState(1);
     const queryClient = useQueryClient();
     const [openModal, setOpenModal] = useState(false);
-    const { data: wishlist, isPending } = useGetWishlist();
+    const { data: wishlist, isPending } = useGetWishlist({ params: { page: page, limit: 6 } });
     const { mutateAsync: removeFromWishlist } = useRemoveFromWishlist();
     const handleremoveWishlist = async (id: string) => {
         await removeFromWishlist({ productId: id });
         await queryClient.invalidateQueries({ queryKey: ['wishlist'] });
         setOpenModal(false);
     };
-    return { wishlist, isPending, handleremoveWishlist, openModal, setOpenModal };
+    return { wishlist, isPending, handleremoveWishlist, openModal, setOpenModal, page, setPage };
 };

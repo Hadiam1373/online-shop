@@ -6,6 +6,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Typography } from '@/components/ui/typography';
+import { Pagination } from '@/components/ui/pagination';
 
 const Orders = () => {
     const { orders, isPending, currentOrderStatus, handleCancelOrder, openModal, setOpenModal, page, setPage } = useOrders();
@@ -76,7 +77,9 @@ const Orders = () => {
                         </tbody>
                     </table>
                 )}
-                <div className='flex w-full justify-center items-center'></div>
+                <div className='flex w-full justify-center items-center mt-10'>
+                    <Pagination currentPage={page} onPageChange={setPage} totalPages={orders?.pagination?.pages || 1} />
+                </div>
             </div>
         </div>
     );

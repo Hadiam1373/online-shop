@@ -7,9 +7,10 @@ import styles from '../user-dashboard.module.css';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Pagination } from '@/components/ui/pagination';
 
 const Whishlist = () => {
-    const { wishlist, isPending, handleremoveWishlist, openModal, setOpenModal } = useWishlist();
+    const { wishlist, isPending, handleremoveWishlist, openModal, setOpenModal, page, setPage } = useWishlist();
     return (
         <div className={styles['form_wrapper']}>
             <HeaderTitle title='محصولات مورد علاقه ' />
@@ -52,6 +53,9 @@ const Whishlist = () => {
                               </div>
                           </Card>
                       ))}
+            </div>
+            <div className='flex w-full justify-center items-center mt-10'>
+                <Pagination currentPage={page} onPageChange={setPage} totalPages={wishlist?.pagination?.pages || 1} />
             </div>
         </div>
     );

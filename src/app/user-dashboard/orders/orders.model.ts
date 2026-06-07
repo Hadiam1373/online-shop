@@ -5,7 +5,7 @@ import { useState } from 'react';
 export const useOrders = () => {
     const [openModal, setOpenModal] = useState(false);
     const [page, setPage] = useState(1);
-    const { data, isPending, isError } = useGetOrders({ params: { limit: 10, page: 1 } });
+    const { data, isPending, isError } = useGetOrders({ params: { limit: 5, page: page } });
     const { mutate: cancelOrder } = useCancelOrder();
     const queryClient = useQueryClient();
 

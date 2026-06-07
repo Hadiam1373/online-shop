@@ -52,3 +52,7 @@ export interface IAddToWishlistParams {
 export interface IRemoveFromWishlistParams {
   productId: string;
 }
+export interface IGetWishlistParams {
+    page: number;
+    limit: number;
+}
