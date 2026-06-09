@@ -20,3 +20,9 @@ export interface IUpdateUserProfile {
   email?: string | null;
   address?: string | null;
 }
+
+export interface IChangePasswordParams {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}

@@ -2,6 +2,8 @@ import { useForm } from 'react-hook-form';
 import { IChangePassword } from './security.dto';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useChangePassword } from '@/lib/api/users/users.query';
+import { toast } from 'sonner';
 
 const changePasswordSchema = yup.object().shape({
     currentPassword: yup.string().required('رمز عبور فعلی الزامی است'),
@@ -13,11 +15,17 @@ const changePasswordSchema = yup.object().shape({
 });
 
 export const userSecurityData = () => {
+    const { mutateAsync: changePassword } = useChangePassword();
     const methods = useForm<IChangePassword>({
         resolver: yupResolver(changePasswordSchema),
     });
-    const onSubmit = (data: IChangePassword) => {
-        console.log(data);
+    const onSubmit = async (data: IChangePassword) => {
+        try {
+            await changePassword(data);
+            methods.reset();
+        } catch (error) {
+            console.error('Error changing password:', error);
+        }
     };
     return { methods, onSubmit };
 };

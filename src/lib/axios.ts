@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { cookieWrapper } from './cookie';
+import { toast } from 'sonner';
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:5000',
@@ -83,6 +84,12 @@ axiosInstance.interceptors.response.use(
                 isRefreshing = false;
             }
         }
+        toast.error(error.response?.data?.error, {
+            style: {
+                border: '1px solid #ff4d4f',
+                color: '#ff4d4f',
+            },
+        });
 
         return Promise.reject(error);
     },

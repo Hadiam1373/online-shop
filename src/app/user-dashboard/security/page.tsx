@@ -18,9 +18,24 @@ const Security = () => {
             </Typography>
             <form onSubmit={methods.handleSubmit(onSubmit)} className='flex flex-col gap-4 mt-4'>
                 <div className='grid grid-cols-3 gap-4'>
-                    <Input type='password' placeholder='رمز عبور فعلی' {...methods.register('currentPassword')} />
-                    <Input type='password' placeholder='رمز عبور جدید' {...methods.register('newPassword')} />
-                    <Input type='password' placeholder='تکرار رمز عبور جدید' {...methods.register('confirmPassword')} />
+                    <Input
+                        type='password'
+                        placeholder='رمز عبور فعلی'
+                        {...methods.register('currentPassword')}
+                        error={methods.formState.errors.currentPassword?.message}
+                    />
+                    <Input
+                        type='password'
+                        placeholder='رمز عبور جدید'
+                        {...methods.register('newPassword')}
+                        error={methods.formState.errors.newPassword?.message}
+                    />
+                    <Input
+                        type='password'
+                        placeholder='تکرار رمز عبور جدید'
+                        {...methods.register('confirmPassword')}
+                        error={methods.formState.errors.confirmPassword?.message}
+                    />
                 </div>
                 <div className='flex gap-2 mt-2'>
                     <Button type='submit' disabled={!methods.formState.isDirty}>
