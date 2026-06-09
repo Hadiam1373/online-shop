@@ -4,6 +4,7 @@ import './globals.css';
 import { cn } from '@/lib/utils';
 import { Providers } from './providers';
 import Header from '@/components/ui/shared/header/header';
+import { Toaster } from 'sonner';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -35,6 +36,7 @@ export default function RootLayout({
         >
             <Providers>
                 <body className='min-h-full' dir='rtl'>
+                    <Toaster />
                     <Header />
                     {children}
                 </body>

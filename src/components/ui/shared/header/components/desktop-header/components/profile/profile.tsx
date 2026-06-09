@@ -20,8 +20,8 @@ export const Profile: React.FC = () => {
                 <DropdownMenuGroup>
                     <DropdownMenuLabel>حساب کاربری من</DropdownMenuLabel>
                     <DropdownMenuItem onClick={() => navigate.push('/user-dashboard')}>پروفایل</DropdownMenuItem>
-                    <DropdownMenuItem>علاقه‌مندی‌ها</DropdownMenuItem>
-                    <DropdownMenuItem>سفارشات</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => navigate.push('/user-dashboard/whishlist')}>علاقه‌مندی‌ها</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => navigate.push('/user-dashboard/orders')}>سفارشات</DropdownMenuItem>
                 </DropdownMenuGroup>
             </DropdownMenuContent>
         </DropdownMenu>

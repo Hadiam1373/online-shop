@@ -6,8 +6,8 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp
 import { REGEXP_ONLY_DIGITS } from 'input-otp';
 import { Input } from '@/components/ui/input';
 import { cookieWrapper } from '@/lib/cookie';
-import { useLoginModel } from '@/components/login/login.model';
-import { Profile } from '@/components/profile';
+import { useLoginModel } from '@/components/ui/shared/header/components/desktop-header/components/login/login.model';
+import { Profile } from '@/components/ui/shared/header/components/desktop-header/components/profile';
 
 export const Login: React.FC = () => {
     const { methods, onSubmit, loginStep, openModal, setOpenModal, isLogin } = useLoginModel();

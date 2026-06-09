@@ -4,6 +4,7 @@ import { useProfileInfo } from './user-dashboard.model';
 import { Input } from '@/components/ui/input';
 import styles from './user-dashboard.module.css';
 import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
 
 const UserDashboard: React.FC = () => {
     const { methods, onSubmit } = useProfileInfo();
@@ -20,19 +21,18 @@ const UserDashboard: React.FC = () => {
                         autoComplete='email'
                     />
                     <Input
-                        {...methods.register('address')}
-                        type='text'
-                        placeholder='آدرس'
-                        error={methods.formState.errors.address?.message}
-                        autoComplete='address'
-                    />
-                    <Input
                         {...methods.register('phone')}
                         type='text'
                         placeholder='تلفن'
                         error={methods.formState.errors.phone?.message}
                         autoComplete='tel'
                         disabled
+                    />
+                    <Textarea
+                        {...methods.register('address')}
+                        placeholder='آدرس'
+                        error={methods.formState.errors.address?.message}
+                        autoComplete='address'
                     />
                     <div className={styles['form_wrapper--submit_wrapper']}>
                         <Button
