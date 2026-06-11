@@ -1,0 +1,20 @@
+@reference "../../../../globals.css";
+
+.form_wrapper--table table {
+    @apply w-full;
+}
+
+.form_wrapper--table table tr {
+    @apply h-12;
+}
+.form_wrapper--table table thead tr:nth-child(odd) {
+    @apply bg-sidebar-accent;
+}
+
+.form_wrapper--table table thead tr:nth-child(odd) {
+    @apply bg-sidebar-accent;
+}
+
+.form_wrapper--table table tr td {
+    @apply text-center;
+}
