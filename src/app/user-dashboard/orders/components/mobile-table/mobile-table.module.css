@@ -1,0 +1,17 @@
+@reference "../../../../globals.css";
+
+.mobile_table {
+    @apply flex flex-col gap-8;
+}
+
+.mobile_table--item {
+    @apply flex flex-col p-4 border rounded-lg;
+}
+
+.mobile_table--item_row {
+    @apply flex items-center justify-between border-b py-4;
+}
+
+.mobile_table--item_row:last-child {
+    @apply border-b-0;
+}
