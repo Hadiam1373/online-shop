@@ -12,12 +12,12 @@ const Security = () => {
     return (
         <div className={styles['form_wrapper']}>
             <HeaderTitle title='امنیت حساب کاربری' />
-            <Typography variant='subtitle1' className='mb-4'>
+            <Typography variant='body2' md-variant='body1' lg-variant='subtitle1' className='mb-4'>
                 در این بخش می‌توانید رمز عبور حساب کاربری خود را تغییر دهید. لطفاً برای حفظ امنیت حساب خود، از رمز عبور قوی استفاده کنید و
                 آن را با کسی به اشتراک نگذارید.
             </Typography>
             <form onSubmit={methods.handleSubmit(onSubmit)} className='flex flex-col gap-4 mt-4'>
-                <div className='grid grid-cols-3 gap-4'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
                     <Input
                         type='password'
                         placeholder='رمز عبور فعلی'

@@ -16,7 +16,7 @@ const Whishlist = () => {
     return (
         <div className={styles['form_wrapper']}>
             <HeaderTitle title='محصولات مورد علاقه ' />
-            <div className={wishlist?.data?.length ? 'grid grid-cols-2 gap-4' : ''}>
+            <div className={wishlist?.data?.length ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4' : ''}>
                 {isPending ? (
                     Array.from({ length: 2 }).map((_, index) => (
                         <div className='flex gap-4' key={index}>
