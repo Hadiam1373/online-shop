@@ -41,16 +41,16 @@ const Comments = () => {
                 </Empty>
             ) : (
                 comments?.data?.map(item => (
-                    <Card key={item?.id} className='mt-4'>
+                    <Card key={item?.id} className='mt-4 p-0'>
                         <div className='flex p-4 items-center justify-between flex-wrap md:flex-nowrap'>
                             <div className='flex items-center gap-4'>
-                                <img width={100} height={100} src={item?.product?.images![0]} alt='' />
+                                <img className='size-[50px] md:size-[100px]' src={item?.product?.images![0]} alt='' />
                                 <div className='flex-1 text-start'>
                                     <Typography variant='subtitle1'>{item?.product?.name}</Typography>
                                     <Typography>{item?.comment}</Typography>
                                 </div>
                             </div>
-                            <div className='flex w-full items-center gap-4 md:w-fit'>
+                            <div className='flex w-full items-center gap-4 mt-4 md:w-fit'>
                                 <EditCommentModal
                                     comment={item?.comment ? item?.comment : ''}
                                     rating={item?.rating || 0}
@@ -88,7 +88,7 @@ const EditCommentModal = ({
     return (
         <Dialog open={openModal} onOpenChange={setOpenModal}>
             <DialogTrigger asChild>
-                <Button className='w-[40%] md:w-auto'>ویرایش</Button>
+                <Button className='max-w-[150px] min-w-[80px] md:w-auto'>ویرایش</Button>
             </DialogTrigger>
             <DialogContent>
                 <DialogTitle>
@@ -118,7 +118,7 @@ const RemoveCommentModal = ({ reviewId }: { reviewId: string }) => {
     return (
         <Dialog open={openRemoveModal} onOpenChange={setOpenRemoveModal}>
             <DialogTrigger asChild>
-                <Button variant='secondary' className='w-[40%] md:w-auto'>
+                <Button variant='secondary' className='max-w-[150px] min-w-[80px] md:w-auto'>
                     حذف
                 </Button>
             </DialogTrigger>

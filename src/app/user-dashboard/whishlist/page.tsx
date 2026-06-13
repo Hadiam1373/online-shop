@@ -44,10 +44,12 @@ const Whishlist = () => {
                                     <Typography>قیمت : {item?.product?.price}</Typography>
                                 </div>
                             </div>
-                            <div className='flex gap-3 items-center'>
+                            <div className='flex flex-wrap lg:flex-nowrap gap-3 items-center'>
                                 <Dialog open={openModal} onOpenChange={setOpenModal}>
                                     <DialogTrigger asChild>
-                                        <Button variant='outline'>حذف از لیست</Button>
+                                        <Button className='w-[150px] md:w-auto' variant='outline'>
+                                            حذف از لیست
+                                        </Button>
                                     </DialogTrigger>
                                     <DialogContent>
                                         <DialogHeader>
@@ -63,7 +65,7 @@ const Whishlist = () => {
                                         </div>
                                     </DialogContent>
                                 </Dialog>
-                                <Button>افزودن به سبد خرید</Button>
+                                <Button className='w-[150px] md:w-auto'>افزودن به سبد خرید</Button>
                             </div>
                         </Card>
                     ))
