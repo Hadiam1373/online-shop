@@ -1,0 +1,25 @@
+@reference "../globals.css";
+
+.sidebar {
+    @apply mt-10 flex flex-col gap-5;
+}
+.sidebar--item {
+    @apply p-2 mx-2 rounded-lg cursor-pointer text-background;
+}
+.form_wrapper {
+    @apply px-6 mx-4;
+}
+.form_wrapper form {
+    @apply flex flex-col gap-4 mt-6;
+}
+.form_wrapper--inputs {
+    @apply grid grid-cols-1 gap-6 items-baseline justify-between;
+    @apply sm:grid-cols-2;
+}
+
+.form_wrapper--submit_wrapper {
+    @apply flex justify-end;
+}
+.form_wrapper--submit {
+    @apply w-[100px];
+}
