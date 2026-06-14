@@ -1,0 +1,28 @@
+@reference "../../../app/globals.css";
+
+.custom_table table {
+    @apply w-full;
+}
+
+.custom_table table tr {
+    @apply h-12;
+}
+.custom_table table thead tr:nth-child(odd) {
+    @apply bg-sidebar-accent;
+}
+
+.custom_table table thead tr th {
+    @apply text-center;
+}
+
+.custom_table table tbody tr {
+    @apply h-16;
+}
+
+.custom_table table thead tr:nth-child(odd) {
+    @apply bg-sidebar-accent;
+}
+
+.custom_table table tr td {
+    @apply text-center;
+}

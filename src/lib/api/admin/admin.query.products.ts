@@ -1,11 +1,11 @@
 import { queryOptions, useMutation, useQuery, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
 import { createAdminProduct, deleteAdminProduct, getAdminProduct, getAdminProducts, updateAdminProduct } from './admin.products.api';
-import { IAdminProductInput, IAdminProductResponse } from './admin.products.dto';
+import { IAdminProductInput, IAdminProductResponse, IAdminProductsResponse } from './admin.products.dto';
 
-export const getAdminProductsOptions = (props?: { queryOptions?: Omit<UseQueryOptions<IAdminProductResponse[]>, 'queryKey'> }) =>
+export const getAdminProductsOptions = (props?: { queryOptions?: Omit<UseQueryOptions<IAdminProductsResponse>, 'queryKey'> }) =>
     queryOptions({ queryKey: ['admin-products'] as const, queryFn: () => getAdminProducts(), ...(props?.queryOptions || {}) });
 
-export const useGetAdminProducts = (props?: { queryOptions?: Omit<UseQueryOptions<IAdminProductResponse[]>, 'queryKey'> }) =>
+export const useGetAdminProducts = (props?: { queryOptions?: Omit<UseQueryOptions<IAdminProductsResponse>, 'queryKey'> }) =>
     useQuery(getAdminProductsOptions(props));
 
 export const getAdminProductOptions = (id: string, props?: { queryOptions?: Omit<UseQueryOptions<IAdminProductResponse>, 'queryKey'> }) =>

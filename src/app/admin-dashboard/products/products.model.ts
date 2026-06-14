@@ -11,7 +11,7 @@ import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 
 export const useProductsList = () => {
-    const { data: products, isLoading } = useGetAdminProducts();
+    const { data: products, isPending: isLoading } = useGetAdminProducts();
     const deleteMutation = useDeleteAdminProduct();
     const router = useRouter();
 

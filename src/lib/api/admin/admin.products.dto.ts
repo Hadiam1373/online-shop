@@ -22,3 +22,13 @@ export interface IAdminProductResponse {
     createdAt: string;
     updatedAt: string;
 }
+
+export interface IAdminProductsResponse {
+    products: IAdminProductResponse[];
+    pagination: {
+        page: number;
+        limit: number;
+        total: number;
+        pages: number;
+    };
+}

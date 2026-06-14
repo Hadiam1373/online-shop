@@ -1,9 +1,9 @@
 import axiosInstance from '@/lib/axios';
-import { IAdminProductInput, IAdminProductResponse } from './admin.products.dto';
+import { IAdminProductInput, IAdminProductResponse, IAdminProductsResponse } from './admin.products.dto';
 
 const Base = '/api/products';
 
-export const getAdminProducts = async (): Promise<IAdminProductResponse[]> => {
+export const getAdminProducts = async (): Promise<IAdminProductsResponse> => {
     const res = await axiosInstance.get(Base);
     return res.data;
 };
