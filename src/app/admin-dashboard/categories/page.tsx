@@ -9,27 +9,7 @@ import { useCategoriesList } from './categories.model';
 
 export default function CategoriesPage() {
     const router = useRouter();
-    const { categories, isLoading, handleDelete } = useCategoriesList();
-
-    const rows =
-        categories?.data?.map(category => ({
-            id: category.id,
-            fields: [
-                { label: 'نام', value: category.name },
-                { label: 'توضیحات', value: category.description ?? '---' },
-                { label: 'شناسه', value: category.id },
-            ],
-            actions: (
-                <div className='flex gap-4 items-center'>
-                    <Button variant='outline' size='sm' onClick={() => router.push(`/admin-dashboard/categories/${category.id}`)}>
-                        ویرایش
-                    </Button>
-                    <Button variant='destructive' size='sm' className='mr-2' onClick={() => handleDelete(category.id)}>
-                        حذف
-                    </Button>
-                </div>
-            ),
-        })) ?? [];
+    const { categories, isLoading, handleDelete, rows } = useCategoriesList();
 
     return (
         <div className={styles['form_wrapper']}>

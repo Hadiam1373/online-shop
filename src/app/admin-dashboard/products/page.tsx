@@ -1,37 +1,16 @@
 'use client';
 import { HeaderTitle } from '@/components';
 import { Button } from '@/components/ui/button';
+import Pagination from '@/components/ui/pagination';
 import { DesktopTable } from '@/components/ui/table/desktop-table';
 import { MobileCardTable } from '@/components/ui/table/mobile-table';
 import { useRouter } from 'next/navigation';
 import styles from '../admin-dashboard.module.css';
 import { useProductsList } from './products.model';
-import Pagination from '@/components/ui/pagination';
 
 export default function ProductsPage() {
     const router = useRouter();
-    const { products, isLoading, handleDelete, setPage, page } = useProductsList();
-
-    const rows =
-        products?.products?.map(product => ({
-            id: product.id,
-            fields: [
-                { label: 'نام محصول', value: product.name },
-                { label: 'قیمت', value: product.price },
-                { label: 'موجودی', value: product.stock },
-                { label: 'شناسه محصول', value: product.id },
-            ],
-            actions: (
-                <div className='flex gap-4 items-center'>
-                    <Button variant='outline' size='sm' onClick={() => router.push(`/admin-dashboard/products/${product.id}`)}>
-                        ویرایش
-                    </Button>
-                    <Button variant='destructive' size='sm' className='mr-2' onClick={() => handleDelete(product.id)}>
-                        حذف
-                    </Button>
-                </div>
-            ),
-        })) ?? [];
+    const { products, isLoading, handleDelete, setPage, page, rows } = useProductsList();
 
     return (
         <div className={styles['form_wrapper']}>

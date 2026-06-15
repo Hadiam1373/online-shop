@@ -9,6 +9,7 @@ import {
 import { IAdminProductInput } from '@/lib/api/admin/admin.products.dto';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
 
 export const useProductsList = () => {
     const [page, setPage] = useState(1);
@@ -23,7 +24,28 @@ export const useProductsList = () => {
         });
     };
 
-    return { products, isLoading, handleDelete, page, setPage };
+    const rows =
+        products?.products?.map(product => ({
+            id: product.id,
+            fields: [
+                { label: 'نام محصول', value: product.name },
+                { label: 'قیمت', value: product.price },
+                { label: 'موجودی', value: product.stock },
+                { label: 'شناسه محصول', value: product.id },
+            ],
+            actions: (
+                <div className='flex gap-4 items-center'>
+                    <Button variant='outline' size='sm' onClick={() => router.push(`/admin-dashboard/products/${product.id}`)}>
+                        ویرایش
+                    </Button>
+                    <Button variant='destructive' size='sm' className='mr-2' onClick={() => handleDelete(product.id)}>
+                        حذف
+                    </Button>
+                </div>
+            ),
+        })) ?? [];
+
+    return { products, isLoading, handleDelete, page, setPage, rows };
 };
 
 export const useCreateProductModel = () => {

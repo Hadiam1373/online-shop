@@ -1,5 +1,5 @@
 import { useRouter } from 'next/navigation';
-import { useCreateAdminCoupon } from '@/lib/api/admin/admin.query';
+import { useCreateAdminCoupon, useGetAdminCoupons } from '@/lib/api/admin/admin.query';
 import { useForm } from 'react-hook-form';
 import { IAdminCouponInput } from '@/lib/api/admin/admin.coupons.dto';
 
@@ -9,6 +9,21 @@ type CreateCouponFormValues = {
     discountType: 'FIXED' | 'PERCENTAGE';
     expirationDate?: string;
     usageLimit?: number;
+};
+
+export const useGetCouponModel = () => {
+    const { data: coupons, isLoading } = useGetAdminCoupons();
+    const rows =
+        coupons?.data?.map(coupon => ({
+            id: coupon.id,
+            fields: [
+                { label: 'کد', value: coupon.code },
+                { label: 'نوع', value: coupon.discountType },
+                { label: 'مقدار', value: coupon.discountValue },
+            ],
+        })) ?? [];
+
+    return { coupons, rows, isLoading };
 };
 
 export const useCreateCouponModel = () => {

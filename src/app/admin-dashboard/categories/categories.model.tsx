@@ -9,6 +9,7 @@ import {
 import { IAdminCategoryInput, IAdminCategoryResponse, IAdminCategoryUpdateInput } from '@/lib/api/admin/admin.categories.dto';
 import { useForm } from 'react-hook-form';
 import React from 'react';
+import { Button } from '@/components/ui/button';
 
 export const useCategoriesList = (page?: number, limit?: number) => {
     const { data: categories, isLoading } = useGetAdminCategories(page, limit);
@@ -20,7 +21,27 @@ export const useCategoriesList = (page?: number, limit?: number) => {
         deleteMutation.mutate(id, { onSuccess: () => router.refresh() });
     };
 
-    return { categories, isLoading, handleDelete };
+    const rows =
+        categories?.data?.map(category => ({
+            id: category.id,
+            fields: [
+                { label: 'نام', value: category.name },
+                { label: 'توضیحات', value: category.description ?? '---' },
+                { label: 'شناسه', value: category.id },
+            ],
+            actions: (
+                <div className='flex gap-4 items-center'>
+                    <Button variant='outline' size='sm' onClick={() => router.push(`/admin-dashboard/categories/${category.id}`)}>
+                        ویرایش
+                    </Button>
+                    <Button variant='destructive' size='sm' className='mr-2' onClick={() => handleDelete(category.id)}>
+                        حذف
+                    </Button>
+                </div>
+            ),
+        })) ?? [];
+
+    return { categories, isLoading, handleDelete, rows };
 };
 
 export const useCreateCategoryModel = () => {

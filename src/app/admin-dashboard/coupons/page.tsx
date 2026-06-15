@@ -1,25 +1,15 @@
 'use client';
+import { useGetCouponModel } from '@/app/admin-dashboard/coupons/coupons.model';
 import { HeaderTitle } from '@/components';
 import { Button } from '@/components/ui/button';
 import { DesktopTable } from '@/components/ui/table/desktop-table';
 import { MobileCardTable } from '@/components/ui/table/mobile-table';
-import styles from '../admin-dashboard.module.css';
 import { useRouter } from 'next/navigation';
-import { useGetAdminCoupons } from '@/lib/api/admin/admin.query';
+import styles from '../admin-dashboard.module.css';
 
 export default function CouponsPage() {
     const router = useRouter();
-    const { data: coupons, isLoading } = useGetAdminCoupons();
-
-    const rows =
-        coupons?.data?.map(coupon => ({
-            id: coupon.id,
-            fields: [
-                { label: 'کد', value: coupon.code },
-                { label: 'نوع', value: coupon.discountType },
-                { label: 'مقدار', value: coupon.discountValue },
-            ],
-        })) ?? [];
+    const { coupons, isLoading, rows } = useGetCouponModel();
 
     return (
         <div className={styles['form_wrapper']}>
