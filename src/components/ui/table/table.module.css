@@ -1,7 +1,11 @@
 @reference "../../../app/globals.css";
 
-.custom_table table {
+.custom_table {
     @apply w-full hidden lg:table;
+}
+
+.custom_table table {
+    @apply w-full;
 }
 
 .custom_table table tr {

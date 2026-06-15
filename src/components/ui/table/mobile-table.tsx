@@ -37,7 +37,7 @@ export const MobileCardTable = ({
 }: MobileCardTableProps) => {
     if (loading) {
         return (
-            <div className='flex flex-col gap-2'>
+            <div className='flex flex-col gap-2 lg:hidden'>
                 {Array.from({ length: 5 }).map((_, i) => (
                     <Skeleton key={i} className='h-[300px]' />
                 ))}
@@ -47,17 +47,19 @@ export const MobileCardTable = ({
 
     if (!data.length) {
         return (
-            <Empty>
-                <EmptyHeader>
-                    <EmptyMedia variant='icon'>
-                        <BookOpen />
-                    </EmptyMedia>
+            <div className='block lg:hidden'>
+                <Empty>
+                    <EmptyHeader>
+                        <EmptyMedia variant='icon'>
+                            <BookOpen />
+                        </EmptyMedia>
 
-                    <EmptyTitle>
-                        <Typography>{emptyText}</Typography>
-                    </EmptyTitle>
-                </EmptyHeader>
-            </Empty>
+                        <EmptyTitle>
+                            <Typography>{emptyText}</Typography>
+                        </EmptyTitle>
+                    </EmptyHeader>
+                </Empty>
+            </div>
         );
     }
 
