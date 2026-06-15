@@ -9,10 +9,68 @@ import { Empty, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empt
 import { BookOpen } from 'lucide-react';
 import { Typography } from '@/components/ui/typography';
 import { DesktopTable } from '@/components/ui/table/desktop-table';
+import { MobileCardTable } from '@/components/ui/table/mobile-table';
 
 export default function ProductsPage() {
     const router = useRouter();
     const { products, isLoading, handleDelete } = useProductsList();
+
+    const currentOrderStatus = (status: string) => {
+        switch (status) {
+            case 'PENDING':
+                return 'در انتظار پرداخت';
+            case 'PAID':
+                return 'پرداخت شده';
+            case 'SHIPED':
+                return 'ارسال شده';
+            case 'DELIVERED':
+                return 'تحویل داده شده';
+            case 'CANCELLED':
+                return 'لغو شده';
+            default:
+                return status;
+        }
+    };
+
+    const rows =
+        products?.products?.flatMap(order =>
+            products?.products.map(product => ({
+                id: product.id,
+
+                fields: [
+                    {
+                        label: 'نام محصول',
+                        value: product.name,
+                    },
+
+                    {
+                        label: 'قیمت',
+                        value: product.price,
+                    },
+
+                    {
+                        label: 'تعداد',
+                        value: product.stock,
+                    },
+
+                    {
+                        label: 'شناسه محصول',
+                        value: currentOrderStatus(product.id),
+                    },
+                ],
+
+                actions: (
+                    <div className='flex gap-4 items-center'>
+                        <Button variant='outline' size='sm' onClick={() => router.push(`/admin-dashboard/products/${order.id}`)}>
+                            ویرایش
+                        </Button>
+                        <Button variant='destructive' size='sm' className='mr-2' onClick={() => handleDelete(order.id)}>
+                            حذف
+                        </Button>
+                    </div>
+                ),
+            })),
+        ) ?? [];
     return (
         <div className={styles['form_wrapper']}>
             <HeaderTitle
@@ -31,8 +89,8 @@ export default function ProductsPage() {
                                 <td className='py-2'>{p.name}</td>
                                 <td className='py-2'>{p.price}</td>
                                 <td className='py-2'>{p.stock}</td>
-                                <td className='py-2'>{p.categoryId}</td>
-                                <td className='py-2'>
+                                <td className='py-2'>{p.id}</td>
+                                <td className='py-2 flex gap-1'>
                                     <Button variant='outline' size='sm' onClick={() => router.push(`/admin-dashboard/products/${p.id}`)}>
                                         ویرایش
                                     </Button>
@@ -44,6 +102,15 @@ export default function ProductsPage() {
                         ))}
                     </tbody>
                 }
+            />
+
+            <MobileCardTable
+                data={rows}
+                loading={isLoading}
+                emptyText='سفارشی موجود نیست'
+                // page={page}
+                // totalPages={orders?.pagination?.pages}
+                // onPageChange={setPage}
             />
         </div>
     );

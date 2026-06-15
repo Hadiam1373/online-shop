@@ -42,7 +42,7 @@ export const DesktopTable = (props: IDesktopTable) => {
                     <thead>
                         <tr className='text-sm text-muted-foreground'>
                             {head?.map(th => (
-                                <th>{th}</th>
+                                <th key={th}>{th}</th>
                             ))}
                         </tr>
                     </thead>

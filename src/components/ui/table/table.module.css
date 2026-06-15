@@ -1,7 +1,7 @@
 @reference "../../../app/globals.css";
 
 .custom_table table {
-    @apply w-full;
+    @apply w-full hidden lg:table;
 }
 
 .custom_table table tr {
@@ -25,4 +25,20 @@
 
 .custom_table table tr td {
     @apply text-center;
+}
+
+.mobile_table {
+    @apply flex flex-col gap-8 lg:hidden;
+}
+
+.mobile_table--item {
+    @apply flex flex-col p-4 border rounded-lg;
+}
+
+.mobile_table--item_row {
+    @apply flex items-center justify-between border-b py-4;
+}
+
+.mobile_table--item_row:last-child {
+    @apply border-b-0;
 }
