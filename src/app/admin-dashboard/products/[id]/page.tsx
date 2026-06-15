@@ -66,29 +66,31 @@ export default function EditProductPage() {
                 <Input {...register('stock')} type='number' placeholder='موجودی' />
                 <Input {...register('categoryId')} placeholder='دسته‌بندی (id)' />
 
-                <div className='border-2 border-dashed rounded p-4 text-center'>
-                    <input type='file' multiple accept='image/*' onChange={handleImageSelect} className='hidden' id='image-input' />
-                    <label htmlFor='image-input' className='cursor-pointer'>
-                        <div className='text-sm text-gray-600'>عکس‌ها را انتخاب کنید یا اینجا بکشید و رها کنید</div>
-                    </label>
-                </div>
-
-                {imagePreviews.length > 0 && (
-                    <div className='grid grid-cols-4 gap-4 mt-4'>
-                        {imagePreviews.map((preview, index) => (
-                            <div key={index} className='relative'>
-                                <img src={preview} alt={`Preview ${index}`} className='w-full h-24 object-cover rounded' />
-                                <button
-                                    type='button'
-                                    onClick={() => removeImage(index)}
-                                    className='absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs'
-                                >
-                                    ✕
-                                </button>
-                            </div>
-                        ))}
+                <div className='w-full'>
+                    <div className='border-2 border-dashed rounded p-4 text-center'>
+                        <input type='file' multiple accept='image/*' onChange={handleImageSelect} className='hidden' id='image-input' />
+                        <label htmlFor='image-input' className='cursor-pointer'>
+                            <div className='text-sm text-gray-600'>عکس‌ها را انتخاب کنید یا اینجا بکشید و رها کنید</div>
+                        </label>
                     </div>
-                )}
+
+                    {imagePreviews.length > 0 && (
+                        <div className='grid grid-cols-4 gap-4 mt-4'>
+                            {imagePreviews.map((preview, index) => (
+                                <div key={index} className='relative'>
+                                    <img src={preview} alt={`Preview ${index}`} className='size-24  object-cover rounded' />
+                                    <button
+                                        type='button'
+                                        onClick={() => removeImage(index)}
+                                        className='absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs'
+                                    >
+                                        ✕
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
 
                 <div className={styles['form_wrapper--submit_wrapper']}>
                     <Button type='submit' disabled={isUpdating}>
