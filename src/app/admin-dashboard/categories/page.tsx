@@ -17,6 +17,7 @@ export default function CategoriesPage() {
             fields: [
                 { label: 'نام', value: category.name },
                 { label: 'توضیحات', value: category.description ?? '---' },
+                { label: 'شناسه', value: category.id },
             ],
             actions: (
                 <div className='flex gap-4 items-center'>
@@ -38,7 +39,7 @@ export default function CategoriesPage() {
             />
 
             <DesktopTable
-                head={['نام', 'توضیحات', 'اقدامات']}
+                head={['نام', 'توضیحات', 'شناسه', 'اقدامات']}
                 isLoading={isLoading}
                 isShowEmptyState={!categories?.data?.length}
                 body={
@@ -47,6 +48,7 @@ export default function CategoriesPage() {
                             <tr key={c.id} className='border-t'>
                                 <td className='py-2'>{c.name}</td>
                                 <td className='py-2'>{c.description ?? '---'}</td>
+                                <td className='py-2'>{c.id}</td>
                                 <td className='py-2 w-full flex justify-center gap-1'>
                                     <Button variant='outline' size='sm' onClick={() => router.push(`/admin-dashboard/categories/${c.id}`)}>
                                         ویرایش
