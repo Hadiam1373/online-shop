@@ -12,7 +12,7 @@ export default function CouponsPage() {
     const { data: coupons, isLoading } = useGetAdminCoupons();
 
     const rows =
-        coupons?.map(coupon => ({
+        coupons?.data?.map(coupon => ({
             id: coupon.id,
             fields: [
                 { label: 'کد', value: coupon.code },
@@ -23,18 +23,18 @@ export default function CouponsPage() {
 
     return (
         <div className={styles['form_wrapper']}>
-            <HeaderTitle title='کدهای تخفیف' />
-            <div className={styles['form_wrapper--inputs']}>
-                <Button onClick={() => router.push('/admin-dashboard/coupons/create')}>ایجاد کوپن</Button>
-            </div>
+            <HeaderTitle
+                title='کدهای تخفیف'
+                children={<Button onClick={() => router.push('/admin-dashboard/coupons/create')}>ایجاد کوپن</Button>}
+            />
 
             <DesktopTable
                 head={['کد', 'نوع', 'مقدار']}
                 isLoading={isLoading}
-                isShowEmptyState={!coupons?.length}
+                isShowEmptyState={!coupons?.data?.length}
                 body={
                     <tbody>
-                        {coupons?.map(c => (
+                        {coupons?.data?.map(c => (
                             <tr key={c.id} className='border-t'>
                                 <td className='py-2'>{c.code}</td>
                                 <td className='py-2'>{c.discountType}</td>

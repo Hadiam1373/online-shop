@@ -1,9 +1,25 @@
 import { queryOptions, useMutation, useQuery, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
 import { createAdminCoupon, deleteAdminCoupon, getAdminCouponStats, getAdminCoupons, updateAdminCoupon } from './admin.coupons.api';
-import { IAdminCoupon, IAdminCouponInput, IAdminCouponStatsResponse, IAdminCouponUpdateInput } from './admin.coupons.dto';
+import {
+    IAdminCoupon,
+    IAdminCouponInput,
+    IAdminCouponStatsResponse,
+    IAdminCouponUpdateInput,
+    IAdminCouponsResponse,
+} from './admin.coupons.dto';
 
-export const useGetAdminCoupons = (props?: { queryOptions?: Omit<UseQueryOptions<IAdminCoupon[]>, 'queryKey'> }) =>
-    useQuery(queryOptions({ queryKey: ['admin-coupons'] as const, queryFn: () => getAdminCoupons(), ...(props?.queryOptions || {}) }));
+export const useGetAdminCoupons = (
+    page?: number,
+    limit?: number,
+    props?: { queryOptions?: Omit<UseQueryOptions<IAdminCouponsResponse>, 'queryKey'> },
+) =>
+    useQuery(
+        queryOptions({
+            queryKey: ['admin-coupons', page, limit] as const,
+            queryFn: () => getAdminCoupons(page, limit),
+            ...(props?.queryOptions || {}),
+        }),
+    );
 
 export const useGetAdminCouponStats = (props?: { queryOptions?: Omit<UseQueryOptions<IAdminCouponStatsResponse>, 'queryKey'> }) =>
     useQuery(

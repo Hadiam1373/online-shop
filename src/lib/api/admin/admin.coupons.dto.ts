@@ -31,3 +31,13 @@ export interface IAdminCouponStatsResponse {
     expiredCoupons: number;
     usedCoupons: number;
 }
+
+export interface IAdminCouponsResponse {
+    data: IAdminCoupon[];
+    pagination: {
+        total: number;
+        page: number;
+        limit: number;
+        pages: number;
+    };
+}
