@@ -3,8 +3,8 @@ import { IAdminProductInput, IAdminProductResponse, IAdminProductsResponse } fro
 
 const Base = '/api/products';
 
-export const getAdminProducts = async (): Promise<IAdminProductsResponse> => {
-    const res = await axiosInstance.get(Base);
+export const getAdminProducts = async (page: number, limit: number): Promise<IAdminProductsResponse> => {
+    const res = await axiosInstance.get(Base, { params: { page, limit } });
     return res.data;
 };
 

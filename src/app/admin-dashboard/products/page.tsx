@@ -6,10 +6,11 @@ import { MobileCardTable } from '@/components/ui/table/mobile-table';
 import { useRouter } from 'next/navigation';
 import styles from '../admin-dashboard.module.css';
 import { useProductsList } from './products.model';
+import Pagination from '@/components/ui/pagination';
 
 export default function ProductsPage() {
     const router = useRouter();
-    const { products, isLoading, handleDelete } = useProductsList();
+    const { products, isLoading, handleDelete, setPage, page } = useProductsList();
 
     const rows =
         products?.products?.map(product => ({
@@ -66,6 +67,10 @@ export default function ProductsPage() {
             />
 
             <MobileCardTable data={rows} loading={isLoading} emptyText='محصولی موجود نیست' />
+
+            <div className='flex w-full justify-center items-center mt-10'>
+                <Pagination currentPage={page} onPageChange={setPage} totalPages={products?.pagination?.pages || 1} />
+            </div>
         </div>
     );
 }

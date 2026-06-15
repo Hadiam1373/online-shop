@@ -6,13 +6,13 @@ import {
     useGetAdminProduct,
     useUpdateAdminProduct,
 } from '@/lib/api/admin/admin.query';
-import { IAdminProductInput, IAdminProductResponse } from '@/lib/api/admin/admin.products.dto';
+import { IAdminProductInput } from '@/lib/api/admin/admin.products.dto';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 
 export const useProductsList = () => {
-    const [page, setPage] = useState(1);
-    const { data: products, isPending: isLoading } = useGetAdminProducts();
+    const [page, setPage] = useState(2);
+    const { data: products, isPending: isLoading } = useGetAdminProducts(page, 10);
     const deleteMutation = useDeleteAdminProduct();
     const router = useRouter();
 
@@ -82,5 +82,5 @@ export const useEditProductModel = (id: string) => {
         );
     };
 
-    return { register, handleSubmit, onSubmit, isUpdating: updateMutation.isPending, isLoading, product };
+    return { register, handleSubmit, onSubmit, isUpdating: updateMutation.isPending, isLoading, product  };
 };

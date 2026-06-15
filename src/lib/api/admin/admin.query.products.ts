@@ -2,11 +2,22 @@ import { queryOptions, useMutation, useQuery, UseMutationOptions, UseQueryOption
 import { createAdminProduct, deleteAdminProduct, getAdminProduct, getAdminProducts, updateAdminProduct } from './admin.products.api';
 import { IAdminProductInput, IAdminProductResponse, IAdminProductsResponse } from './admin.products.dto';
 
-export const getAdminProductsOptions = (props?: { queryOptions?: Omit<UseQueryOptions<IAdminProductsResponse>, 'queryKey'> }) =>
-    queryOptions({ queryKey: ['admin-products'] as const, queryFn: () => getAdminProducts(), ...(props?.queryOptions || {}) });
+export const getAdminProductsOptions = (
+    page: number,
+    limit: number,
+    props?: { queryOptions?: Omit<UseQueryOptions<IAdminProductsResponse>, 'queryKey'> },
+) =>
+    queryOptions({
+        queryKey: ['admin-products', page, limit] as const,
+        queryFn: () => getAdminProducts(page, limit),
+        ...(props?.queryOptions || {}),
+    });
 
-export const useGetAdminProducts = (props?: { queryOptions?: Omit<UseQueryOptions<IAdminProductsResponse>, 'queryKey'> }) =>
-    useQuery(getAdminProductsOptions(props));
+export const useGetAdminProducts = (
+    page: number,
+    limit: number,
+    props?: { queryOptions?: Omit<UseQueryOptions<IAdminProductsResponse>, 'queryKey'> },
+) => useQuery(getAdminProductsOptions(page, limit, { ...props, queryOptions: { ...props?.queryOptions, staleTime: 1000 * 60 * 5 } }));
 
 export const getAdminProductOptions = (id: string, props?: { queryOptions?: Omit<UseQueryOptions<IAdminProductResponse>, 'queryKey'> }) =>
     queryOptions({ queryKey: ['admin-product', id] as const, queryFn: () => getAdminProduct(id), ...(props?.queryOptions || {}) });
