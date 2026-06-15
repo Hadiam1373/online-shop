@@ -1,15 +1,20 @@
 import axiosInstance from '@/lib/axios';
-import { IAdminCouponInput, IAdminCouponStatsResponse, IAdminCouponUpdateInput } from './admin.coupons.dto';
+import { IAdminCoupon, IAdminCouponInput, IAdminCouponStatsResponse, IAdminCouponUpdateInput } from './admin.coupons.dto';
 
 const Base = '/api/coupons';
 
 export const getAdminCoupons = async (): Promise<IAdminCoupon[]> => {
-    const res = await axiosInstance.get(`${Base}`);
+    const res = await axiosInstance.get(Base);
+    return res.data;
+};
+
+export const getAdminCoupon = async (id: string): Promise<IAdminCoupon> => {
+    const res = await axiosInstance.get(`${Base}/${id}`);
     return res.data;
 };
 
 export const getAdminCouponStats = async (): Promise<IAdminCouponStatsResponse> => {
-    const res = await axiosInstance.get(`${Base}/admin/stats`);
+    const res = await axiosInstance.get(`${Base}/stats`);
     return res.data;
 };
 

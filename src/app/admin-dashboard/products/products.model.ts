@@ -8,9 +8,10 @@ import {
 } from '@/lib/api/admin/admin.query';
 import { IAdminProductInput, IAdminProductResponse } from '@/lib/api/admin/admin.products.dto';
 import { useForm } from 'react-hook-form';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export const useProductsList = () => {
+    const [page, setPage] = useState(1);
     const { data: products, isPending: isLoading } = useGetAdminProducts();
     const deleteMutation = useDeleteAdminProduct();
     const router = useRouter();
@@ -22,7 +23,7 @@ export const useProductsList = () => {
         });
     };
 
-    return { products, isLoading, handleDelete };
+    return { products, isLoading, handleDelete, page, setPage };
 };
 
 export const useCreateProductModel = () => {

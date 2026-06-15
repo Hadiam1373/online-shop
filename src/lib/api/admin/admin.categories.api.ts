@@ -1,10 +1,15 @@
 import axiosInstance from '@/lib/axios';
-import { IAdminCategoryInput, IAdminCategoryResponse, IAdminCategoryUpdateInput } from './admin.categories.dto';
+import { IAdminCategoryInput, IAdminCategoryResponse, IAdminCategoryUpdateInput, IAdminCategoriesResponse } from './admin.categories.dto';
 
 const Base = '/api/categories';
 
-export const getAdminCategories = async (): Promise<IAdminCategoryResponse[]> => {
-    const res = await axiosInstance.get(Base);
+export const getAdminCategories = async (page?: number, limit?: number): Promise<IAdminCategoriesResponse> => {
+    const params = new URLSearchParams();
+    if (page !== undefined) params.append('page', String(page));
+    if (limit !== undefined) params.append('limit', String(limit));
+
+    const query = params.toString();
+    const res = await axiosInstance.get(query ? `${Base}?${query}` : Base);
     return res.data;
 };
 

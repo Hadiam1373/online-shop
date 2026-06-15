@@ -10,8 +10,8 @@ import { IAdminCategoryInput, IAdminCategoryResponse, IAdminCategoryUpdateInput 
 import { useForm } from 'react-hook-form';
 import React from 'react';
 
-export const useCategoriesList = () => {
-    const { data: categories, isLoading } = useGetAdminCategories();
+export const useCategoriesList = (page?: number, limit?: number) => {
+    const { data: categories, isLoading } = useGetAdminCategories(page, limit);
     const deleteMutation = useDeleteAdminCategory();
     const router = useRouter();
 

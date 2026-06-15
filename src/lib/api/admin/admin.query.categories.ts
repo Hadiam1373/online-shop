@@ -1,11 +1,29 @@
 import { queryOptions, useMutation, useQuery, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
-import { createAdminCategory, deleteAdminCategory, getAdminCategories, updateAdminCategory } from './admin.categories.api';
-import { IAdminCategoryInput, IAdminCategoryResponse, IAdminCategoryUpdateInput } from './admin.categories.dto';
+import {
+    createAdminCategory,
+    deleteAdminCategory,
+    getAdminCategories,
+    getAdminCategory,
+    updateAdminCategory,
+} from './admin.categories.api';
+import { IAdminCategoryInput, IAdminCategoryResponse, IAdminCategoryUpdateInput, IAdminCategoriesResponse } from './admin.categories.dto';
 
-export const useGetAdminCategories = (props?: { queryOptions?: Omit<UseQueryOptions<IAdminCategoryResponse[]>, 'queryKey'> }) =>
-    useQuery(
-        queryOptions({ queryKey: ['admin-categories'] as const, queryFn: () => getAdminCategories(), ...(props?.queryOptions || {}) }),
-    );
+export const getAdminCategoriesOptions = (
+    page?: number,
+    limit?: number,
+    props?: { queryOptions?: Omit<UseQueryOptions<IAdminCategoriesResponse>, 'queryKey'> },
+) =>
+    queryOptions({
+        queryKey: ['admin-categories', page, limit] as const,
+        queryFn: () => getAdminCategories(page, limit),
+        ...(props?.queryOptions || {}),
+    });
+
+export const useGetAdminCategories = (
+    page?: number,
+    limit?: number,
+    props?: { queryOptions?: Omit<UseQueryOptions<IAdminCategoriesResponse>, 'queryKey'> },
+) => useQuery(getAdminCategoriesOptions(page, limit, props));
 
 export const getAdminCategoryOptions = (id: string, props?: { queryOptions?: Omit<UseQueryOptions<IAdminCategoryResponse>, 'queryKey'> }) =>
     queryOptions({ queryKey: ['admin-category', id] as const, queryFn: () => getAdminCategory(id), ...(props?.queryOptions || {}) });

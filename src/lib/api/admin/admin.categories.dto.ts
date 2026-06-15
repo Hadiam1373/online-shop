@@ -16,4 +16,19 @@ export interface IAdminCategoryResponse {
     description?: string;
     parentId?: string | null;
     createdAt: string;
+    parent?: IAdminCategoryResponse | null;
+    children: IAdminCategoryResponse[];
+    _count: {
+        products: number;
+    };
+}
+
+export interface IAdminCategoriesResponse {
+    data: IAdminCategoryResponse[];
+    pagination: {
+        total: number;
+        page: number;
+        limit: number;
+        pages: number;
+    };
 }

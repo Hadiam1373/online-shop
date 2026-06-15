@@ -1,9 +1,11 @@
 'use client';
-import React from 'react';
 import { HeaderTitle } from '@/components';
+import { Button } from '@/components/ui/button';
+import { DesktopTable } from '@/components/ui/table/desktop-table';
+import { MobileCardTable } from '@/components/ui/table/mobile-table';
 import styles from '../admin-dashboard.module.css';
-import { useGetAdminUsers, useChangeUserRole, useBanUser } from '@/lib/api/admin/admin.query';
 import { useRouter } from 'next/navigation';
+import { useGetAdminUsers, useChangeUserRole, useBanUser } from '@/lib/api/admin/admin.query';
 
 export default function UsersPage() {
     const router = useRouter();
@@ -12,47 +14,74 @@ export default function UsersPage() {
     const banMutation = useBanUser();
 
     const changeRole = (userId: string, role: string) => {
-        changeRoleMutation.mutate({ userId, role }, { onSuccess: () => refetch() });
+        changeRoleMutation.mutate({ userId, payload: { role } }, { onSuccess: () => refetch() });
     };
 
     const banUser = (userId: string) => {
-        banMutation.mutate(userId, { onSuccess: () => refetch() });
+        banMutation.mutate({ userId, payload: { banned: true } }, { onSuccess: () => refetch() });
     };
+
+    const items = users?.data ?? [];
+
+    const rows = items.map(user => ({
+        id: user.id,
+        fields: [
+            { label: 'ایمیل', value: user.email ?? 'بدون ایمیل' },
+            { label: 'نقش', value: user.role },
+            { label: 'سفارش‌ها', value: user._count.orders },
+        ],
+        actions: (
+            <div className='flex flex-wrap gap-2 items-center'>
+                <Button variant='outline' size='sm' onClick={() => changeRole(user.id, user.role === 'ADMIN' ? 'USER' : 'ADMIN')}>
+                    تغییر نقش
+                </Button>
+                <Button variant='destructive' size='sm' onClick={() => banUser(user.id)}>
+                    مسدود
+                </Button>
+                <Button variant='outline' size='sm' onClick={() => router.push(`/admin-dashboard/users/${user.id}`)}>
+                    جزئیات
+                </Button>
+            </div>
+        ),
+    }));
 
     return (
         <div className={styles['form_wrapper']}>
             <HeaderTitle title='کاربران و گزارش‌ها' />
-            {isLoading && <p>در حال بارگذاری...</p>}
-            {!isLoading && users && (
-                <table className='w-full text-right mt-4'>
-                    <thead>
-                        <tr className='text-sm text-muted-foreground'>
-                            <th>ایمیل</th>
-                            <th>نقش</th>
-                            <th>اقدامات</th>
-                        </tr>
-                    </thead>
+
+            <DesktopTable
+                head={['ایمیل', 'نقش', 'سفارش‌ها', 'اقدامات']}
+                isLoading={isLoading}
+                isShowEmptyState={!items.length}
+                body={
                     <tbody>
-                        {users.map((u: any) => (
+                        {items.map(u => (
                             <tr key={u.id} className='border-t'>
-                                <td className='py-2'>{u.email}</td>
+                                <td className='py-2'>{u.email ?? 'بدون ایمیل'}</td>
                                 <td className='py-2'>{u.role}</td>
-                                <td className='py-2'>
-                                    <button className='btn' onClick={() => changeRole(u.id, u.role === 'ADMIN' ? 'USER' : 'ADMIN')}>
+                                <td className='py-2'>{u._count.orders}</td>
+                                <td className='py-2 flex flex-wrap gap-2'>
+                                    <Button
+                                        variant='outline'
+                                        size='sm'
+                                        onClick={() => changeRole(u.id, u.role === 'ADMIN' ? 'USER' : 'ADMIN')}
+                                    >
                                         تغییر نقش
-                                    </button>
-                                    <button className='btn ml-2' onClick={() => banUser(u.id)}>
-                                        مسدود/آن‌بلاک
-                                    </button>
-                                    <button className='btn ml-2' onClick={() => router.push(`/admin-dashboard/users/${u.id}`)}>
+                                    </Button>
+                                    <Button variant='destructive' size='sm' onClick={() => banUser(u.id)}>
+                                        مسدود
+                                    </Button>
+                                    <Button variant='outline' size='sm' onClick={() => router.push(`/admin-dashboard/users/${u.id}`)}>
                                         جزئیات
-                                    </button>
+                                    </Button>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
-                </table>
-            )}
+                }
+            />
+
+            <MobileCardTable data={rows} loading={isLoading} emptyText='کاربری موجود نیست' />
         </div>
     );
 }
