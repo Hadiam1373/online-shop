@@ -32,6 +32,7 @@ export const useCreateProductModel = () => {
     const form = useForm<IAdminProductInput>({
         defaultValues: { name: '', description: '', price: 0, stock: 0, images: [], categoryId: '', attributes: {} },
     });
+    const { watch, setValue } = form;
 
     const onSubmit = (data: IAdminProductInput) => {
         createMutation.mutate(
@@ -50,13 +51,14 @@ export const useCreateProductModel = () => {
         );
     };
 
-    return { form, onSubmit, isCreating: createMutation.isPending };
+    return { form, onSubmit, isCreating: createMutation.isPending, watch, setValue };
 };
 
 export const useEditProductModel = (id: string) => {
     const { data: product, isLoading } = useGetAdminProduct(id || '');
     const updateMutation = useUpdateAdminProduct();
-    const { register, handleSubmit, reset } = useForm<IAdminProductInput>();
+    const form = useForm<IAdminProductInput>();
+    const { register, handleSubmit, reset, watch, setValue } = form;
     const router = useRouter();
 
     useEffect(() => {
@@ -82,5 +84,5 @@ export const useEditProductModel = (id: string) => {
         );
     };
 
-    return { register, handleSubmit, onSubmit, isUpdating: updateMutation.isPending, isLoading, product  };
+    return { register, handleSubmit, onSubmit, isUpdating: updateMutation.isPending, isLoading, product, watch, setValue };
 };
