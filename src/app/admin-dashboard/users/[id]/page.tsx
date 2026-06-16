@@ -4,6 +4,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { HeaderTitle } from '@/components';
 import styles from '../../admin-dashboard.module.css';
 import { useGetAdminUser, useChangeUserRole, useBanUser } from '@/lib/api/admin/admin.query';
+import { Button } from '@/components/ui/button';
 
 export default function AdminUserDetail() {
     const params = useParams() as { id?: string };
@@ -13,8 +14,8 @@ export default function AdminUserDetail() {
     const changeRoleMutation = useChangeUserRole();
     const banMutation = useBanUser();
 
-    const changeRole = (role: string) => changeRoleMutation.mutate({ userId: id, role }, { onSuccess: () => refetch() });
-    const ban = () => banMutation.mutate(id, { onSuccess: () => refetch() });
+    const changeRole = (role: string) => changeRoleMutation.mutate({ userId: id, payload: { role } }, { onSuccess: () => refetch() });
+    const ban = () => banMutation.mutate({ userId: id, payload: { banned: true } }, { onSuccess: () => refetch() });
 
     if (isLoading) return <p>در حال بارگذاری...</p>;
 
@@ -26,16 +27,16 @@ export default function AdminUserDetail() {
                     <p>ایمیل: {user.email}</p>
                     <p>نقش: {user.role}</p>
                     <p>تاریخ ایجاد: {user.createdAt}</p>
-                    <div className='mt-4'>
-                        <button className='btn' onClick={() => changeRole(user.role === 'ADMIN' ? 'USER' : 'ADMIN')}>
+                    <div className='mt-4 flex items-center gap-2'>
+                        <Button variant='outline' size='sm' onClick={() => changeRole(user.role === 'ADMIN' ? 'USER' : 'ADMIN')}>
                             تغییر نقش
-                        </button>
-                        <button className='btn ml-2' onClick={ban}>
+                        </Button>
+                        <Button variant='destructive' size='sm' onClick={ban}>
                             مسدود/آن‌بلاک
-                        </button>
-                        <button className='btn ml-2' onClick={() => router.back()}>
+                        </Button>
+                        <Button variant='outline' size='sm' onClick={() => router.back()}>
                             بازگشت
-                        </button>
+                        </Button>
                     </div>
                 </div>
             ) : (

@@ -15,7 +15,7 @@ export default function ReviewsPage() {
     };
 
     const rows =
-        pending?.map(review => ({
+        pending?.data?.map(review => ({
             id: review.id,
             fields: [
                 { label: 'کاربر', value: review.user?.email ?? review.userId },
@@ -41,13 +41,13 @@ export default function ReviewsPage() {
             <DesktopTable
                 head={['کاربر', 'نظر', 'تاریخ', 'اقدامات']}
                 isLoading={isLoading}
-                isShowEmptyState={!pending?.length}
+                isShowEmptyState={!pending?.data?.length}
                 body={
                     <tbody>
-                        {pending?.map(r => (
+                        {pending?.data?.map(r => (
                             <tr key={r.id} className='border-t'>
                                 <td className='py-2'>{r.user?.email ?? r.userId}</td>
-                                <td className='py-2'>{r.comment ?? r.comment}</td>
+                                <td className='py-2 max-w-[200px] overflow-auto'>{r.comment ?? r.comment}</td>
                                 <td className='py-2'>{r.createdAt}</td>
                                 <td className='py-2 flex gap-2'>
                                     <Button variant='outline' size='sm' onClick={() => moderate(r.id, true)}>

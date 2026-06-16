@@ -1,5 +1,10 @@
 import axiosInstance from '@/lib/axios';
-import { IAdminReviewModerationResponse, IAdminReviewPendingItem, IAdminReviewStatsResponse } from './admin.reviews.dto';
+import {
+    IAdminReviewModerationResponse,
+    IAdminReviewPendingItem,
+    IAdminReviewPendingResponse,
+    IAdminReviewStatsResponse,
+} from './admin.reviews.dto';
 
 const Base = '/api/reviews';
 
@@ -8,7 +13,7 @@ export const getAdminReviewStats = async (): Promise<IAdminReviewStatsResponse> 
     return res.data;
 };
 
-export const getAdminPendingReviews = async (): Promise<IAdminReviewPendingItem[]> => {
+export const getAdminPendingReviews = async (): Promise<IAdminReviewPendingResponse> => {
     const res = await axiosInstance.get(`${Base}/admin/pending`);
     return res.data;
 };

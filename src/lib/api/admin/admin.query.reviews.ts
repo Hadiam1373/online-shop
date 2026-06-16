@@ -1,8 +1,13 @@
 import { queryOptions, useMutation, useQuery, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
 import { getAdminPendingReviews, getAdminReviewStats, moderateAdminReview } from './admin.reviews.api';
-import { IAdminReviewPendingItem, IAdminReviewModerationResponse, IAdminReviewStatsResponse } from './admin.reviews.dto';
+import {
+    IAdminReviewPendingResponse,
+    IAdminReviewPendingItem,
+    IAdminReviewModerationResponse,
+    IAdminReviewStatsResponse,
+} from './admin.reviews.dto';
 
-export const useGetAdminPendingReviews = (props?: { queryOptions?: Omit<UseQueryOptions<IAdminReviewPendingItem[]>, 'queryKey'> }) =>
+export const useGetAdminPendingReviews = (props?: { queryOptions?: Omit<UseQueryOptions<IAdminReviewPendingResponse>, 'queryKey'> }) =>
     useQuery(
         queryOptions({
             queryKey: ['admin-pending-reviews'] as const,

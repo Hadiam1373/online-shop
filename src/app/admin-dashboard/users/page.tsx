@@ -31,7 +31,7 @@ export default function UsersPage() {
             { label: 'سفارش‌ها', value: user._count.orders },
         ],
         actions: (
-            <div className='flex flex-wrap gap-2 items-center'>
+            <div className='flex flex-wrap gap-2 items-center justify-end'>
                 <Button variant='outline' size='sm' onClick={() => changeRole(user.id, user.role === 'ADMIN' ? 'USER' : 'ADMIN')}>
                     تغییر نقش
                 </Button>
@@ -60,7 +60,7 @@ export default function UsersPage() {
                                 <td className='py-2'>{u.email ?? 'بدون ایمیل'}</td>
                                 <td className='py-2'>{u.role}</td>
                                 <td className='py-2'>{u._count.orders}</td>
-                                <td className='py-2 flex flex-wrap gap-2'>
+                                <td className='py-2 flex justify-center flex-wrap gap-2'>
                                     <Button
                                         variant='outline'
                                         size='sm'

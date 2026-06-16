@@ -16,6 +16,16 @@ export interface IAdminReviewPendingItem {
     };
 }
 
+export interface IAdminReviewPendingResponse {
+    data: IAdminReviewPendingItem[];
+    pagination: {
+        total: number;
+        page: number;
+        limit: number;
+        pages: number;
+    };
+}
+
 export interface IAdminReviewModerationResponse {
     id: string;
     approved: boolean;
