@@ -1,3 +1,11 @@
 {
-  "cSpell.words": ["uselogin"]
+  "cSpell.words": ["uselogin"],
+  "cSpell.ignoreRegExpList": [
+    "\\p{Script=Han}",
+    "\\p{Script=Hiragana}",
+    "\\p{Script=Katakana}",
+    "\\p{Script=Arabic}",
+    "[\\u0600-\\u06FF]+"
+  ],
+  "cSpell.language": "en,fa"
 }
