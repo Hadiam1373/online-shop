@@ -1,8 +1,11 @@
 import { queryOptions, useMutation, useQuery, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
-import { getMyReviews, createReview, deleteReview, editReview } from './reviews.api';
-import { IGetMyReviewsParams, IReviewInput, IUserReviewsResponse } from './reviews.dto';
+import { getMyReviews, createReview, deleteReview, editReview, getProductReview } from './reviews.api';
+import { IGetMyReviewsParams, IProductReviewResponse, IReviewInput, IUserReviewsResponse } from './reviews.dto';
 
-export const getMyReviewsOptions = (props?: { queryOptions?: Omit<UseQueryOptions<IUserReviewsResponse>, 'queryKey'> ,  params?: IGetMyReviewsParams;}) => {
+export const getMyReviewsOptions = (props?: {
+    queryOptions?: Omit<UseQueryOptions<IUserReviewsResponse>, 'queryKey'>;
+    params?: IGetMyReviewsParams;
+}) => {
     return queryOptions({
         queryKey: ['my-reviews'] as const,
         queryFn: () => getMyReviews(props?.params),
@@ -15,6 +18,24 @@ export const useGetMyReviews = (props?: {
     params?: IGetMyReviewsParams;
 }) => {
     return useQuery(getMyReviewsOptions(props));
+};
+
+export const useGetProductReviewOption = (props?: {
+    queryOptions?: Omit<UseQueryOptions<IProductReviewResponse>, 'queryKey'>;
+    params: { productId: string };
+}) => {
+    return queryOptions({
+        queryKey: ['my-reviews', props?.params?.productId] as const,
+        queryFn: () => getProductReview(props?.params?.productId!),
+        ...(props?.queryOptions || {}),
+    });
+};
+
+export const useGetProductReview = (props?: {
+    queryOptions?: Omit<UseQueryOptions<IProductReviewResponse>, 'queryKey'>;
+    params: { productId: string };
+}) => {
+    return useQuery(useGetProductReviewOption(props));
 };
 
 export const createReviewOptions = (props?: {
