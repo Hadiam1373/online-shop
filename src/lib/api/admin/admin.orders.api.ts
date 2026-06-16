@@ -1,10 +1,16 @@
 import axiosInstance from '@/lib/axios';
-import { AdminOrderStatus, IAdminOrder, IAdminOrderStatsResponse, IAdminOrderStatusUpdateRequest } from './admin.orders.dto';
+import {
+    AdminOrderStatus,
+    IAdminOrder,
+    IAdminOrderListResponse,
+    IAdminOrderStatsResponse,
+    IAdminOrderStatusUpdateRequest,
+} from './admin.orders.dto';
 
 const Base = '/api/orders';
 
-export const getAdminOrders = async (): Promise<IAdminOrder[]> => {
-    const res = await axiosInstance.get(`${Base}/admin/all`);
+export const getAdminOrders = async (): Promise<IAdminOrderListResponse> => {
+    const res = await axiosInstance.get<IAdminOrderListResponse>(`${Base}/admin/all`);
     return res.data;
 };
 

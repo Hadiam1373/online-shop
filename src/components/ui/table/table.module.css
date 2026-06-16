@@ -43,6 +43,10 @@
     @apply flex items-center justify-between border-b py-4;
 }
 
+.mobile_table--item_row p:nth-child(even) {
+    @apply max-w-[60%] text-wrap overflow-auto text-[14px];
+}
+
 .mobile_table--item_row:last-child {
     @apply border-b-0;
 }

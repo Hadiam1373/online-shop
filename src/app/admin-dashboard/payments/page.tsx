@@ -1,35 +1,14 @@
 'use client';
 import { HeaderTitle } from '@/components';
-import { Button } from '@/components/ui/button';
-import styles from '../admin-dashboard.module.css';
-import { useGetAdminPayments, useRefundAdminPayment } from '@/lib/api/admin/admin.query';
 import { DesktopTable } from '@/components/ui/table/desktop-table';
 import { MobileCardTable } from '@/components/ui/table/mobile-table';
+import styles from '../admin-dashboard.module.css';
+import { usePaymentModel } from '@/app/admin-dashboard/payments/payments.model';
+import { Button } from '@/components/ui/button';
+import { currentOrderStatus } from '@/hooks/useCurrentStatus';
 
 export default function PaymentsPage() {
-    const { data: payments, isLoading, refetch } = useGetAdminPayments();
-    const refundMutation = useRefundAdminPayment();
-
-    const refund = (paymentId: string) => {
-        refundMutation.mutate(paymentId, { onSuccess: () => refetch() });
-    };
-
-    const rows =
-        payments?.map(payment => ({
-            id: payment.id,
-            fields: [
-                { label: 'پرداخت', value: payment.id },
-                { label: 'مقدار', value: payment.amount },
-                { label: 'وضعیت', value: payment.status },
-            ],
-            actions: (
-                <div className='flex gap-2 items-center'>
-                    <Button variant='destructive' size='sm' onClick={() => refund(payment.id)}>
-                        بازپرداخت
-                    </Button>
-                </div>
-            ),
-        })) ?? [];
+    const { payments, isLoading, refund, rows } = usePaymentModel();
 
     return (
         <div className={styles['form_wrapper']}>
@@ -38,18 +17,20 @@ export default function PaymentsPage() {
             <DesktopTable
                 head={['پرداخت', 'مقدار', 'وضعیت', 'اقدامات']}
                 isLoading={isLoading}
-                isShowEmptyState={!payments?.length}
+                isShowEmptyState={!payments?.data.length}
                 body={
                     <tbody>
-                        {payments?.map(p => (
+                        {payments?.data.map(p => (
                             <tr key={p.id} className='border-t'>
                                 <td className='py-2'>{p.id}</td>
                                 <td className='py-2'>{p.amount}</td>
-                                <td className='py-2'>{p.status}</td>
+                                <td className='py-2'>{currentOrderStatus(p.status)}</td>
                                 <td className='py-2'>
-                                    <Button variant='destructive' size='sm' onClick={() => refund(p.id)}>
-                                        بازپرداخت
-                                    </Button>
+                                    {p.status === 'SUCCESS' && (
+                                        <Button variant='destructive' type='button' onClick={() => refund(p.id)}>
+                                            بازپرداخت
+                                        </Button>
+                                    )}
                                 </td>
                             </tr>
                         ))}

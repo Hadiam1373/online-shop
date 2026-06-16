@@ -1,10 +1,10 @@
 import axiosInstance from '@/lib/axios';
-import { IAdminPayment, IAdminPaymentStatsResponse, IAdminPaymentRefundResponse } from './admin.payments.dto';
+import { IAdminPayment, IAdminPaymentListResponse, IAdminPaymentStatsResponse, IAdminPaymentRefundResponse } from './admin.payments.dto';
 
 const Base = '/api/payments';
 
-export const getAdminPayments = async (): Promise<IAdminPayment[]> => {
-    const res = await axiosInstance.get(`${Base}/admin/all`);
+export const getAdminPayments = async (): Promise<IAdminPaymentListResponse> => {
+    const res = await axiosInstance.get<IAdminPaymentListResponse>(`${Base}/admin/all`);
     return res.data;
 };
 

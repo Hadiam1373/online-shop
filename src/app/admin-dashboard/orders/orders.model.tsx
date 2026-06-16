@@ -1,4 +1,6 @@
 import { Button } from '@/components/ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { currentOrderStatus } from '@/hooks/useCurrentStatus';
 import { AdminOrderStatus } from '@/lib/api/admin/admin.orders.dto';
 import { useGetAdminOrders, useUpdateAdminOrderStatus } from '@/lib/api/admin/admin.query.orders';
 
@@ -16,17 +18,25 @@ export const OrderModel = () => {
             fields: [
                 { label: 'شماره سفارش', value: order.id },
                 { label: 'مبلغ', value: order.total },
-                { label: 'وضعیت', value: order.status },
+                { label: 'وضعیت', value: currentOrderStatus(order.status) },
             ],
             actions: (
-                <div className='flex gap-2 items-center'>
-                    <Button variant='outline' size='sm' onClick={() => changeStatus(order.id, 'SHIPPED')}>
-                        ارسال شد
-                    </Button>
-                    <Button variant='destructive' size='sm' onClick={() => changeStatus(order.id, 'CANCELLED')}>
-                        لغو
-                    </Button>
-                </div>
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant='outline' size='sm'>
+                            عملیات
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuGroup className='w-[150px]'>
+                            <DropdownMenuItem onClick={() => changeStatus(order.id, 'SHIPPED')}>ارسال </DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => changeStatus(order.id, 'PAID')}>پرداخت </DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => changeStatus(order.id, 'PENDING')}>در انتظار پرداخت </DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => changeStatus(order.id, 'DELIVERED')}>تحویل داده شده</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => changeStatus(order.id, 'CANCELLED')}>لغو</DropdownMenuItem>
+                        </DropdownMenuGroup>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             ),
         })) ?? [];
 

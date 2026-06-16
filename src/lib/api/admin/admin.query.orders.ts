@@ -1,8 +1,8 @@
 import { queryOptions, useMutation, useQuery, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
 import { getAdminOrderStats, getAdminOrders, updateAdminOrderStatus } from './admin.orders.api';
-import { IAdminOrder, IAdminOrderStatsResponse, IAdminOrderStatusUpdateRequest } from './admin.orders.dto';
+import { IAdminOrder, IAdminOrderListResponse, IAdminOrderStatsResponse, IAdminOrderStatusUpdateRequest } from './admin.orders.dto';
 
-export const useGetAdminOrders = (props?: { queryOptions?: Omit<UseQueryOptions<IAdminOrder[]>, 'queryKey'> }) =>
+export const useGetAdminOrders = (props?: { queryOptions?: Omit<UseQueryOptions<IAdminOrderListResponse>, 'queryKey'> }) =>
     useQuery(queryOptions({ queryKey: ['admin-orders'] as const, queryFn: () => getAdminOrders(), ...(props?.queryOptions || {}) }));
 
 export const useUpdateAdminOrderStatus = (props?: {

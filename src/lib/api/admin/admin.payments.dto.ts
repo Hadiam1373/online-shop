@@ -1,12 +1,36 @@
+export interface IAdminPaymentOrderUser {
+    id: string;
+    email: string;
+}
+
+export interface IAdminPaymentOrder {
+    id: string;
+    userId: string;
+    total: number;
+    status: string;
+    createdAt: string;
+    updatedAt: string;
+    user?: IAdminPaymentOrderUser;
+}
+
 export interface IAdminPayment {
     id: string;
     orderId: string;
-    method: string;
+    amount: number;
     status: string;
     transactionId?: string;
-    amount: number;
     createdAt: string;
-    updatedAt: string;
+    order?: IAdminPaymentOrder;
+}
+
+export interface IAdminPaymentListResponse {
+    data: IAdminPayment[];
+    pagination: {
+        total: number;
+        page: number;
+        limit: number;
+        pages: number;
+    };
 }
 
 export interface IAdminPaymentStatsResponse {

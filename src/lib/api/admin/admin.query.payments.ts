@@ -1,8 +1,8 @@
 import { queryOptions, useMutation, useQuery, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
 import { getAdminPayments, getAdminPaymentStats, refundAdminPayment } from './admin.payments.api';
-import { IAdminPayment, IAdminPaymentStatsResponse, IAdminPaymentRefundResponse } from './admin.payments.dto';
+import { IAdminPaymentListResponse, IAdminPaymentStatsResponse, IAdminPaymentRefundResponse } from './admin.payments.dto';
 
-export const useGetAdminPayments = (props?: { queryOptions?: Omit<UseQueryOptions<IAdminPayment[]>, 'queryKey'> }) =>
+export const useGetAdminPayments = (props?: { queryOptions?: Omit<UseQueryOptions<IAdminPaymentListResponse>, 'queryKey'> }) =>
     useQuery(queryOptions({ queryKey: ['admin-payments'] as const, queryFn: () => getAdminPayments(), ...(props?.queryOptions || {}) }));
 
 export const useGetAdminPaymentStats = (props?: { queryOptions?: Omit<UseQueryOptions<IAdminPaymentStatsResponse>, 'queryKey'> }) =>
