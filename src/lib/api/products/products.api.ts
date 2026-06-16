@@ -1,10 +1,10 @@
 import axiosInstance from "@/lib/axios";
-import { IProduct, IProductInput } from "./products.dto";
+import { IProduct, IProductInput, IProductsResponse } from "./products.dto";
 
 const Base = "/api/products";
 
-export const getProducts = async (): Promise<IProduct[]> => {
-  const res = await axiosInstance.get<IProduct[]>(Base);
+export const getProducts = async (page?: number, limit?: number): Promise<IProductsResponse> => {
+  const res = await axiosInstance.get<IProductsResponse>(Base, { params: { page, limit } });
   return res.data;
 };
 
