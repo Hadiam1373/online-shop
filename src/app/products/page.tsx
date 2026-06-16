@@ -4,9 +4,12 @@ import { Typography } from '@/components/ui/typography';
 import { useProducts } from './products.model';
 import styles from './products.module.css';
 import { Pagination } from '@/components/ui/pagination';
+import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
 
 const Products = () => {
     const { products, page, setPage } = useProducts();
+    const router = useRouter();
     return (
         <div className={styles['products']}>
             <div className={styles['products__list']}>
@@ -23,10 +26,14 @@ const Products = () => {
                             </Typography>
                         </div>
 
-                        <div className='flex items-center justify-between'>
+                        <div className='flex items-center justify-between mt-4'>
                             <Typography variant='body1'>قیمت</Typography>
                             <Typography variant='body2'>{product.price.toFixed(2)}</Typography>
                         </div>
+
+                        <Button onClick={() => router.push(`/products/${product.id}`)} variant='outline' size='sm' className='w-full mt-4'>
+                            مشاهده جزئیات
+                        </Button>
                     </div>
                 ))}
             </div>

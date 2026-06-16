@@ -11,3 +11,27 @@
 .products__item {
     @apply bg-white rounded-lg shadow-md p-4 flex flex-col gap-2;
 }
+
+.product-detail {
+    @apply w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 mt-10 px-10  lg:px-20 xxl:px-60;
+}
+
+.product-detail__image {
+    @apply w-full h-fit object-cover rounded-lg border p-2;
+}
+
+.product-detail__info {
+    @apply flex flex-col gap-4;
+}
+
+.product-image-gallery {
+    @apply flex flex-col gap-2;
+}
+
+.product-image-gallery__item {
+    @apply w-fit object-cover rounded-lg flex items-center overflow-x-auto gap-2;
+}
+
+.product-image-gallery__item img {
+    @apply border rounded-b-lg p-2 cursor-pointer;
+}

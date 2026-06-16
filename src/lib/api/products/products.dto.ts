@@ -10,6 +10,13 @@ export interface IProduct {
     attributes?: Record<string, any>;
     createdAt: string;
     updatedAt: string;
+    category: {
+        id: string;
+        name: string;
+        description: string;
+        parentId: null;
+        createdAt: string;
+    };
 }
 
 export interface IProductInput {
