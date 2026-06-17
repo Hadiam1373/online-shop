@@ -37,7 +37,7 @@ const Whishlist = () => {
                 ) : (
                     wishlist?.data?.map(item => (
                         <Card className='p-4' key={item.id}>
-                            <div className='flex '>
+                            <div className='flex gap-4 items-center'>
                                 <img src={item.product.images[0]} alt={item.product.name} className='h-16 w-16 rounded object-cover' />
                                 <div className='flex flex-col gap-2 items-start'>
                                     <Typography weight='bold'>{item?.product?.name}</Typography>

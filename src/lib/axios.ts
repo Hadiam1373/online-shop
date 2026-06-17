@@ -84,7 +84,7 @@ axiosInstance.interceptors.response.use(
                 isRefreshing = false;
             }
         }
-        toast.error(error.response?.data?.error, {
+        toast.error(error.response?.data?.message, {
             style: {
                 border: '1px solid #ff4d4f',
                 color: '#ff4d4f',

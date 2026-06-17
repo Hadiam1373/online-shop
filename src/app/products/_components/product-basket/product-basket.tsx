@@ -4,7 +4,7 @@ import { CalendarSync, ShieldCheck } from 'lucide-react';
 import { useProducts } from '../../products.model';
 
 export const ProductBasket = () => {
-    const { product } = useProducts();
+    const { product, addProductToWhishloist } = useProducts();
     return (
         <>
             <div>
@@ -16,6 +16,9 @@ export const ProductBasket = () => {
                     <CalendarSync />
                     بازگشت کالا تا ۷ روز طبق شرایط مرجوعی
                 </Typography>
+                <Button onClick={() => addProductToWhishloist()} variant='outline' className='mt-8 w-full'>
+                    افزودن به لیست مورد علاقه ها
+                </Button>
             </div>
             <div>
                 <Typography variant='subtitle1' className='mt-10 text-center'>
