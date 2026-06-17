@@ -1,4 +1,4 @@
-import { useDeleteReview, useEditReview, useGetMyReviews } from '@/lib/api/reviews/reviews.query';
+import { useCreateReview, useDeleteReview, useEditReview, useGetMyReviews } from '@/lib/api/reviews/reviews.query';
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -8,11 +8,13 @@ export const useComments = ({
     rating,
     productId,
     reviewId,
+    mode = 'edit',
 }: {
     comment?: string;
     rating?: number;
     productId?: string;
     reviewId?: string;
+    mode?: 'edit' | 'create';
 }) => {
     const [page, setPage] = useState(1);
     const [openModal, setOpenModal] = useState(false);
@@ -21,6 +23,7 @@ export const useComments = ({
     const queryClient = useQueryClient();
     const { mutateAsync: editReview } = useEditReview();
     const { mutateAsync: deleteReview } = useDeleteReview();
+    const { mutateAsync: createReview } = useCreateReview();
 
     const methods = useForm({
         defaultValues: {
@@ -32,9 +35,16 @@ export const useComments = ({
     const ratingValue = methods.watch('rating');
 
     const onSubmit = async (data: any) => {
-        await editReview({
-            reviewId: reviewId ? reviewId : '',
-            payload: { comment: data.comment, rating: data.rating, productId: productId ? productId : '' },
+        if (mode === 'edit') {
+            await editReview({
+                reviewId: reviewId ? reviewId : '',
+                payload: { comment: data.comment, rating: data.rating, productId: productId ? productId : '' },
+            });
+        }
+        await createReview({
+            comment: data.comment,
+            rating: data.rating,
+            productId: productId ? productId : '',
         });
         await queryClient.invalidateQueries({ queryKey: ['my-reviews'] });
         setOpenModal(false);
