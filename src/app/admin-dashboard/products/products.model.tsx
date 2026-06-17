@@ -7,9 +7,34 @@ import {
     useUpdateAdminProduct,
 } from '@/lib/api/admin/admin.query';
 import { IAdminProductInput } from '@/lib/api/admin/admin.products.dto';
-import { useForm } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
+
+type IAttributeField = {
+    key: string;
+    value: string;
+};
+
+type IAdminProductFormValues = Omit<IAdminProductInput, 'attributes'> & {
+    attributes: IAttributeField[];
+};
+
+const mapAttributesToArray = (attributes?: Record<string, any>): IAttributeField[] => {
+    if (!attributes || typeof attributes !== 'object') return [{ key: '', value: '' }];
+
+    const entries = Object.entries(attributes).map(([key, value]) => ({ key, value: String(value) }));
+    return entries.length > 0 ? [...entries, { key: '', value: '' }] : [{ key: '', value: '' }];
+};
+
+const mapAttributesToObject = (attributes: IAttributeField[] = []) => {
+    return attributes.reduce<Record<string, any>>((acc, attribute) => {
+        const key = attribute.key?.trim();
+        if (!key) return acc;
+        acc[key] = attribute.value;
+        return acc;
+    }, {});
+};
 
 export const useProductsList = () => {
     const [page, setPage] = useState(1);
@@ -51,12 +76,15 @@ export const useProductsList = () => {
 export const useCreateProductModel = () => {
     const createMutation = useCreateAdminProduct();
     const router = useRouter();
-    const form = useForm<IAdminProductInput>({
-        defaultValues: { name: '', description: '', price: 0, stock: 0, images: [], categoryId: '', attributes: {} },
+    const form = useForm<IAdminProductFormValues>({
+        defaultValues: { name: '', description: '', price: 0, stock: 0, images: [], categoryId: '', attributes: [{ key: '', value: '' }] },
     });
-    const { watch, setValue } = form;
+    const { watch, setValue, control } = form;
+    const attributesFieldArray = useFieldArray({ control, name: 'attributes' });
 
-    const onSubmit = (data: IAdminProductInput) => {
+    const onSubmit = (data: IAdminProductFormValues) => {
+        const attributes = mapAttributesToObject(data.attributes);
+
         createMutation.mutate(
             {
                 name: data.name,
@@ -65,7 +93,7 @@ export const useCreateProductModel = () => {
                 stock: Number(data.stock),
                 images: data.images ?? [],
                 categoryId: data.categoryId,
-                attributes: data.attributes,
+                attributes,
             },
             {
                 onSuccess: () => router.push('/admin-dashboard/products'),
@@ -73,14 +101,22 @@ export const useCreateProductModel = () => {
         );
     };
 
-    return { form, onSubmit, isCreating: createMutation.isPending, watch, setValue };
+    return {
+        form,
+        onSubmit,
+        isCreating: createMutation.isPending,
+        watch,
+        setValue,
+        attributesFieldArray,
+    };
 };
 
 export const useEditProductModel = (id: string) => {
     const { data: product, isLoading } = useGetAdminProduct(id || '');
     const updateMutation = useUpdateAdminProduct();
-    const form = useForm<IAdminProductInput>();
-    const { register, handleSubmit, reset, watch, setValue } = form;
+    const form = useForm<IAdminProductFormValues>();
+    const { register, handleSubmit, reset, watch, setValue, control } = form;
+    const attributesFieldArray = useFieldArray({ control, name: 'attributes' });
     const router = useRouter();
 
     useEffect(() => {
@@ -92,19 +128,42 @@ export const useEditProductModel = (id: string) => {
                 stock: product.stock,
                 images: product.images,
                 categoryId: product.categoryId,
-                attributes: product.attributes ?? {},
+                attributes: mapAttributesToArray(product.attributes),
             });
         }
     }, [product, reset]);
 
-    const onSubmit = (data: IAdminProductInput) => {
+    const onSubmit = (data: IAdminProductFormValues) => {
+        const attributes = mapAttributesToObject(data.attributes);
+
         updateMutation.mutate(
-            { id, payload: { ...data, price: Number(data.price), stock: Number(data.stock) } },
+            {
+                id,
+                payload: {
+                    name: data.name,
+                    description: data.description,
+                    price: Number(data.price),
+                    stock: Number(data.stock),
+                    images: data.images ?? [],
+                    categoryId: data.categoryId,
+                    attributes,
+                },
+            },
             {
                 onSuccess: () => router.push('/admin-dashboard/products'),
             },
         );
     };
 
-    return { register, handleSubmit, onSubmit, isUpdating: updateMutation.isPending, isLoading, product, watch, setValue };
+    return {
+        register,
+        handleSubmit,
+        onSubmit,
+        isUpdating: updateMutation.isPending,
+        isLoading,
+        product,
+        watch,
+        setValue,
+        attributesFieldArray,
+    };
 };

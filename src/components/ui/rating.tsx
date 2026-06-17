@@ -4,7 +4,7 @@ import { Typography } from '@/components/ui/typography';
 
 export type TRatingProps = {
     value: number;
-    onChange: (value: number) => void;
+    onChange?: (value: number) => void;
     max?: number;
     size?: 'sm' | 'md' | 'lg';
     readOnly?: boolean;
@@ -48,7 +48,7 @@ export const Rating: React.FC<TRatingProps> = ({
 
     const handleClick = (i: number) => {
         if (readOnly) return;
-        onChange(i);
+        onChange && onChange(i);
     };
 
     return (

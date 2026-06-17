@@ -8,7 +8,7 @@ import { useCreateProductModel } from '../products.model';
 import { useEffect, useState } from 'react';
 
 export default function CreateProductPage() {
-    const { form, onSubmit, isCreating, watch, setValue } = useCreateProductModel();
+    const { form, onSubmit, isCreating, watch, setValue, attributesFieldArray } = useCreateProductModel();
     const { register, handleSubmit } = form;
     const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 
@@ -55,6 +55,29 @@ export default function CreateProductPage() {
                 <Input {...register('price')} type='number' placeholder='قیمت' required />
                 <Input {...register('stock')} type='number' placeholder='موجودی' required />
                 <Input {...register('categoryId')} placeholder='دسته‌بندی (id)' required />
+
+                <div className='w-full rounded border border-gray-200 p-4 space-y-3'>
+                    <div className='font-medium text-sm'>ویژگی‌های محصول</div>
+                    {attributesFieldArray.fields.map((field, index) => (
+                        <div key={field.id} className='grid gap-2 md:grid-cols-[1fr_1fr_auto] items-end'>
+                            <Input {...register(`attributes.${index}.key` as const)} placeholder='کلید' />
+                            <Input {...register(`attributes.${index}.value` as const)} placeholder='مقدار' />
+                            <Button
+                                type='button'
+                                variant='outline'
+                                size='sm'
+                                className='h-10'
+                                onClick={() => attributesFieldArray.remove(index)}
+                                disabled={attributesFieldArray.fields.length <= 1}
+                            >
+                                حذف
+                            </Button>
+                        </div>
+                    ))}
+                    <Button type='button' variant='ghost' size='sm' onClick={() => attributesFieldArray.append({ key: '', value: '' })}>
+                        افزودن ویژگی جدید
+                    </Button>
+                </div>
 
                 <div className='w-full'>
                     <div className='border-2 border-dashed rounded p-4 text-center'>

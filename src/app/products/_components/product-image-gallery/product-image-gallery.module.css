@@ -1,0 +1,13 @@
+@reference "../../../globals.css";
+
+.product-image-gallery {
+    @apply flex flex-col gap-2;
+}
+
+.product-image-gallery__item {
+    @apply w-fit object-cover rounded-lg flex items-center overflow-x-auto gap-2;
+}
+
+.product-image-gallery__item img {
+    @apply border rounded-b-lg p-2 cursor-pointer;
+}

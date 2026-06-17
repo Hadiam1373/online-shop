@@ -1,0 +1,9 @@
+@reference "../../../globals.css";
+
+.product-detail__info {
+    @apply flex flex-col gap-2;
+}
+
+.product-detail__info--property {
+    @apply flex items-center gap-4 border-3 border-dashed rounded-lg px-4 py-2;
+}
