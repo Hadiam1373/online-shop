@@ -4,7 +4,7 @@ import { CalendarSync, ShieldCheck } from 'lucide-react';
 import { useProducts } from '../../products.model';
 
 export const ProductBasket = () => {
-    const { product, addProductToWhishloist } = useProducts();
+    const { product, addProductToWhishloist, addToCartHandler } = useProducts();
     return (
         <>
             <div>
@@ -25,7 +25,12 @@ export const ProductBasket = () => {
                     {product?.price.toLocaleString('fa')} تومان
                 </Typography>
 
-                <Button variant='default' size='lg' className='w-full mt-4'>
+                <Button
+                    onClick={() => addToCartHandler({ productId: product!.id, quantity: 1 })}
+                    variant='default'
+                    size='lg'
+                    className='w-full mt-4'
+                >
                     افزودن به سبد خرید
                 </Button>
             </div>

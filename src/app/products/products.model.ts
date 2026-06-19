@@ -1,4 +1,5 @@
 import { useGetAdminProducts } from '@/lib/api/admin/admin.query.products';
+import { useAddToCart } from '@/lib/api/cart/cart.query';
 import { useGetProduct } from '@/lib/api/products/products.query';
 import { useAddToWishlist } from '@/lib/api/wishlist';
 import { useParams } from 'next/navigation';
@@ -12,6 +13,16 @@ export const useProducts = () => {
     const { data: product, isLoading } = useGetProduct(id);
     const { data: products } = useGetAdminProducts(page, 10);
     const { mutateAsync: addToWishlist } = useAddToWishlist();
+    const { mutateAsync: addToCart } = useAddToCart();
+
+    const addToCartHandler = async (data: { productId: string; quantity: number }) => {
+        try {
+            await addToCart(data);
+            toast.success('محصول با موفقیت به سبد خرید شما اضافه شد .');
+        } catch (err) {
+            console.log(err);
+        }
+    };
     const addProductToWhishloist = async () => {
         try {
             await addToWishlist({ productId: id });
@@ -20,5 +31,5 @@ export const useProducts = () => {
             console.log(err);
         }
     };
-    return { products, page, setPage, product, isLoading, addProductToWhishloist };
+    return { products, page, setPage, product, isLoading, addProductToWhishloist, addToCartHandler };
 };

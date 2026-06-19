@@ -1,7 +1,7 @@
-import React from 'react';
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ShoppingCart } from 'lucide-react';
+import { Basket } from './components/basket.tsx/basket';
+import Link from 'next/link';
+import React from 'react';
 import { Login } from './components/login';
 
 export const DesktopHeader: React.FC = () => {
@@ -21,7 +21,7 @@ export const DesktopHeader: React.FC = () => {
                         محصولات
                     </Button>
                 </Link>
-                <ShoppingCart />
+                <Basket />
                 <Login />
             </div>
         </header>

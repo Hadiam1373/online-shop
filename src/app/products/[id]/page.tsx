@@ -1,12 +1,9 @@
 'use client';
 import { CommentBox } from '@/app/products/_components/comment-box/comment-box';
-import { Button } from '@/components/ui/button';
-import { Typography } from '@/components/ui/typography';
-import { CalendarSync, ShieldCheck } from 'lucide-react';
 import { ProductImageGallery, ProductInfo } from '../_components';
+import { ProductBasket } from '../_components/product-basket';
 import { useProducts } from '../products.model';
 import styles from '../products.module.css';
-import { ProductBasket } from '../_components/product-basket';
 
 const ProductDetail = () => {
     const { product, isLoading } = useProducts();
