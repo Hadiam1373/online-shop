@@ -9,8 +9,15 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/providers/auth-context';
+import { useLogout } from '@/hooks/usePermission';
+import { cookieWrapper } from '@/lib/cookie';
 export const Profile: React.FC = () => {
     const navigate = useRouter();
+    const { role } = useAuth();
+    const { logout } = useLogout();
+    const showProfile = !!cookieWrapper.get('accessToken');
+    if (!showProfile) return null;
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -19,9 +26,21 @@ export const Profile: React.FC = () => {
             <DropdownMenuContent>
                 <DropdownMenuGroup>
                     <DropdownMenuLabel>حساب کاربری من</DropdownMenuLabel>
-                    <DropdownMenuItem onClick={() => navigate.push('/user-dashboard')}>پروفایل</DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => navigate.push('/user-dashboard/whishlist')}>علاقه‌مندی‌ها</DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => navigate.push('/user-dashboard/orders')}>سفارشات</DropdownMenuItem>
+                    {role === 'USER' && (
+                        <>
+                            <DropdownMenuItem onClick={() => navigate.push('/user-dashboard')}>پروفایل</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => navigate.push('/user-dashboard/whishlist')}>علاقه‌مندی‌ها</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => navigate.push('/user-dashboard/orders')}>سفارشات</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => logout()}>خروج</DropdownMenuItem>
+                        </>
+                    )}
+
+                    {(role === 'ADMIN' || role === 'OPERATOR') && (
+                        <>
+                            <DropdownMenuItem onClick={() => navigate.push('/admin-dashboard')}>پنل مدیریت</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => logout()}>خروج</DropdownMenuItem>
+                        </>
+                    )}
                 </DropdownMenuGroup>
             </DropdownMenuContent>
         </DropdownMenu>
