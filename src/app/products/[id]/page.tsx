@@ -4,13 +4,14 @@ import { ProductImageGallery, ProductInfo } from '../_components';
 import { ProductBasket } from '../_components/product-basket';
 import { useProducts } from '../products.model';
 import styles from '../products.module.css';
+import { Spinner } from '@/components/ui/spinner';
 
 const ProductDetail = () => {
     const { product, isLoading } = useProducts();
     return (
         <div>
             {isLoading ? (
-                <p>در حال بارگذاری...</p>
+                <Spinner />
             ) : (
                 <div className={styles['product-detail']}>
                     <div className={styles['product-detail__image']}>

@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import styles from '../../admin-dashboard.module.css';
+import { Spinner } from '@/components/ui/spinner';
 
 export default function EditProductPage() {
     const params = useParams() as { id?: string };
@@ -54,7 +55,7 @@ export default function EditProductPage() {
         setImagePreviews(updatedPreviews);
     };
 
-    if (isLoading) return <p>در حال بارگذاری...</p>;
+    if (isLoading) return <Spinner />;
 
     return (
         <div className={styles['form_wrapper']}>

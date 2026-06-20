@@ -6,6 +6,7 @@ import styles from '../../admin-dashboard.module.css';
 import { useGetAdminUser, useChangeUserRole, useBanUser } from '@/lib/api/admin/admin.query';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
+import { Spinner } from '@/components/ui/spinner';
 
 export default function AdminUserDetail() {
     const params = useParams() as { id?: string };
@@ -27,7 +28,7 @@ export default function AdminUserDetail() {
             { onSuccess: () => queryClient.invalidateQueries({ queryKey: ['admin-users'] }) },
         );
 
-    if (isLoading) return <p>در حال بارگذاری...</p>;
+    if (isLoading) return <Spinner />;
 
     return (
         <div className={styles['form_wrapper']}>

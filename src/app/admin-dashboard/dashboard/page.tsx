@@ -3,6 +3,7 @@ import React from 'react';
 import { HeaderTitle } from '@/components';
 import styles from '../../admin-dashboard.module.css';
 import { useGetDashboardStats } from '@/lib/api/admin/admin.query';
+import { Spinner } from '@/components/ui/spinner';
 
 export default function AdminDashboardStats() {
     const { data, isLoading } = useGetDashboardStats();
@@ -10,7 +11,7 @@ export default function AdminDashboardStats() {
     return (
         <div className={styles['form_wrapper']}>
             <HeaderTitle title='آمار کلی پنل ادمین' />
-            {isLoading && <p>در حال بارگذاری...</p>}
+            {isLoading && <Spinner />}
             {!isLoading && data && (
                 <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
                     {Object.entries(data).map(([k, v]) => (
