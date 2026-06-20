@@ -51,15 +51,15 @@ export const useCalculateCartTotal = (props?: {
 }) => useMutation(calculateCartTotalOptions(props));
 
 export const updateCartItemOptions = (props?: {
-    mutationOptions?: Omit<UseMutationOptions<any, unknown, { id: string; payload: { quantity: number } }>, 'mutationKey' | 'mutationFn'>;
+    mutationOptions?: Omit<UseMutationOptions<any, unknown, { id: string; payload: { type: string } }>, 'mutationKey' | 'mutationFn'>;
 }) => ({
     mutationKey: ['update-cart-item'] as const,
-    mutationFn: ({ id, payload }: { id: string; payload: { quantity: number } }) => updateCartItem(id, payload),
+    mutationFn: ({ id, payload }: { id: string; payload: { type: string } }) => updateCartItem(id, payload),
     ...(props?.mutationOptions || {}),
 });
 
 export const useUpdateCartItem = (props?: {
-    mutationOptions?: Omit<UseMutationOptions<any, unknown, { id: string; payload: { quantity: number } }>, 'mutationKey' | 'mutationFn'>;
+    mutationOptions?: Omit<UseMutationOptions<any, unknown, { id: string; payload: { type: string } }>, 'mutationKey' | 'mutationFn'>;
 }) => useMutation(updateCartItemOptions(props));
 
 export const removeCartItemOptions = (props?: {

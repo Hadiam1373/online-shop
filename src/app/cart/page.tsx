@@ -1,13 +1,14 @@
 'use client';
 
 import { useCart } from '@/app/cart/cart.model';
-import styles from './cart.module.css';
+import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Typography } from '@/components/ui/typography';
-import { Button } from '@/components/ui/button';
+import { MinusIcon, Plus } from 'lucide-react';
+import styles from './cart.module.css';
 
 const Cart = () => {
-    const { cartData } = useCart();
+    const { cartData, updateCartItemHandler } = useCart();
     return (
         <div className={styles.cart}>
             <div className='col-span-2 flex flex-col gap-5'>
@@ -22,6 +23,27 @@ const Cart = () => {
                                 <Typography weight='bold' variant='body1'>
                                     {card?.product?.price.toLocaleString('fa')} تومان
                                 </Typography>
+                                <div className='flex gap-1'>
+                                    <Button
+                                        onClick={() => updateCartItemHandler({ productId: card?.id, type: 'increment' })}
+                                        size='icon'
+                                        className='rotate-180 rounded-xl!'
+                                    >
+                                        <Plus />
+                                    </Button>
+
+                                    <Button size='icon' variant='outline'>
+                                        {card?.quantity}
+                                    </Button>
+
+                                    <Button
+                                        onClick={() => updateCartItemHandler({ productId: card?.id, type: 'decrement' })}
+                                        size='icon'
+                                        className='rotate-180 bg-secondary rounded-xl! '
+                                    >
+                                        <MinusIcon />
+                                    </Button>
+                                </div>
                             </div>
                         </div>
                     </Card>
@@ -46,7 +68,7 @@ const Cart = () => {
                     </Typography>
                 </div>
 
-                <Button variant='outline'>تسویه حساب</Button>
+                <Button>تسویه حساب</Button>
             </Card>
         </div>
     );

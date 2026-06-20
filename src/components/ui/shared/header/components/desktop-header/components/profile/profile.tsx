@@ -11,13 +11,13 @@ import {
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/providers/auth-context';
 import { useLogout } from '@/hooks/usePermission';
-import { cookieWrapper } from '@/lib/cookie';
+
 export const Profile: React.FC = () => {
     const navigate = useRouter();
-    const { role } = useAuth();
+    const { isAuthenticated, role } = useAuth();
     const { logout } = useLogout();
-    const showProfile = !!cookieWrapper.get('accessToken');
-    if (!showProfile) return null;
+
+    if (!isAuthenticated) return null;
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>

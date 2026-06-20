@@ -1,9 +1,9 @@
 import { Button } from '@/components/ui/button';
-import { Basket } from './components/basket.tsx/basket';
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { Login } from './components/login';
-import Image from 'next/image';
+import { Basket } from './components/basket.tsx/basket';
+import { Profile } from '@/components/ui/shared/header/components/desktop-header/components/profile';
 
 export const DesktopHeader: React.FC = () => {
     return (
@@ -23,6 +23,7 @@ export const DesktopHeader: React.FC = () => {
                     </Button>
                 </Link>
                 <Basket />
+                <Profile />
             </div>
         </header>
     );

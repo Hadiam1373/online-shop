@@ -66,7 +66,7 @@ export const MobileCardTable = ({
     return (
         <div className={styles.mobile_table}>
             {data.map(item => (
-                <div key={item.id + Math.random().toString()} className={styles['mobile_table--item']}>
+                <div key={item.id} className={styles['mobile_table--item']}>
                     {item.fields.map(field => (
                         <div key={field.label} className={styles['mobile_table--item_row']}>
                             <Typography variant='body2' className='text-secondary'>
