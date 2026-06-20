@@ -4,18 +4,28 @@ import { useParams, useRouter } from 'next/navigation';
 import { HeaderTitle } from '@/components';
 import styles from '../../admin-dashboard.module.css';
 import { useGetAdminUser, useChangeUserRole, useBanUser } from '@/lib/api/admin/admin.query';
+import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 
 export default function AdminUserDetail() {
     const params = useParams() as { id?: string };
     const id = params?.id || '';
     const router = useRouter();
-    const { data: user, isLoading, refetch } = useGetAdminUser(id);
+    const { data: user, isLoading } = useGetAdminUser(id);
     const changeRoleMutation = useChangeUserRole();
     const banMutation = useBanUser();
+    const queryClient = useQueryClient();
 
-    const changeRole = (role: string) => changeRoleMutation.mutate({ userId: id, payload: { role } }, { onSuccess: () => refetch() });
-    const ban = () => banMutation.mutate({ userId: id, payload: { banned: true } }, { onSuccess: () => refetch() });
+    const changeRole = (role: string) =>
+        changeRoleMutation.mutate(
+            { userId: id, payload: { role } },
+            { onSuccess: () => queryClient.invalidateQueries({ queryKey: ['admin-users'] }) },
+        );
+    const ban = () =>
+        banMutation.mutate(
+            { userId: id, payload: { banned: true } },
+            { onSuccess: () => queryClient.invalidateQueries({ queryKey: ['admin-users'] }) },
+        );
 
     if (isLoading) return <p>در حال بارگذاری...</p>;
 

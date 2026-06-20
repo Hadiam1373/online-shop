@@ -5,13 +5,18 @@ import { DesktopTable } from '@/components/ui/table/desktop-table';
 import { MobileCardTable } from '@/components/ui/table/mobile-table';
 import styles from '../admin-dashboard.module.css';
 import { useGetAdminPendingReviews, useModerateAdminReview } from '@/lib/api/admin/admin.query';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function ReviewsPage() {
-    const { data: pending, isLoading, refetch } = useGetAdminPendingReviews();
+    const { data: pending, isLoading } = useGetAdminPendingReviews();
     const moderateMutation = useModerateAdminReview();
+    const queryClient = useQueryClient();
 
     const moderate = (id: string, approved: boolean) => {
-        moderateMutation.mutate({ id, approve: approved }, { onSuccess: () => refetch() });
+        moderateMutation.mutate(
+            { id, approve: approved },
+            { onSuccess: () => queryClient.invalidateQueries({ queryKey: ['admin-pending-reviews'] }) },
+        );
     };
 
     const rows =

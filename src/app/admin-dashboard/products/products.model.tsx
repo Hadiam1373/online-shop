@@ -9,6 +9,7 @@ import {
 import { IAdminProductInput } from '@/lib/api/admin/admin.products.dto';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 
 type IAttributeField = {
@@ -41,11 +42,16 @@ export const useProductsList = () => {
     const { data: products, isPending: isLoading } = useGetAdminProducts(page, 10);
     const deleteMutation = useDeleteAdminProduct();
     const router = useRouter();
+    const queryClient = useQueryClient();
 
     const handleDelete = (id: string) => {
         if (!confirm('آیا از حذف محصول مطمئن هستید؟')) return;
         deleteMutation.mutate(id, {
-            onSuccess: () => router.refresh(),
+            onSuccess: () => {
+                queryClient.invalidateQueries({ queryKey: ['admin-products'] });
+                queryClient.invalidateQueries({ queryKey: ['products'] });
+                router.refresh();
+            },
         });
     };
 
@@ -75,6 +81,7 @@ export const useProductsList = () => {
 
 export const useCreateProductModel = () => {
     const createMutation = useCreateAdminProduct();
+    const queryClient = useQueryClient();
     const router = useRouter();
     const form = useForm<IAdminProductFormValues>({
         defaultValues: { name: '', description: '', price: 0, stock: 0, images: [], categoryId: '', attributes: [{ key: '', value: '' }] },
@@ -96,7 +103,11 @@ export const useCreateProductModel = () => {
                 attributes,
             },
             {
-                onSuccess: () => router.push('/admin-dashboard/products'),
+                onSuccess: () => {
+                    queryClient.invalidateQueries({ queryKey: ['admin-products'] });
+                    queryClient.invalidateQueries({ queryKey: ['products'] });
+                    router.push('/admin-dashboard/products');
+                },
             },
         );
     };
@@ -112,6 +123,7 @@ export const useCreateProductModel = () => {
 };
 
 export const useEditProductModel = (id: string) => {
+    const queryClient = useQueryClient();
     const { data: product, isLoading } = useGetAdminProduct(id || '');
     const updateMutation = useUpdateAdminProduct();
     const form = useForm<IAdminProductFormValues>();
@@ -150,7 +162,11 @@ export const useEditProductModel = (id: string) => {
                 },
             },
             {
-                onSuccess: () => router.push('/admin-dashboard/products'),
+                onSuccess: () => {
+                    queryClient.invalidateQueries({ queryKey: ['admin-products'] });
+                    queryClient.invalidateQueries({ queryKey: ['products'] });
+                    router.push('/admin-dashboard/products');
+                },
             },
         );
     };

@@ -2,9 +2,53 @@
 
 import { useCart } from '@/app/cart/cart.model';
 import styles from './cart.module.css';
+import { Card } from '@/components/ui/card';
+import { Typography } from '@/components/ui/typography';
+import { Button } from '@/components/ui/button';
 
 const Cart = () => {
     const { cartData } = useCart();
-    return <div className={styles.cart}>Cart</div>;
+    return (
+        <div className={styles.cart}>
+            <div className='col-span-2 flex flex-col gap-5'>
+                {cartData?.cart.cartItems?.map(card => (
+                    <Card key={card?.id} className='p-5'>
+                        <div className='grid grid-cols-2 gap-8 '>
+                            <img src={card?.product?.images[0]} alt={card?.product?.name} className='size-32' />
+                            <div className='flex flex-col justify-content gap-6'>
+                                <Typography className='text-secondary' variant='subtitle1'>
+                                    {card?.product?.name}
+                                </Typography>
+                                <Typography weight='bold' variant='body1'>
+                                    {card?.product?.price.toLocaleString('fa')} تومان
+                                </Typography>
+                            </div>
+                        </div>
+                    </Card>
+                ))}
+            </div>
+            <Card className='p-5 h-fit sticky top-[150px]'>
+                <div className='flex items-center gap-2'>
+                    <Typography className='text-secondary' variant='body1'>
+                        تعداد آیتم های سفارش:
+                    </Typography>
+                    <Typography weight='bold' variant='body1'>
+                        {cartData?.itemCount.toLocaleString('fa')}
+                    </Typography>
+                </div>
+
+                <div className='flex items-center gap-2'>
+                    <Typography variant='body1' className='text-secondary'>
+                        جمع کل سفارش :
+                    </Typography>
+                    <Typography variant='body1' weight='bold'>
+                        {cartData?.subtotal.toLocaleString('fa')} تومان{' '}
+                    </Typography>
+                </div>
+
+                <Button variant='outline'>تسویه حساب</Button>
+            </Card>
+        </div>
+    );
 };
 export default Cart;

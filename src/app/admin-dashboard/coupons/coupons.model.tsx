@@ -2,6 +2,7 @@ import { useRouter } from 'next/navigation';
 import { useCreateAdminCoupon, useGetAdminCoupons } from '@/lib/api/admin/admin.query';
 import { useForm } from 'react-hook-form';
 import { IAdminCouponInput } from '@/lib/api/admin/admin.coupons.dto';
+import { useQueryClient } from '@tanstack/react-query';
 
 type CreateCouponFormValues = {
     code: string;
@@ -29,6 +30,7 @@ export const useGetCouponModel = () => {
 export const useCreateCouponModel = () => {
     const createMutation = useCreateAdminCoupon();
     const router = useRouter();
+    const queryClient = useQueryClient();
     const form = useForm<CreateCouponFormValues>({ defaultValues: { discountType: 'FIXED', value: 0 } });
 
     const onSubmit = (data: CreateCouponFormValues) => {
@@ -40,7 +42,12 @@ export const useCreateCouponModel = () => {
             usageLimit: data.usageLimit,
         };
 
-        createMutation.mutate(payload, { onSuccess: () => router.push('/admin-dashboard/coupons') });
+        createMutation.mutate(payload, {
+            onSuccess: () => {
+                queryClient.invalidateQueries({ queryKey: ['admin-coupons'] });
+                router.push('/admin-dashboard/coupons');
+            },
+        });
     };
 
     return { form, onSubmit, isCreating: createMutation.isPending };

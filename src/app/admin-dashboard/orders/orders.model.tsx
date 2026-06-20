@@ -3,13 +3,18 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { currentOrderStatus } from '@/hooks/useCurrentStatus';
 import { AdminOrderStatus } from '@/lib/api/admin/admin.orders.dto';
 import { useGetAdminOrders, useUpdateAdminOrderStatus } from '@/lib/api/admin/admin.query.orders';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const OrderModel = () => {
-    const { data: orders, isLoading, refetch } = useGetAdminOrders();
+    const { data: orders, isLoading } = useGetAdminOrders();
     const updateOrderStatus = useUpdateAdminOrderStatus();
+    const queryClient = useQueryClient();
 
     const changeStatus = (id: string, status: AdminOrderStatus) => {
-        updateOrderStatus.mutate({ id, payload: { status } }, { onSuccess: () => refetch() });
+        updateOrderStatus.mutate(
+            { id, payload: { status } },
+            { onSuccess: () => queryClient.invalidateQueries({ queryKey: ['admin-orders'] }) },
+        );
     };
 
     const rows =

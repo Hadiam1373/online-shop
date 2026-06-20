@@ -5,10 +5,12 @@ import { IOtpFormData } from './login.dto';
 import { useEffect, useState } from 'react';
 import { cookieWrapper } from '@/lib/cookie';
 import { useRequestOtp, useVerifyOtp } from '@/lib/api/auth/auth.query';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const useLoginModel = () => {
     const { mutate: requestOtp } = useRequestOtp();
     const { mutateAsync: verifyOtp } = useVerifyOtp();
+    const queryClient = useQueryClient();
     const [loginStep, setLoginStep] = useState<number>(0);
     const [openModal, setOpenModal] = useState(false);
     const methods = useForm({
@@ -41,6 +43,7 @@ export const useLoginModel = () => {
             const res = await verifyOtp({ code: data.otp, phone: data.phone! });
             cookieWrapper.set('accessToken', res.accessToken, { path: '/' });
             cookieWrapper.set('refreshToken', res.refreshToken, { path: '/' });
+            await queryClient.invalidateQueries({ queryKey: ['user-profile'] });
             setLoginStep(0);
             setOpenModal(false);
             methods.reset();

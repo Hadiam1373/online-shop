@@ -19,7 +19,7 @@ export const ProductImageGallery = ({ images }: IProductImageGalleryProps) => {
                 />
             )}
 
-            <div key={images[0].toString()} className={styles['product-image-gallery__item']}>
+            <div key={images[0].toString() + Math.random()} className={styles['product-image-gallery__item']}>
                 {images.map((image, index) => (
                     <Image
                         onClick={() => setSelectedImage(image)}
@@ -28,7 +28,7 @@ export const ProductImageGallery = ({ images }: IProductImageGalleryProps) => {
                         width={100}
                         height={100}
                         className='object-cover rounded-md'
-                        key={image.toString()}
+                        key={image.toString() + Math.random()}
                     />
                 ))}
             </div>

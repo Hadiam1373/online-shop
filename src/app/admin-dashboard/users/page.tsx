@@ -6,19 +6,27 @@ import { MobileCardTable } from '@/components/ui/table/mobile-table';
 import styles from '../admin-dashboard.module.css';
 import { useRouter } from 'next/navigation';
 import { useGetAdminUsers, useChangeUserRole, useBanUser } from '@/lib/api/admin/admin.query';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function UsersPage() {
     const router = useRouter();
-    const { data: users, isLoading, refetch } = useGetAdminUsers();
+    const { data: users, isLoading } = useGetAdminUsers();
     const changeRoleMutation = useChangeUserRole();
     const banMutation = useBanUser();
+    const queryClient = useQueryClient();
 
     const changeRole = (userId: string, role: string) => {
-        changeRoleMutation.mutate({ userId, payload: { role } }, { onSuccess: () => refetch() });
+        changeRoleMutation.mutate(
+            { userId, payload: { role } },
+            { onSuccess: () => queryClient.invalidateQueries({ queryKey: ['admin-users'] }) },
+        );
     };
 
     const banUser = (userId: string) => {
-        banMutation.mutate({ userId, payload: { banned: true } }, { onSuccess: () => refetch() });
+        banMutation.mutate(
+            { userId, payload: { banned: true } },
+            { onSuccess: () => queryClient.invalidateQueries({ queryKey: ['admin-users'] }) },
+        );
     };
 
     const items = users?.data ?? [];
