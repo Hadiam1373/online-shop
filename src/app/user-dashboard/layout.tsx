@@ -15,64 +15,68 @@ import { User2 } from 'lucide-react';
 import style from './user-dashboard.module.css';
 import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import Header from '@/components/ui/shared/header/header';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
     const path = usePathname();
     const route = useRouter();
     return (
-        <SidebarProvider dir='rtl'>
-            <Sidebar>
-                <SidebarHeader>
-                    <Typography variant='subtitle1' className='border-b border-secondary py-3 text-center text-background'>
-                        پروفایل کاربر
-                    </Typography>
-                </SidebarHeader>
-                <SidebarContent className={style['sidebar']}>
-                    <div
-                        onClick={() => route.push('/user-dashboard')}
-                        className={cn(style['sidebar--item'], path === '/user-dashboard' && 'bg-destructive')}
-                    >
-                        <Typography>مشخصات </Typography>
-                    </div>
-                    <div
-                        onClick={() => route.push('/user-dashboard/orders')}
-                        className={cn(style['sidebar--item'], path === '/user-dashboard/orders' && 'bg-destructive')}
-                    >
-                        <Typography>سفارشات </Typography>
-                    </div>
-                    <div
-                        onClick={() => route.push('/user-dashboard/comments')}
-                        className={cn(style['sidebar--item'], path === '/user-dashboard/comments' && 'bg-destructive')}
-                    >
-                        <Typography>نظر ها </Typography>
-                    </div>
-                    <div
-                        onClick={() => route.push('/user-dashboard/whishlist')}
-                        className={cn(style['sidebar--item'], path === '/user-dashboard/whishlist' && 'bg-destructive')}
-                    >
-                        <Typography> علاقه مندی ها </Typography>
-                    </div>
-                    <div
-                        onClick={() => route.push('/user-dashboard/security')}
-                        className={cn(style['sidebar--item'], path === '/user-dashboard/security' && 'bg-destructive')}
-                    >
-                        <Typography> امنیت حساب </Typography>
-                    </div>
-                </SidebarContent>
-                <SidebarFooter>
-                    <SidebarMenu>
-                        <SidebarMenuItem>
-                            <SidebarMenuButton>
-                                <User2 /> Username
-                            </SidebarMenuButton>
-                        </SidebarMenuItem>
-                    </SidebarMenu>
-                </SidebarFooter>
-            </Sidebar>
-            <main className='w-full'>
-                <SidebarTrigger />
-                {children}
-            </main>
-        </SidebarProvider>
+        <div>
+            <Header />
+            <SidebarProvider dir='rtl'>
+                <Sidebar>
+                    <SidebarHeader>
+                        <Typography variant='subtitle1' className='border-b border-secondary py-3 text-center text-background'>
+                            پروفایل کاربر
+                        </Typography>
+                    </SidebarHeader>
+                    <SidebarContent className={style['sidebar']}>
+                        <div
+                            onClick={() => route.push('/user-dashboard')}
+                            className={cn(style['sidebar--item'], path === '/user-dashboard' && 'bg-destructive')}
+                        >
+                            <Typography>مشخصات </Typography>
+                        </div>
+                        <div
+                            onClick={() => route.push('/user-dashboard/orders')}
+                            className={cn(style['sidebar--item'], path === '/user-dashboard/orders' && 'bg-destructive')}
+                        >
+                            <Typography>سفارشات </Typography>
+                        </div>
+                        <div
+                            onClick={() => route.push('/user-dashboard/comments')}
+                            className={cn(style['sidebar--item'], path === '/user-dashboard/comments' && 'bg-destructive')}
+                        >
+                            <Typography>نظر ها </Typography>
+                        </div>
+                        <div
+                            onClick={() => route.push('/user-dashboard/whishlist')}
+                            className={cn(style['sidebar--item'], path === '/user-dashboard/whishlist' && 'bg-destructive')}
+                        >
+                            <Typography> علاقه مندی ها </Typography>
+                        </div>
+                        <div
+                            onClick={() => route.push('/user-dashboard/security')}
+                            className={cn(style['sidebar--item'], path === '/user-dashboard/security' && 'bg-destructive')}
+                        >
+                            <Typography> امنیت حساب </Typography>
+                        </div>
+                    </SidebarContent>
+                    <SidebarFooter>
+                        <SidebarMenu>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton>
+                                    <User2 /> Username
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+                        </SidebarMenu>
+                    </SidebarFooter>
+                </Sidebar>
+                <main className='w-full'>
+                    <SidebarTrigger />
+                    {children}
+                </main>
+            </SidebarProvider>
+        </div>
     );
 }

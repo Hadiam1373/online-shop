@@ -16,6 +16,7 @@ import style from './admin-dashboard.module.css';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/providers/auth-context';
 import { AdminRoute } from '@/components/route-protection/protected-route';
+import Header from '@/components/ui/shared/header/header';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
     const path = usePathname();
@@ -24,6 +25,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
     return (
         <AdminRoute isLoading={isLoading}>
+            <Header />
             <SidebarProvider dir='rtl'>
                 <Sidebar>
                     <SidebarHeader>

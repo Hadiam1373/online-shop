@@ -3,12 +3,13 @@ import { Basket } from './components/basket.tsx/basket';
 import Link from 'next/link';
 import React from 'react';
 import { Login } from './components/login';
+import Image from 'next/image';
 
 export const DesktopHeader: React.FC = () => {
     return (
-        <header className='w-full h-28 bg-background grid grid-cols-2 items-center px-12 shadow'>
+        <header className='w-full h-22 bg-background grid grid-cols-2 items-center px-12 shadow'>
             <div>
-                <img width={150} src='/image/logo.png' alt='Logo' className='h-auto' />
+                <Image width={100} src='/image/logo.png' alt='Logo' height='100' />
             </div>
             <div className='flex items-center justify-end gap-4'>
                 <Link href='/'>
@@ -22,7 +23,6 @@ export const DesktopHeader: React.FC = () => {
                     </Button>
                 </Link>
                 <Basket />
-                <Login />
             </div>
         </header>
     );

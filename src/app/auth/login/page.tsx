@@ -1,60 +1,68 @@
-"use client";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { object, string } from "yup";
-import Link from "next/link";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { useLogin } from "@/lib/api/auth/auth.query";
-import { ILoginParams } from "@/lib/api/auth";
-
-const loginFormSchema = object({
-  email: string().required("Email is required").email("Invalid email format"),
-  password: string().required("Password is required"),
-});
+'use client';
+import { useLogin } from '@/app/auth/login/login.model';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
+import { Typography } from '@/components/ui/typography';
+import { REGEXP_ONLY_DIGITS } from 'input-otp';
+import Image from 'next/image';
 
 const LoginPage = () => {
-  const { mutate: login } = useLogin();
-  const methods = useForm({
-    resolver: yupResolver(loginFormSchema),
-  });
-
-  const onSubmit: SubmitHandler<ILoginParams> = (data) => login(data);
-  return (
-    <Card className="px-6 mx-4">
-      <h1 className="text-2xl text-center font-bold">Welcome to Online Shop</h1>
-      <form
-        onSubmit={methods.handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 mt-6"
-      >
-        <Input
-        {...methods.register("email")}
-          type="email"
-          placeholder="Email"
-          error={methods.formState.errors.email?.message}
-          autoComplete="email"
-        />
-        <Input
-          {...methods.register("password")}
-          type="password"
-          placeholder="Password"
-          error={methods.formState.errors.password?.message}
-          autoComplete="current-password"
-        />
-
-        <div className="mt-4 flex flex-wrap gap-2 items-center justify-between">
-          <Button variant="default" type="submit">
-            Login
-          </Button>
-          <Link href="/auth/register">
-            <Button variant="link" type="submit">
-              Don't have an account? Register.
-            </Button>
-          </Link>
+    const { methods, onSubmit, loginStep } = useLogin();
+    return (
+        <div className='grid grid-cols-1 md:grid-cols-2  justify-center items-center h-screen w-full max-w-[1280px] mx-auto px-8 md:px-10 lg:px-20 box-border'>
+            <Card className='col-span-1'>
+                <CardHeader>
+                    <Typography variant='subtitle1' weight='bold'>
+                        صفحه ورود
+                    </Typography>
+                    <Typography variant='body2' className='text-secondary'>
+                        {loginStep === 0
+                            ? 'شماره تلفن خود را وارد کنید تا کد ورود دریافت کنید'
+                            : 'کد ورود ارسال شده به تلفن همراه خود را وارد کنید'}
+                    </Typography>
+                </CardHeader>
+                <CardContent>
+                    <form onSubmit={methods.handleSubmit(onSubmit)}>
+                        <div className='flex flex-wrap md:flex-nowrap gap-2.5 items-center justify-between'>
+                            {loginStep === 0 ? (
+                                <Input
+                                    {...methods.register('phone')}
+                                    type='tel'
+                                    placeholder='شماره تلفن'
+                                    error={methods.formState.errors.phone?.message}
+                                    autoComplete='tel'
+                                />
+                            ) : loginStep === 1 ? (
+                                <InputOTP
+                                    {...methods.register('otp')}
+                                    onChange={e => methods.setValue('otp', e)}
+                                    id='digits-only'
+                                    maxLength={6}
+                                    pattern={REGEXP_ONLY_DIGITS}
+                                >
+                                    <InputOTPGroup className='mx-auto'>
+                                        <InputOTPSlot index={0} />
+                                        <InputOTPSlot index={1} />
+                                        <InputOTPSlot index={2} />
+                                        <InputOTPSlot index={3} />
+                                        <InputOTPSlot index={4} />
+                                        <InputOTPSlot index={5} />
+                                    </InputOTPGroup>
+                                </InputOTP>
+                            ) : null}
+                            <Button variant='default' type='submit' className='ms-4'>
+                                {loginStep === 0 ? 'ارسال کد ورود' : 'تأیید کد ورود'}
+                            </Button>
+                        </div>
+                    </form>
+                </CardContent>
+            </Card>
+            <div className='col-span-1 hidden md:flex items-end justify-end'>
+                <Image src='/image/logo.png' width='400' height={400} alt='' />
+            </div>
         </div>
-      </form>
-    </Card>
-  );
+    );
 };
 export default LoginPage;
