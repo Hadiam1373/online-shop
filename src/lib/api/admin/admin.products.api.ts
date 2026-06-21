@@ -1,10 +1,14 @@
 import axiosInstance from '@/lib/axios';
-import { IAdminProductInput, IAdminProductResponse, IAdminProductsResponse } from './admin.products.dto';
+import { IAdminProductInput, IAdminProductResponse, IAdminProductsFilters, IAdminProductsResponse } from './admin.products.dto';
 
 const Base = '/api/products';
 
-export const getAdminProducts = async (page: number, limit: number): Promise<IAdminProductsResponse> => {
-    const res = await axiosInstance.get(Base, { params: { page, limit } });
+export const getAdminProducts = async (
+    page: number,
+    limit: number,
+    filters?: IAdminProductsFilters,
+): Promise<IAdminProductsResponse> => {
+    const res = await axiosInstance.get(Base, { params: { page, limit, ...filters } });
     return res.data;
 };
 

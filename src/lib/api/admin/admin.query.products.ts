@@ -1,23 +1,28 @@
 import { queryOptions, useMutation, useQuery, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
 import { createAdminProduct, deleteAdminProduct, getAdminProduct, getAdminProducts, updateAdminProduct } from './admin.products.api';
-import { IAdminProductInput, IAdminProductResponse, IAdminProductsResponse } from './admin.products.dto';
+import { IAdminProductInput, IAdminProductResponse, IAdminProductsFilters, IAdminProductsResponse } from './admin.products.dto';
 
 export const getAdminProductsOptions = (
     page: number,
     limit: number,
+    filters?: IAdminProductsFilters,
     props?: { queryOptions?: Omit<UseQueryOptions<IAdminProductsResponse>, 'queryKey'> },
 ) =>
     queryOptions({
-        queryKey: ['admin-products', page, limit] as const,
-        queryFn: () => getAdminProducts(page, limit),
+        queryKey: ['admin-products', page, limit, filters] as const,
+        queryFn: () => getAdminProducts(page, limit, filters),
         ...(props?.queryOptions || {}),
     });
 
 export const useGetAdminProducts = (
     page: number,
     limit: number,
+    filters?: IAdminProductsFilters,
     props?: { queryOptions?: Omit<UseQueryOptions<IAdminProductsResponse>, 'queryKey'> },
-) => useQuery(getAdminProductsOptions(page, limit, { ...props, queryOptions: { ...props?.queryOptions, staleTime: 1000 * 60 * 5 } }));
+) =>
+    useQuery(
+        getAdminProductsOptions(page, limit, filters, { ...props, queryOptions: { ...props?.queryOptions, staleTime: 1000 * 60 * 5 } }),
+    );
 
 export const getAdminProductOptions = (id: string, props?: { queryOptions?: Omit<UseQueryOptions<IAdminProductResponse>, 'queryKey'> }) =>
     queryOptions({ queryKey: ['admin-product', id] as const, queryFn: () => getAdminProduct(id), ...(props?.queryOptions || {}) });

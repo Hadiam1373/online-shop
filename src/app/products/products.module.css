@@ -1,7 +1,11 @@
 @reference "../globals.css";
 
 .products {
-    @apply flex flex-col gap-4 py-8 px-4 md:px-6 lg:px-8 max-w-[1280px] mx-auto;
+    @apply flex flex-col gap-6 py-8 px-4 md:px-6 lg:px-8 max-w-[1280px] mx-auto;
+}
+
+.products__header {
+    @apply relative overflow-hidden rounded-3xl bg-primary px-6 py-10 text-primary-foreground md:px-10 md:py-12;
 }
 
 .products__list {

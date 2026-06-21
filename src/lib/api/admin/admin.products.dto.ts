@@ -32,3 +32,13 @@ export interface IAdminProductsResponse {
         pages: number;
     };
 }
+
+export type TProductsSort = 'newest' | 'price-asc' | 'price-desc';
+
+export interface IAdminProductsFilters {
+    search?: string;
+    categoryId?: string;
+    minPrice?: number;
+    maxPrice?: number;
+    sort?: TProductsSort;
+}
