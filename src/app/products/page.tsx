@@ -54,7 +54,7 @@ const Products = () => {
             </motion.div>
 
             <ProductFilters
-                categories={categories}
+                categories={categories?.data}
                 searchInput={searchInput}
                 setSearchInput={setSearchInput}
                 categoryId={categoryId}

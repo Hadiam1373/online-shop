@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Typography } from '@/components/ui/typography';
 import { TProductsSort } from '@/lib/api/admin/admin.products.dto';
 import { ICategory } from '@/lib/api/categories/categories.dto';
@@ -14,7 +15,7 @@ const SORT_OPTIONS: { value: TProductsSort; label: string }[] = [
     { value: 'price-desc', label: 'گران‌ترین' },
 ];
 
-const selectClassName =
+const SelectClassName =
     'h-9 w-full rounded-3xl border border-transparent bg-input/50 px-3 text-sm text-foreground outline-none transition-[color,box-shadow,background-color] focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30';
 
 interface ProductFiltersProps {
@@ -59,7 +60,7 @@ export const ProductFilters = ({
     hasActiveFilters,
     clearFilters,
 }: ProductFiltersProps) => {
-    const selectedCategory = categories?.find(cat => cat.id === categoryId);
+    const SelectedCategory = categories?.find(cat => cat.id === categoryId);
 
     return (
         <div className='flex flex-col gap-3 rounded-2xl border border-border bg-card p-4 md:p-5'>
@@ -71,7 +72,7 @@ export const ProductFilters = ({
             </div>
 
             <div className='flex flex-wrap items-center gap-3'>
-                <div className='relative min-w-[200px] flex-1'>
+                <div className='relative min-w-50 flex-1'>
                     <Search className='pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground' />
                     <Input
                         value={searchInput}
@@ -81,14 +82,19 @@ export const ProductFilters = ({
                     />
                 </div>
 
-                <select value={categoryId} onChange={e => setCategoryId(e.target.value)} className={cn(selectClassName, 'sm:w-44')}>
-                    <option value=''>همه دسته‌بندی‌ها</option>
-                    {categories?.map(cat => (
-                        <option key={cat.id} value={cat.id}>
-                            {cat.name}
-                        </option>
-                    ))}
-                </select>
+                <Select value={categoryId} onValueChange={e => setCategoryId(e === '__all__' ? '' : e)}>
+                    <SelectTrigger className={cn(SelectClassName, 'sm:w-44')}>
+                        <SelectValue placeholder='همه دسته‌بندی‌ها' />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value='__all__'>همه دسته‌بندی‌ها</SelectItem>
+                        {categories?.map(cat => (
+                            <SelectItem key={cat.id} value={cat.id}>
+                                {cat.name}
+                            </SelectItem>
+                        ))}
+                    </SelectContent>
+                </Select>
 
                 <div className='flex items-center gap-2'>
                     <Input
@@ -112,17 +118,18 @@ export const ProductFilters = ({
                     />
                 </div>
 
-                <select
-                    value={sort}
-                    onChange={e => setSort(e.target.value as TProductsSort)}
-                    className={cn(selectClassName, 'sm:w-32')}
-                >
-                    {SORT_OPTIONS.map(option => (
-                        <option key={option.value} value={option.value}>
-                            {option.label}
-                        </option>
-                    ))}
-                </select>
+                <Select value={sort} onValueChange={e => setSort(e as TProductsSort)}>
+                    <SelectTrigger className={cn(SelectClassName, 'sm:w-32')}>
+                        <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                        {SORT_OPTIONS.map(option => (
+                            <SelectItem key={option.value} value={option.value}>
+                                {option.label}
+                            </SelectItem>
+                        ))}
+                    </SelectContent>
+                </Select>
 
                 {hasActiveFilters && (
                     <Button variant='ghost' size='sm' onClick={clearFilters} className='gap-1 text-muted-foreground'>
@@ -135,7 +142,7 @@ export const ProductFilters = ({
             {hasActiveFilters && (
                 <div className='flex flex-wrap items-center gap-2 border-t border-border pt-3'>
                     {searchInput && <Chip onRemove={() => setSearchInput('')}>جستجو: {searchInput}</Chip>}
-                    {selectedCategory && <Chip onRemove={() => setCategoryId('')}>{selectedCategory.name}</Chip>}
+                    {SelectedCategory && <Chip onRemove={() => setCategoryId('')}>{SelectedCategory.name}</Chip>}
                     {minPrice && <Chip onRemove={() => setMinPrice('')}>از {Number(minPrice).toLocaleString('fa')} تومان</Chip>}
                     {maxPrice && <Chip onRemove={() => setMaxPrice('')}>تا {Number(maxPrice).toLocaleString('fa')} تومان</Chip>}
                 </div>

@@ -313,6 +313,9 @@
             sans-serif;
         direction: rtl;
     }
+    * {
+        font-family: 'Anjoman', Arial, sans-serif;
+    }
     body {
         @apply bg-background text-foreground;
         font-family: 'Anjoman', Arial, sans-serif;
