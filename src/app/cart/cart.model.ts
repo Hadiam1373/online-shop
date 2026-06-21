@@ -1,9 +1,10 @@
-import { useGetCart, useUpdateCartItem } from '@/lib/api/cart/cart.query';
+import { useClearCart, useGetCart, useUpdateCartItem } from '@/lib/api/cart/cart.query';
 import { useQueryClient } from '@tanstack/react-query';
 
 export const useCart = () => {
     const { data: cartData } = useGetCart();
     const { mutateAsync: updateCartItem } = useUpdateCartItem();
+    const { mutateAsync: clearCartMutate } = useClearCart();
     const queryClient = useQueryClient();
     const updateCartItemHandler = async (data: { productId: string; type: string }) => {
         try {
@@ -14,5 +15,14 @@ export const useCart = () => {
         }
     };
 
-    return { cartData, updateCartItemHandler };
+    const removeCart = async () => {
+        try {
+            await clearCartMutate();
+            await queryClient.invalidateQueries({ queryKey: ['cart'] });
+        } catch (error) {
+            console.error('Error clearing cart:', error);
+        }
+    };
+
+    return { cartData, updateCartItemHandler, removeCart };
 };

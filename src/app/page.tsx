@@ -1,3 +1,9 @@
+import Header from '@/components/ui/shared/header/header';
+
 export default function Home() {
-    return <div className='container'></div>;
+    return (
+        <div>
+            <Header />
+        </div>
+    );
 }

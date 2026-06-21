@@ -4,11 +4,13 @@ import { useComments } from '@/app/user-dashboard/comments/comments.model';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Empty, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty';
 import Rating from '@/components/ui/rating';
 import { Textarea } from '@/components/ui/textarea';
 import { Typography } from '@/components/ui/typography';
 import { useGetProductReview } from '@/lib/api/reviews/reviews.query';
 import { useGetProfile } from '@/lib/api/users/users.query';
+import { BookOpen } from 'lucide-react';
 import { useParams } from 'next/navigation';
 
 export const CommentBox = () => {
@@ -18,24 +20,39 @@ export const CommentBox = () => {
     const { data: currentUser } = useGetProfile();
     const haveUserComment = comments?.data?.find(co => co?.user?.id === currentUser?.id);
     return (
-        <Card>
-            <CardHeader className='w-full flex items-center justify-between py-2'>
-                <Typography weight='bold'>دیدگاه کاربران</Typography>
-                {!haveUserComment && <CreateCommentModal productId={comments?.product?.id} />}
-            </CardHeader>
-            <CardContent>
-                {comments?.data?.map(co => (
-                    <div key={co.id} className='flex flex-col gap-2 border rounded-lg p-4'>
-                        <div className='flex flex-wrap w-full justify-between items-center'>
-                            <Typography className='text-secondary' variant='body2'>
-                                {co.user?.email}
-                            </Typography>
-                            <Rating value={co?.rating} />
-                        </div>
-                        <Typography>{co.comment}</Typography>
-                    </div>
-                ))}
-            </CardContent>
+        <Card className='mb-8'>
+            {comments?.data?.length ? (
+                <>
+                    <CardHeader className='w-full flex items-center justify-between py-2'>
+                        <Typography weight='bold'>دیدگاه کاربران</Typography>
+                        {!haveUserComment && <CreateCommentModal productId={comments?.product?.id} />}
+                    </CardHeader>
+                    <CardContent>
+                        {comments?.data?.map(co => (
+                            <div key={co.id} className='flex flex-col gap-2 border rounded-lg p-4'>
+                                <div className='flex flex-wrap w-full justify-between items-center'>
+                                    <Typography className='text-secondary' variant='body2'>
+                                        {co.user?.email}
+                                    </Typography>
+                                    <Rating value={co?.rating} />
+                                </div>
+                                <Typography>{co.comment}</Typography>
+                            </div>
+                        ))}
+                    </CardContent>
+                </>
+            ) : (
+                <Empty className='p-2'>
+                    <EmptyHeader>
+                        <EmptyMedia variant='icon'>
+                            <BookOpen />
+                        </EmptyMedia>
+                        <EmptyTitle>
+                            <Typography>دیدگاهی جهت نمایش وجود ندارد!</Typography>
+                        </EmptyTitle>
+                    </EmptyHeader>
+                </Empty>
+            )}
         </Card>
     );
 };

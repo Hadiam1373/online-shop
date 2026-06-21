@@ -21,7 +21,7 @@ export const Profile: React.FC = () => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <User className='cursor-pointer' />
+                <User className='size-4 md:size-6 cursor-pointer' />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuGroup>
