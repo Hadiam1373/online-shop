@@ -60,7 +60,7 @@ const LoginPage = () => {
                 </CardContent>
             </Card>
             <div className='col-span-1 hidden md:flex items-center justify-center'>
-                <Image src='/image/logo.png' width={320} height={320} alt='' className='h-auto w-2/3 object-contain opacity-90' />
+                <Image src='/image/logo.webp' width={320} height={320} alt='' className='h-auto w-2/3 object-contain opacity-90' />
             </div>
         </div>
     );

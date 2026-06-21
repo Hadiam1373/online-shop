@@ -45,7 +45,7 @@ export const Hero = () => {
                         variants={container}
                         initial='hidden'
                         animate='show'
-                        className='flex flex-wrap justify-end gap-x-2.5 text-3xl font-bold leading-[1.4] text-foreground md:text-4xl lg:text-5xl'
+                        className='flex flex-wrap justify-start gap-x-2.5 text-3xl font-bold leading-[1.4] text-foreground md:text-4xl lg:text-5xl'
                     >
                         {HEADLINE_WORDS.map((word, i) => (
                             <motion.span key={i} variants={wordVariant} className='inline-block'>
@@ -97,7 +97,7 @@ export const Hero = () => {
                         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
                         className='flex size-56 items-center justify-center rounded-4xl bg-card shadow-md ring-1 ring-foreground/5 md:size-72'
                     >
-                        <Image src='/image/logo.png' alt='کویر یدک' width={200} height={200} className='h-auto w-2/3 object-contain' />
+                        <Image src='/image/logo.webp' alt='موتوپارت' width={200} height={200} className='h-auto w-2/3 object-contain' />
                     </motion.div>
                 </motion.div>
             </div>

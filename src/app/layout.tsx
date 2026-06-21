@@ -19,8 +19,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: 'کویر یدک | فروشگاه آنلاین',
-    description: 'فروشگاه آنلاین کویر یدک',
+    title: 'موتوپارت | فروشگاه آنلاین',
+    description: 'فروشگاه آنلاین موتوپارت',
 };
 
 export default function RootLayout({

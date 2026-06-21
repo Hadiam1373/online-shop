@@ -25,7 +25,7 @@ export const WhyUs = () => {
                     className='mb-10 text-center'
                 >
                     <Typography as='h2' variant='subtitle1' md-variant='h5' weight='bold' className='text-foreground'>
-                        چرا کویر یدک؟
+                        چرا موتوپارت؟
                     </Typography>
                     <Typography variant='body2' className='mt-2 text-muted-foreground'>
                         خریدی راحت، مطمئن و بدون دردسر

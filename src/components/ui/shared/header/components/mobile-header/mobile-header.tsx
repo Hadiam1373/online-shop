@@ -24,7 +24,7 @@ export const MobileHeader: React.FC = () => {
     return (
         <header className='w-full px-4 h-16 bg-background/90 backdrop-blur-md border-b border-border flex items-center justify-between'>
             <Link href='/'>
-                <Image width={60} src='/image/logo.png' alt='Logo' height={100} className='h-8 w-auto object-contain' />
+                <Image width={60} src='/image/logo.webp' alt='Logo' height={100} className='h-8 w-auto object-contain' />
             </Link>
 
             <div className='flex items-center gap-1'>
@@ -47,7 +47,7 @@ export const MobileHeader: React.FC = () => {
                     <SheetContent side='right' className='flex flex-col'>
                         <SheetHeader>
                             <SheetTitle>منو</SheetTitle>
-                            <SheetDescription>کویر یدک</SheetDescription>
+                            <SheetDescription>موتوپارت</SheetDescription>
                         </SheetHeader>
 
                         <nav className='mt-2 flex flex-col gap-1 px-4'>

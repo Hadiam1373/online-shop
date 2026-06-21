@@ -15,7 +15,7 @@ export const HomeFooter = () => {
         <footer className='border-t border-border bg-muted/30'>
             <div className='mx-auto grid max-w-[1280px] grid-cols-1 gap-8 px-4 py-10 sm:grid-cols-3 lg:px-8'>
                 <div className='flex flex-col items-start gap-3'>
-                    <Image src='/image/logo.png' alt='کویر یدک' width={90} height={90} className='h-10 w-auto object-contain' />
+                    <Image src='/image/logo.webp' alt='موتوپارت' width={90} height={90} className='h-10 w-auto object-contain' />
                     <Typography variant='body2' className='text-muted-foreground'>
                         فروشگاه آنلاین قطعات یدکی موتور، عرضه‌کننده قطعات اصلی و باکیفیت برای انواع خودرو.
                     </Typography>
@@ -26,7 +26,11 @@ export const HomeFooter = () => {
                         دسترسی سریع
                     </Typography>
                     {LINKS.map(link => (
-                        <Link key={link.href} href={link.href} className='text-sm text-muted-foreground transition-colors hover:text-primary'>
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            className='text-sm text-muted-foreground transition-colors hover:text-primary'
+                        >
                             {link.label}
                         </Link>
                     ))}
@@ -53,7 +57,7 @@ export const HomeFooter = () => {
 
             <div className='border-t border-border py-4 text-center'>
                 <Typography variant='caption' className='text-muted-foreground'>
-                    © {new Date().getFullYear()} کویر یدک — تمامی حقوق محفوظ است
+                    © {new Date().getFullYear()} موتوپارت — تمامی حقوق محفوظ است
                 </Typography>
             </div>
         </footer>
