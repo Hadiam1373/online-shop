@@ -17,7 +17,7 @@ const Cart = () => {
                         <div className='grid grid-cols-2 gap-8 '>
                             <img src={card?.product?.images[0]} alt={card?.product?.name} className='size-32' />
                             <div className='flex flex-col justify-content gap-6'>
-                                <Typography className='text-secondary' variant='subtitle1'>
+                                <Typography className='text-secondary' variant='body1'>
                                     {card?.product?.name}
                                 </Typography>
                                 <Typography weight='bold' variant='body1'>
@@ -26,19 +26,19 @@ const Cart = () => {
                                 <div className='flex gap-1'>
                                     <Button
                                         onClick={() => updateCartItemHandler({ productId: card?.id, type: 'increment' })}
-                                        size='icon'
+                                        size='icon-xs'
                                         className='rotate-180 rounded-xl!'
                                     >
                                         <Plus />
                                     </Button>
 
-                                    <Button size='icon' variant='outline'>
+                                    <Button size='icon-xs' variant='outline'>
                                         {card?.quantity}
                                     </Button>
 
                                     <Button
                                         onClick={() => updateCartItemHandler({ productId: card?.id, type: 'decrement' })}
-                                        size='icon'
+                                        size='icon-xs'
                                         className='rotate-180 bg-secondary rounded-xl! '
                                     >
                                         <MinusIcon />
@@ -49,21 +49,21 @@ const Cart = () => {
                     </Card>
                 ))}
             </div>
-            <Card className='p-5 h-fit sticky top-[150px]'>
-                <div className='flex items-center gap-2'>
-                    <Typography className='text-secondary' variant='body1'>
+            <Card className='p-5 col-span-2 md:col-span-1 md:h-full md:sticky md:top-[150px]'>
+                <div className='flex items-center justify-between gap-2'>
+                    <Typography className='text-secondary' variant='body2' lg-variant='body1'>
                         تعداد آیتم های سفارش:
                     </Typography>
-                    <Typography weight='bold' variant='body1'>
+                    <Typography weight='bold' variant='body2' lg-variant='body1' className='text-end'>
                         {cartData?.itemCount.toLocaleString('fa')}
                     </Typography>
                 </div>
 
-                <div className='flex items-center gap-2'>
-                    <Typography variant='body1' className='text-secondary'>
+                <div className='flex items-center justify-between gap-2'>
+                    <Typography variant='body2' lg-variant='body1' className='text-secondary text-nowrap'>
                         جمع کل سفارش :
                     </Typography>
-                    <Typography variant='body1' weight='bold'>
+                    <Typography variant='body2' lg-variant='body1' weight='bold' className='text-end'>
                         {cartData?.subtotal.toLocaleString('fa')} تومان{' '}
                     </Typography>
                 </div>

@@ -2,5 +2,5 @@
 
 .cart {
     @apply w-full mt-10 max-w-[1280px] mx-auto px-4 md:px-6 lg:px-8 box-border relative;
-    @apply grid grid-cols-3 gap-8 justify-between;
+    @apply grid grid-cols-1 md:grid-cols-3 gap-8 justify-between;
 }
