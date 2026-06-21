@@ -23,7 +23,9 @@ const Orders = () => {
                 order?.status === 'PENDING' ? (
                     <Dialog open={openModal} onOpenChange={setOpenModal}>
                         <DialogTrigger asChild>
-                            <Button>لغو سفارش</Button>
+                            <Button variant='destructive' size='sm'>
+                                لغو سفارش
+                            </Button>
                         </DialogTrigger>
                         <DialogContent>
                             <DialogHeader>
@@ -32,10 +34,12 @@ const Orders = () => {
                                 </DialogTitle>
                             </DialogHeader>
                             <div className='flex gap-2'>
-                                <Button variant='secondary' onClick={() => handleCancelOrder(order.id)}>
+                                <Button variant='destructive' onClick={() => handleCancelOrder(order.id)}>
                                     بلی
                                 </Button>
-                                <Button onClick={() => setOpenModal(false)}>خیر</Button>
+                                <Button variant='secondary' onClick={() => setOpenModal(false)}>
+                                    خیر
+                                </Button>
                             </div>
                         </DialogContent>
                     </Dialog>
@@ -65,7 +69,9 @@ const Orders = () => {
                                         {item?.status === 'PENDING' ? (
                                             <Dialog open={openModal} onOpenChange={setOpenModal}>
                                                 <DialogTrigger asChild>
-                                                    <Button>لغو سفارش</Button>
+                                                    <Button variant='destructive' size='sm'>
+                                                        لغو سفارش
+                                                    </Button>
                                                 </DialogTrigger>
                                                 <DialogContent>
                                                     <DialogHeader>
@@ -74,15 +80,19 @@ const Orders = () => {
                                                         </DialogTitle>
                                                     </DialogHeader>
                                                     <div className='flex gap-2'>
-                                                        <Button variant='secondary' onClick={() => handleCancelOrder(item.id)}>
+                                                        <Button variant='destructive' onClick={() => handleCancelOrder(item.id)}>
                                                             بلی
                                                         </Button>
-                                                        <Button onClick={() => setOpenModal(false)}>خیر</Button>
+                                                        <Button variant='secondary' onClick={() => setOpenModal(false)}>
+                                                            خیر
+                                                        </Button>
                                                     </div>
                                                 </DialogContent>
                                             </Dialog>
                                         ) : (
-                                            '---'
+                                            <Typography variant='body2' className='text-muted-foreground'>
+                                                ---
+                                            </Typography>
                                         )}
                                     </td>
                                 </tr>

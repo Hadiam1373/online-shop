@@ -13,11 +13,9 @@ export const OrderMobileTable = () => {
     return (
         <div className={styles['mobile_table']}>
             {isPending ? (
-                <div className='flex w-full  flex-col gap-2'>
-                    {Array.from({ length: 5 }).map((_, index) => (
-                        <div className='flex gap-4' key={index}>
-                            <Skeleton className='h-[300px] flex-1' />
-                        </div>
+                <div className='flex w-full flex-col gap-4'>
+                    {Array.from({ length: 3 }).map((_, index) => (
+                        <Skeleton className='h-[220px] w-full rounded-2xl' key={index} />
                     ))}
                 </div>
             ) : !orders?.data?.length ? (
@@ -88,7 +86,9 @@ export const OrderMobileTable = () => {
                                     {order?.status === 'PENDING' ? (
                                         <Dialog open={openModal} onOpenChange={setOpenModal}>
                                             <DialogTrigger asChild>
-                                                <Button>لغو سفارش</Button>
+                                                <Button variant='destructive' size='sm'>
+                                                    لغو سفارش
+                                                </Button>
                                             </DialogTrigger>
                                             <DialogContent>
                                                 <DialogHeader>
@@ -97,15 +97,19 @@ export const OrderMobileTable = () => {
                                                     </DialogTitle>
                                                 </DialogHeader>
                                                 <div className='flex gap-2'>
-                                                    <Button variant='secondary' onClick={() => handleCancelOrder(order.id)}>
+                                                    <Button variant='destructive' onClick={() => handleCancelOrder(order.id)}>
                                                         بلی
                                                     </Button>
-                                                    <Button onClick={() => setOpenModal(false)}>خیر</Button>
+                                                    <Button variant='secondary' onClick={() => setOpenModal(false)}>
+                                                        خیر
+                                                    </Button>
                                                 </div>
                                             </DialogContent>
                                         </Dialog>
                                     ) : (
-                                        '---'
+                                        <Typography variant='body2' className='text-muted-foreground'>
+                                            ---
+                                        </Typography>
                                     )}
                                 </div>
                             </div>

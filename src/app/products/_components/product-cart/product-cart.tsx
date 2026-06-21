@@ -10,24 +10,39 @@ export const ProductCart = () => {
     return (
         <>
             {products?.products?.map(product => (
-                <div key={product.id} className={styles['products__item']}>
+                <div
+                    key={product.id}
+                    onClick={() => router.push(`/products/${product.id}`)}
+                    className={styles['products__item']}
+                    role='button'
+                >
                     {product.images?.length > 0 ? (
-                        <img src={product.images[0]} alt={product.name} className='size-48 object-cover rounded-full mx-auto' />
+                        <img
+                            src={product.images[0]}
+                            alt={product.name}
+                            className='aspect-square w-full object-cover rounded-xl bg-muted'
+                        />
                     ) : (
-                        <div className='w-full h-48 bg-gray-200 rounded-md' />
+                        <div className='aspect-square w-full bg-muted rounded-xl' />
                     )}
-                    <div className='flex items-center justify-between mt-8 h-12'>
-                        <Typography variant='body1' weight='bold'>
-                            {product.name}
-                        </Typography>
-                    </div>
 
-                    <div className='flex items-center justify-between mt-4'>
-                        <Typography variant='body1'>قیمت</Typography>
-                        <Typography variant='body2'>{product.price.toLocaleString('fa')} تومان</Typography>
-                    </div>
+                    <Typography variant='body2' md-variant='body1' weight='bold' className='mt-3 line-clamp-2 min-h-10 text-foreground'>
+                        {product.name}
+                    </Typography>
 
-                    <Button onClick={() => router.push(`/products/${product.id}`)} variant='outline' size='sm' className='w-full mt-4'>
+                    <Typography variant='body1' weight='bold' className='mt-1 text-primary'>
+                        {product.price.toLocaleString('fa')} تومان
+                    </Typography>
+
+                    <Button
+                        onClick={e => {
+                            e.stopPropagation();
+                            router.push(`/products/${product.id}`);
+                        }}
+                        variant='outline'
+                        size='sm'
+                        className='w-full mt-3'
+                    >
                         مشاهده جزئیات
                     </Button>
                 </div>

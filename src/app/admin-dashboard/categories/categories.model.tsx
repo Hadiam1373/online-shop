@@ -37,11 +37,11 @@ export const useCategoriesList = (page?: number, limit?: number) => {
                 { label: 'شناسه', value: category.id },
             ],
             actions: (
-                <div className='flex gap-4 items-center'>
+                <div className='flex gap-2 items-center'>
                     <Button variant='outline' size='sm' onClick={() => router.push(`/admin-dashboard/categories/${category.id}`)}>
                         ویرایش
                     </Button>
-                    <Button variant='destructive' size='sm' className='mr-2' onClick={() => handleDelete(category.id)}>
+                    <Button variant='destructive' size='sm' onClick={() => handleDelete(category.id)}>
                         حذف
                     </Button>
                 </div>

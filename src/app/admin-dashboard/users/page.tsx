@@ -31,11 +31,23 @@ export default function UsersPage() {
 
     const items = users?.data ?? [];
 
+    const RoleBadge = ({ role }: { role: string }) => (
+        <span
+            className={
+                role === 'ADMIN'
+                    ? 'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-primary/10 text-primary'
+                    : 'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-muted text-muted-foreground'
+            }
+        >
+            {role}
+        </span>
+    );
+
     const rows = items.map(user => ({
         id: user.id,
         fields: [
             { label: 'ایمیل', value: user.email ?? 'بدون ایمیل' },
-            { label: 'نقش', value: user.role },
+            { label: 'نقش', value: <RoleBadge role={user.role} /> },
             { label: 'سفارش‌ها', value: user._count.orders },
         ],
         actions: (
@@ -64,11 +76,13 @@ export default function UsersPage() {
                 body={
                     <tbody>
                         {items.map(u => (
-                            <tr key={u.id} className='border-t'>
-                                <td className='py-2'>{u.email ?? 'بدون ایمیل'}</td>
-                                <td className='py-2'>{u.role}</td>
-                                <td className='py-2'>{u._count.orders}</td>
-                                <td className='py-2 flex justify-center flex-wrap gap-2'>
+                            <tr key={u.id} className='border-t border-border'>
+                                <td className='py-3 text-foreground'>{u.email ?? 'بدون ایمیل'}</td>
+                                <td className='py-3'>
+                                    <RoleBadge role={u.role} />
+                                </td>
+                                <td className='py-3 text-foreground'>{u._count.orders}</td>
+                                <td className='py-3 flex justify-center flex-wrap gap-2'>
                                     <Button
                                         variant='outline'
                                         size='sm'

@@ -1,18 +1,27 @@
 @reference "../../../../globals.css";
 
+.form_wrapper--table {
+    @apply w-full rounded-2xl border border-border overflow-hidden;
+}
+
 .form_wrapper--table table {
-    @apply w-full;
+    @apply w-full border-collapse;
 }
 
 .form_wrapper--table table tr {
     @apply h-12;
 }
-.form_wrapper--table table thead tr:nth-child(odd) {
-    @apply bg-sidebar-accent;
+
+.form_wrapper--table table thead tr {
+    @apply bg-muted;
 }
 
-.form_wrapper--table table thead tr:nth-child(odd) {
-    @apply bg-sidebar-accent;
+.form_wrapper--table table thead tr th {
+    @apply text-center text-muted-foreground font-medium text-sm py-3;
+}
+
+.form_wrapper--table table tbody tr {
+    @apply h-16 border-t border-border transition-colors hover:bg-accent/40;
 }
 
 .form_wrapper--table table tr td {

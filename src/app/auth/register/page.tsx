@@ -24,54 +24,55 @@ const RegisterPage = () => {
   const onSubmit: SubmitHandler<any> = (data) =>
     console.log(data, methods.formState.errors.form?.message);
   return (
-    <Card className="px-6 mx-4">
-      <h1 className="text-2xl text-center font-bold">Welcome to Online Shop</h1>
-      <form
-        onSubmit={methods.handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 mt-6"
-      >
-        <Input
-          {...methods.register("email")}
-          type="email"
-          placeholder="Email"
-          error={methods.formState.errors.email?.message}
-          autoComplete="email"
-        />
-        <Input
-          {...methods.register("phone")}
-          type="text"
-          placeholder="Phone Number"
-          error={methods.formState.errors.phone?.message}
-          autoComplete="tel"
-        />
-        <Input
-          {...methods.register("address")}
-          type="text"
-          placeholder="Address"
-          error={methods.formState.errors.address?.message}
-          autoComplete="street-address"
-        />
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-4">
+      <div className="absolute inset-0 -z-10 bg-linear-to-bl from-primary/10 via-background to-background" />
+      <Card className="w-full max-w-md px-6 py-8">
+        <h1 className="text-2xl text-center font-bold text-foreground">ثبت‌نام در فروشگاه</h1>
+        <form
+          onSubmit={methods.handleSubmit(onSubmit)}
+          className="flex flex-col gap-4 mt-6"
+        >
+          <Input
+            {...methods.register("email")}
+            type="email"
+            placeholder="ایمیل"
+            error={methods.formState.errors.email?.message}
+            autoComplete="email"
+          />
+          <Input
+            {...methods.register("phone")}
+            type="text"
+            placeholder="شماره تلفن"
+            error={methods.formState.errors.phone?.message}
+            autoComplete="tel"
+          />
+          <Input
+            {...methods.register("address")}
+            type="text"
+            placeholder="آدرس"
+            error={methods.formState.errors.address?.message}
+            autoComplete="street-address"
+          />
 
-        <Input
-          {...methods.register("password")}
-          type="password"
-          placeholder="Password"
-          error={methods.formState.errors.password?.message}
-          autoComplete="current-password"
-        />
+          <Input
+            {...methods.register("password")}
+            type="password"
+            placeholder="رمز عبور"
+            error={methods.formState.errors.password?.message}
+            autoComplete="current-password"
+          />
 
-        <div className="mt-4 flex flex-wrap gap-2 items-center justify-between">
-          <Button variant="default" type="submit">
-            Register
+          <Button variant="default" type="submit" className="w-full mt-2">
+            ثبت‌نام
           </Button>
-          <Link href="/auth/login">
-            <Button variant="link" type="submit">
-              Already have an account? Login.
+          <Link href="/auth/login" className="text-center">
+            <Button variant="link" type="button">
+              قبلاً ثبت‌نام کرده‌اید؟ ورود
             </Button>
           </Link>
-        </div>
-      </form>
-    </Card>
+        </form>
+      </Card>
+    </div>
   );
 };
 export default RegisterPage;

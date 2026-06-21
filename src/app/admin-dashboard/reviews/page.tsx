@@ -24,12 +24,12 @@ export default function ReviewsPage() {
             id: review.id,
             fields: [
                 { label: 'کاربر', value: review.user?.email ?? review.userId },
-                { label: 'نظر', value: review.comment ?? review.comment },
+                { label: 'نظر', value: review.comment ?? '—' },
                 { label: 'تاریخ', value: review.createdAt },
             ],
             actions: (
                 <div className='flex gap-2 items-center'>
-                    <Button variant='outline' size='sm' onClick={() => moderate(review.id, true)}>
+                    <Button variant='default' size='sm' onClick={() => moderate(review.id, true)}>
                         تایید
                     </Button>
                     <Button variant='destructive' size='sm' onClick={() => moderate(review.id, false)}>
@@ -50,12 +50,12 @@ export default function ReviewsPage() {
                 body={
                     <tbody>
                         {pending?.data?.map(r => (
-                            <tr key={r.id} className='border-t'>
-                                <td className='py-2'>{r.user?.email ?? r.userId}</td>
-                                <td className='py-2 max-w-[200px] overflow-auto'>{r.comment ?? r.comment}</td>
-                                <td className='py-2'>{r.createdAt}</td>
-                                <td className='py-2 flex gap-2'>
-                                    <Button variant='outline' size='sm' onClick={() => moderate(r.id, true)}>
+                            <tr key={r.id} className='border-t border-border'>
+                                <td className='py-3 text-foreground'>{r.user?.email ?? r.userId}</td>
+                                <td className='py-3 max-w-[200px] overflow-auto text-foreground'>{r.comment ?? '—'}</td>
+                                <td className='py-3 text-muted-foreground'>{r.createdAt}</td>
+                                <td className='py-3 flex gap-2'>
+                                    <Button variant='default' size='sm' onClick={() => moderate(r.id, true)}>
                                         تایید
                                     </Button>
                                     <Button variant='destructive' size='sm' onClick={() => moderate(r.id, false)}>

@@ -28,44 +28,56 @@ const Cart = () => {
     }
     return (
         <div className={styles.cart}>
-            <div className='col-span-2 flex flex-col gap-5'>
-                {cartData?.itemCount && cartData?.itemCount > 0 ? (
-                    <Button onClick={() => removeCart()} variant='outline' className='flex w-fit'>
-                        <Trash className='size-4' />
-                        <Typography variant='body2'>حذف سبد خرید</Typography>
-                    </Button>
-                ) : null}
+            <div className='col-span-2 flex flex-col gap-4'>
+                <div className='flex items-center justify-between'>
+                    <Typography as='h1' variant='subtitle1' md-variant='h6' weight='bold' className='text-foreground'>
+                        سبد خرید
+                    </Typography>
+                    {cartData?.itemCount && cartData?.itemCount > 0 ? (
+                        <Button onClick={() => removeCart()} variant='ghost' size='sm' className='text-destructive hover:bg-destructive/10 hover:text-destructive'>
+                            <Trash className='size-4' />
+                            <Typography variant='body2'>حذف سبد خرید</Typography>
+                        </Button>
+                    ) : null}
+                </div>
                 {cartData?.cart.cartItems?.map(card => (
-                    <Card key={card?.id} className='p-5'>
-                        <div className='grid grid-cols-2 gap-8 '>
-                            <img src={card?.product?.images[0]} alt={card?.product?.name} className='size-32' />
-                            <div className='flex flex-col justify-content gap-6'>
-                                <Typography className='text-secondary' variant='body1'>
+                    <Card key={card?.id} className='p-4'>
+                        <div className='flex gap-4'>
+                            <img
+                                src={card?.product?.images[0]}
+                                alt={card?.product?.name}
+                                className='size-24 md:size-28 rounded-xl object-cover bg-muted shrink-0'
+                            />
+                            <div className='flex flex-1 flex-col justify-between'>
+                                <Typography className='text-foreground' variant='body1' weight='bold'>
                                     {card?.product?.name}
                                 </Typography>
-                                <Typography weight='bold' variant='body1'>
-                                    {card?.product?.price.toLocaleString('fa')} تومان
-                                </Typography>
-                                <div className='flex gap-1'>
-                                    <Button
-                                        onClick={() => updateCartItemHandler({ productId: card?.id, type: 'increment' })}
-                                        size='icon-xs'
-                                        className='rotate-180 rounded-xl!'
-                                    >
-                                        <Plus />
-                                    </Button>
+                                <div className='flex items-center justify-between mt-2'>
+                                    <Typography weight='bold' variant='body1' className='text-primary'>
+                                        {card?.product?.price.toLocaleString('fa')} تومان
+                                    </Typography>
+                                    <div className='flex items-center gap-2'>
+                                        <Button
+                                            onClick={() => updateCartItemHandler({ productId: card?.id, type: 'decrement' })}
+                                            size='icon-sm'
+                                            variant='outline'
+                                            className='rounded-full'
+                                        >
+                                            <MinusIcon />
+                                        </Button>
 
-                                    <Button size='icon-xs' variant='outline'>
-                                        {card?.quantity}
-                                    </Button>
+                                        <Typography variant='body2' weight='bold' className='w-6 text-center'>
+                                            {card?.quantity.toLocaleString('fa')}
+                                        </Typography>
 
-                                    <Button
-                                        onClick={() => updateCartItemHandler({ productId: card?.id, type: 'decrement' })}
-                                        size='icon-xs'
-                                        className='rotate-180 bg-secondary rounded-xl! '
-                                    >
-                                        <MinusIcon />
-                                    </Button>
+                                        <Button
+                                            onClick={() => updateCartItemHandler({ productId: card?.id, type: 'increment' })}
+                                            size='icon-sm'
+                                            className='rounded-full'
+                                        >
+                                            <Plus />
+                                        </Button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -73,9 +85,12 @@ const Cart = () => {
                 ))}
             </div>
             {cartData?.itemCount && cartData?.itemCount > 0 ? (
-                <Card className='p-5 col-span-2 md:col-span-1 md:h-[184px] md:sticky md:top-[185px]'>
+                <Card className='p-5 col-span-2 md:col-span-1 h-fit md:sticky md:top-28 gap-4'>
+                    <Typography variant='body1' weight='bold' className='text-foreground'>
+                        خلاصه سفارش
+                    </Typography>
                     <div className='flex items-center justify-between gap-2'>
-                        <Typography className='text-secondary' variant='body2' lg-variant='body1'>
+                        <Typography className='text-muted-foreground' variant='body2' lg-variant='body1'>
                             تعداد آیتم های سفارش:
                         </Typography>
                         <Typography weight='bold' variant='body2' lg-variant='body1' className='text-end'>
@@ -83,16 +98,16 @@ const Cart = () => {
                         </Typography>
                     </div>
 
-                    <div className='flex items-center justify-between gap-2'>
-                        <Typography variant='body2' lg-variant='body1' className='text-secondary text-nowrap'>
+                    <div className='flex items-center justify-between gap-2 border-t border-border pt-4'>
+                        <Typography variant='body2' lg-variant='body1' className='text-muted-foreground text-nowrap'>
                             جمع کل سفارش :
                         </Typography>
-                        <Typography variant='body2' lg-variant='body1' weight='bold' className='text-end'>
+                        <Typography variant='body2' lg-variant='body1' weight='bold' className='text-end text-primary'>
                             {cartData?.subtotal.toLocaleString('fa')} تومان
                         </Typography>
                     </div>
 
-                    <Button>تسویه حساب</Button>
+                    <Button size='lg'>تسویه حساب</Button>
                 </Card>
             ) : null}
         </div>

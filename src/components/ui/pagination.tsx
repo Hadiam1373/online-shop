@@ -128,9 +128,9 @@ export const Pagination = <T extends React.ElementType = 'button'>(props: TPagin
                     key={pageKey}
                     {...commonProps}
                     className={cn(
-                        'transition-colors duration-150 p-1 border rounded min-w-7 h-7 flex items-center justify-center text-sm',
+                        'transition-colors duration-150 border border-border rounded-full min-w-8 h-8 flex items-center justify-center text-sm',
                         commonProps.className,
-                        pageNumber === currentPage ? 'pointer-events-none bg-muted' : '',
+                        pageNumber === currentPage ? 'pointer-events-none' : 'hover:border-primary/40 hover:text-primary',
                     )}
                     onClick={() => !isDisabled && typeof pageNumber === 'number' && onPageChange(pageNumber)}
                     disabled={isDisabled}
@@ -189,12 +189,14 @@ export const Pagination = <T extends React.ElementType = 'button'>(props: TPagin
             <div className={cn('flex items-center gap-2')}>
                 {showPrevButton && (
                     <button
-                        className={cn('p-1 border border-destructive rounded text-destructive disabled:opacity-50')}
+                        className={cn(
+                            'size-8 flex items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary/40 hover:text-primary disabled:opacity-40 disabled:hover:border-border disabled:hover:text-foreground',
+                        )}
                         disabled={currentPage === 1}
                         onClick={previousButtonClickHandler}
                         aria-label='previous page'
                     >
-                        <ChevronRight className='size-4 ' />
+                        <ChevronRight className='size-4' />
                     </button>
                 )}
 
@@ -203,7 +205,7 @@ export const Pagination = <T extends React.ElementType = 'button'>(props: TPagin
                         renderItemComponent(pageNumber, pageNumber === currentPage, index, {
                             className: cn(
                                 'text-center',
-                                pageNumber === currentPage ? 'font-medium' : '',
+                                pageNumber === currentPage ? 'font-semibold bg-primary! text-primary-foreground! border-primary!' : '',
                                 pageNumber === '...' ? 'border-0 w-8' : '',
                             ),
                         }),
@@ -211,7 +213,9 @@ export const Pagination = <T extends React.ElementType = 'button'>(props: TPagin
 
                 {showNextButton && (
                     <button
-                        className={cn('p-1 border border-destructive rounded text-destructive disabled:opacity-50')}
+                        className={cn(
+                            'size-8 flex items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-primary/40 hover:text-primary disabled:opacity-40 disabled:hover:border-border disabled:hover:text-foreground',
+                        )}
                         disabled={currentPage === totalPages}
                         onClick={nextButtonClickHandler}
                         aria-label='next page'

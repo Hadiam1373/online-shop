@@ -3,6 +3,7 @@ import { useCreateAdminCoupon, useGetAdminCoupons } from '@/lib/api/admin/admin.
 import { useForm } from 'react-hook-form';
 import { IAdminCouponInput } from '@/lib/api/admin/admin.coupons.dto';
 import { useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
 
 type CreateCouponFormValues = {
     code: string;
@@ -13,7 +14,8 @@ type CreateCouponFormValues = {
 };
 
 export const useGetCouponModel = () => {
-    const { data: coupons, isLoading } = useGetAdminCoupons();
+    const [page, setPage] = useState(1);
+    const { data: coupons, isLoading } = useGetAdminCoupons(page, 10);
     const rows =
         coupons?.data?.map(coupon => ({
             id: coupon.id,
@@ -24,7 +26,7 @@ export const useGetCouponModel = () => {
             ],
         })) ?? [];
 
-    return { coupons, rows, isLoading };
+    return { coupons, rows, isLoading, page, setPage };
 };
 
 export const useCreateCouponModel = () => {

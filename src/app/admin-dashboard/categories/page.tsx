@@ -25,17 +25,23 @@ export default function CategoriesPage() {
                 body={
                     <tbody>
                         {categories?.data?.map(c => (
-                            <tr key={c.id} className='border-t'>
+                            <tr key={c.id} className='border-t border-border'>
                                 <td className='py-2'>{c.name}</td>
-                                <td className='py-2'>{c.description ?? '---'}</td>
-                                <td className='py-2'>{c.id}</td>
-                                <td className='py-2 w-full flex justify-center gap-1'>
-                                    <Button variant='outline' size='sm' onClick={() => router.push(`/admin-dashboard/categories/${c.id}`)}>
-                                        ویرایش
-                                    </Button>
-                                    <Button variant='destructive' size='sm' className='mr-2' onClick={() => handleDelete(c.id)}>
-                                        حذف
-                                    </Button>
+                                <td className='py-2 text-muted-foreground'>{c.description ?? '---'}</td>
+                                <td className='py-2 text-muted-foreground'>{c.id}</td>
+                                <td className='py-2'>
+                                    <div className='flex items-center gap-2'>
+                                        <Button
+                                            variant='outline'
+                                            size='sm'
+                                            onClick={() => router.push(`/admin-dashboard/categories/${c.id}`)}
+                                        >
+                                            ویرایش
+                                        </Button>
+                                        <Button variant='destructive' size='sm' onClick={() => handleDelete(c.id)}>
+                                            حذف
+                                        </Button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}

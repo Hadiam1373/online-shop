@@ -5,6 +5,9 @@ import { useAuthGuard, UserRole } from '@/providers/auth-context';
 import { cookieWrapper } from '@/lib/cookie';
 import { useRouter } from 'next/navigation';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Button } from '@/components/ui/button';
+import { Typography } from '@/components/ui/typography';
+import { ShieldAlert } from 'lucide-react';
 
 interface ProtectedRouteProps {
     children: React.ReactNode;
@@ -48,13 +51,20 @@ export const ProtectedRoute = ({ children, allowedRoles, fallback, isLoading }: 
     if (!canAccess) {
         // دسترسی رد شد
         return (
-            <div className='flex items-center justify-center min-h-screen'>
-                <div className='text-center'>
-                    <h1 className='text-2xl font-bold'>دسترسی رد شد</h1>
-                    <p className='text-gray-600 mt-2'>شما دسترسی کافی برای دیدن این صفحه ندارید</p>
-                    <button onClick={() => router.back()} className='mt-4 px-4 py-2 bg-blue-500 text-white rounded'>
+            <div className='flex items-center justify-center min-h-screen px-4'>
+                <div className='flex flex-col items-center gap-3 text-center'>
+                    <span className='flex size-14 items-center justify-center rounded-full bg-destructive/10 text-destructive'>
+                        <ShieldAlert className='size-7' />
+                    </span>
+                    <Typography variant='subtitle1' weight='bold' className='text-foreground'>
+                        دسترسی رد شد
+                    </Typography>
+                    <Typography variant='body2' className='text-muted-foreground'>
+                        شما دسترسی کافی برای دیدن این صفحه ندارید
+                    </Typography>
+                    <Button onClick={() => router.back()} className='mt-2'>
                         بازگشت
-                    </button>
+                    </Button>
                 </div>
             </div>
         );

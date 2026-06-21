@@ -8,20 +8,10 @@ export const ProductBasket = () => {
     return (
         <>
             <div>
-                <Typography variant='body2' as='div' className='flex items-center gap-2'>
-                    <ShieldCheck />
-                    ضمانت اصالت و سلامت کالا
+                <Typography variant='caption' className='text-muted-foreground'>
+                    قیمت محصول
                 </Typography>
-                <Typography variant='body2' as='div' className='flex items-center gap-2 mt-4'>
-                    <CalendarSync />
-                    بازگشت کالا تا ۷ روز طبق شرایط مرجوعی
-                </Typography>
-                <Button onClick={() => addProductToWhishloist()} variant='outline' className='mt-8 w-full'>
-                    افزودن به لیست مورد علاقه ها
-                </Button>
-            </div>
-            <div>
-                <Typography variant='subtitle1' className='mt-10 text-center'>
+                <Typography variant='h6' weight='bold' className='text-primary'>
                     {product?.price.toLocaleString('fa')} تومان
                 </Typography>
 
@@ -33,6 +23,20 @@ export const ProductBasket = () => {
                 >
                     افزودن به سبد خرید
                 </Button>
+                <Button onClick={() => addProductToWhishloist()} variant='outline' className='mt-2 w-full'>
+                    افزودن به لیست مورد علاقه ها
+                </Button>
+            </div>
+
+            <div className='mt-6 flex flex-col gap-3 border-t border-border pt-4'>
+                <Typography variant='body2' as='div' className='flex items-center gap-2 text-muted-foreground'>
+                    <ShieldCheck className='size-4 text-primary' />
+                    ضمانت اصالت و سلامت کالا
+                </Typography>
+                <Typography variant='body2' as='div' className='flex items-center gap-2 text-muted-foreground'>
+                    <CalendarSync className='size-4 text-primary' />
+                    بازگشت کالا تا ۷ روز طبق شرایط مرجوعی
+                </Typography>
             </div>
         </>
     );

@@ -15,12 +15,12 @@ export const OrderDesktopTable = () => {
     return (
         <div className={styles['form_wrapper--table']}>
             {isPending ? (
-                <div className='flex w-full  flex-col gap-2'>
+                <div className='flex w-full flex-col gap-2 p-4'>
                     {Array.from({ length: 5 }).map((_, index) => (
                         <div className='flex gap-4' key={index}>
-                            <Skeleton className='h-4 flex-1' />
-                            <Skeleton className='h-4 w-24' />
-                            <Skeleton className='h-4 w-20' />
+                            <Skeleton className='h-8 flex-1' />
+                            <Skeleton className='h-8 w-24' />
+                            <Skeleton className='h-8 w-20' />
                         </div>
                     ))}
                 </div>
@@ -62,7 +62,9 @@ export const OrderDesktopTable = () => {
                                         {item?.status === 'PENDING' ? (
                                             <Dialog open={openModal} onOpenChange={setOpenModal}>
                                                 <DialogTrigger asChild>
-                                                    <Button>لغو سفارش</Button>
+                                                    <Button variant='destructive' size='sm'>
+                                                        لغو سفارش
+                                                    </Button>
                                                 </DialogTrigger>
                                                 <DialogContent>
                                                     <DialogHeader>
@@ -71,15 +73,19 @@ export const OrderDesktopTable = () => {
                                                         </DialogTitle>
                                                     </DialogHeader>
                                                     <div className='flex gap-2'>
-                                                        <Button variant='secondary' onClick={() => handleCancelOrder(item.id)}>
+                                                        <Button variant='destructive' onClick={() => handleCancelOrder(item.id)}>
                                                             بلی
                                                         </Button>
-                                                        <Button onClick={() => setOpenModal(false)}>خیر</Button>
+                                                        <Button variant='secondary' onClick={() => setOpenModal(false)}>
+                                                            خیر
+                                                        </Button>
                                                     </div>
                                                 </DialogContent>
                                             </Dialog>
                                         ) : (
-                                            '---'
+                                            <Typography variant='body2' className='text-muted-foreground'>
+                                                ---
+                                            </Typography>
                                         )}
                                     </td>
                                 </tr>

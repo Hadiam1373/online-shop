@@ -5,6 +5,24 @@ import { AdminOrderStatus } from '@/lib/api/admin/admin.orders.dto';
 import { useGetAdminOrders, useUpdateAdminOrderStatus } from '@/lib/api/admin/admin.query.orders';
 import { useQueryClient } from '@tanstack/react-query';
 
+const ORDER_STATUS_BADGE_CLASS: Record<string, string> = {
+    PENDING: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400',
+    PAID: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400',
+    SHIPPED: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400',
+    DELIVERED: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
+    CANCELLED: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400',
+    SUCCESS: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400',
+    FAILURE: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400',
+};
+
+export const OrderStatusBadge = ({ status }: { status: string }) => (
+    <span
+        className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${ORDER_STATUS_BADGE_CLASS[status] ?? 'bg-muted text-muted-foreground'}`}
+    >
+        {currentOrderStatus(status)}
+    </span>
+);
+
 export const OrderModel = () => {
     const { data: orders, isLoading } = useGetAdminOrders();
     const updateOrderStatus = useUpdateAdminOrderStatus();
@@ -23,7 +41,7 @@ export const OrderModel = () => {
             fields: [
                 { label: 'شماره سفارش', value: order.id },
                 { label: 'مبلغ', value: order.total },
-                { label: 'وضعیت', value: currentOrderStatus(order.status) },
+                { label: 'وضعیت', value: <OrderStatusBadge status={order.status} /> },
             ],
             actions: (
                 <DropdownMenu>

@@ -1,5 +1,5 @@
 @reference "../../../globals.css";
 
 .products__item {
-    @apply bg-white rounded-lg shadow-md p-4 flex flex-col gap-2;
+    @apply bg-card rounded-2xl border border-border p-3 md:p-4 flex flex-col gap-2 cursor-pointer transition-shadow hover:shadow-md;
 }

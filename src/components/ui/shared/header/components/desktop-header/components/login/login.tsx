@@ -16,51 +16,49 @@ export const Login: React.FC = () => {
     return (
         <Dialog open={openModal}>
             <DialogTrigger asChild>
-                <Button variant='outline' onClick={() => setOpenModal(true)}>
+                <Button onClick={() => setOpenModal(true)} className='rounded-full px-5'>
                     ورود
                 </Button>
             </DialogTrigger>
             <DialogContent className='sm:max-w-md'>
                 <DialogHeader>
-                    <DialogTitle>ورود</DialogTitle>
+                    <DialogTitle>ورود به حساب کاربری</DialogTitle>
                     <DialogDescription>
                         {loginStep === 0
-                            ? 'شماره تلفن خود را وارد کنید تا OTP دریافت کنید'
-                            : 'OTP ارسال شده به تلفن همراه خود را وارد کنید'}
+                            ? 'شماره تلفن خود را وارد کنید تا کد یکبار مصرف دریافت کنید'
+                            : 'کد ارسال شده به تلفن همراه خود را وارد کنید'}
                     </DialogDescription>
                 </DialogHeader>
-                <form onSubmit={methods.handleSubmit(onSubmit)}>
-                    <div className='flex items-center justify-between'>
-                        {loginStep === 0 ? (
-                            <Input
-                                {...methods.register('phone')}
-                                type='tel'
-                                placeholder='شماره تلفن'
-                                error={methods.formState.errors.phone?.message}
-                                autoComplete='tel'
-                            />
-                        ) : loginStep === 1 ? (
-                            <InputOTP
-                                {...methods.register('otp')}
-                                onChange={e => methods.setValue('otp', e)}
-                                id='digits-only'
-                                maxLength={6}
-                                pattern={REGEXP_ONLY_DIGITS}
-                            >
-                                <InputOTPGroup className='mx-auto'>
-                                    <InputOTPSlot index={0} />
-                                    <InputOTPSlot index={1} />
-                                    <InputOTPSlot index={2} />
-                                    <InputOTPSlot index={3} />
-                                    <InputOTPSlot index={4} />
-                                    <InputOTPSlot index={5} />
-                                </InputOTPGroup>
-                            </InputOTP>
-                        ) : null}
-                        <Button variant='default' type='submit' className='ms-4'>
-                            {loginStep === 0 ? 'ارسال OTP' : 'تأیید OTP'}
-                        </Button>
-                    </div>
+                <form onSubmit={methods.handleSubmit(onSubmit)} className='flex flex-col gap-4'>
+                    {loginStep === 0 ? (
+                        <Input
+                            {...methods.register('phone')}
+                            type='tel'
+                            placeholder='شماره تلفن'
+                            error={methods.formState.errors.phone?.message}
+                            autoComplete='tel'
+                        />
+                    ) : loginStep === 1 ? (
+                        <InputOTP
+                            {...methods.register('otp')}
+                            onChange={e => methods.setValue('otp', e)}
+                            id='digits-only'
+                            maxLength={6}
+                            pattern={REGEXP_ONLY_DIGITS}
+                        >
+                            <InputOTPGroup className='mx-auto'>
+                                <InputOTPSlot index={0} />
+                                <InputOTPSlot index={1} />
+                                <InputOTPSlot index={2} />
+                                <InputOTPSlot index={3} />
+                                <InputOTPSlot index={4} />
+                                <InputOTPSlot index={5} />
+                            </InputOTPGroup>
+                        </InputOTP>
+                    ) : null}
+                    <Button variant='default' type='submit' className='w-full'>
+                        {loginStep === 0 ? 'ارسال کد' : 'تأیید کد'}
+                    </Button>
                 </form>
             </DialogContent>
         </Dialog>

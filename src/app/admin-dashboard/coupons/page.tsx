@@ -2,6 +2,7 @@
 import { useGetCouponModel } from '@/app/admin-dashboard/coupons/coupons.model';
 import { HeaderTitle } from '@/components';
 import { Button } from '@/components/ui/button';
+import Pagination from '@/components/ui/pagination';
 import { DesktopTable } from '@/components/ui/table/desktop-table';
 import { MobileCardTable } from '@/components/ui/table/mobile-table';
 import { useRouter } from 'next/navigation';
@@ -9,7 +10,7 @@ import styles from '../admin-dashboard.module.css';
 
 export default function CouponsPage() {
     const router = useRouter();
-    const { coupons, isLoading, rows } = useGetCouponModel();
+    const { coupons, isLoading, rows, page, setPage } = useGetCouponModel();
 
     return (
         <div className={styles['form_wrapper']}>
@@ -25,9 +26,9 @@ export default function CouponsPage() {
                 body={
                     <tbody>
                         {coupons?.data?.map(c => (
-                            <tr key={c.id} className='border-t'>
+                            <tr key={c.id} className='border-t border-border'>
                                 <td className='py-2'>{c.code}</td>
-                                <td className='py-2'>{c.discountType}</td>
+                                <td className='py-2 text-muted-foreground'>{c.discountType}</td>
                                 <td className='py-2'>{c.discountValue}</td>
                             </tr>
                         ))}
@@ -36,6 +37,10 @@ export default function CouponsPage() {
             />
 
             <MobileCardTable data={rows} loading={isLoading} emptyText='کوپنی موجود نیست' />
+
+            <div className='flex w-full justify-center items-center mt-10'>
+                <Pagination currentPage={page} onPageChange={setPage} totalPages={coupons?.pagination?.pages || 1} />
+            </div>
         </div>
     );
 }

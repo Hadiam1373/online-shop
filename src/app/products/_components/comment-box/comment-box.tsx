@@ -27,16 +27,16 @@ export const CommentBox = () => {
                         <Typography weight='bold'>دیدگاه کاربران</Typography>
                         {!haveUserComment && <CreateCommentModal productId={comments?.product?.id} />}
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className='flex flex-col gap-3'>
                         {comments?.data?.map(co => (
-                            <div key={co.id} className='flex flex-col gap-2 border rounded-lg p-4'>
+                            <div key={co.id} className='flex flex-col gap-2 border border-border rounded-xl p-4 bg-muted/30'>
                                 <div className='flex flex-wrap w-full justify-between items-center'>
                                     <Typography className='text-secondary' variant='body2'>
                                         {co.user?.email}
                                     </Typography>
                                     <Rating value={co?.rating} />
                                 </div>
-                                <Typography>{co.comment}</Typography>
+                                <Typography className='text-foreground'>{co.comment}</Typography>
                             </div>
                         ))}
                     </CardContent>

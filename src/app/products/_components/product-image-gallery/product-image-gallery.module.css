@@ -1,13 +1,13 @@
 @reference "../../../globals.css";
 
 .product-image-gallery {
-    @apply flex flex-col gap-2;
+    @apply flex flex-col gap-3;
 }
 
 .product-image-gallery__item {
-    @apply w-fit object-cover rounded-lg flex items-center overflow-x-auto gap-2;
+    @apply w-fit object-cover rounded-xl flex items-center overflow-x-auto gap-2;
 }
 
 .product-image-gallery__item img {
-    @apply border rounded-b-lg p-2 cursor-pointer;
+    @apply border border-border rounded-xl p-1 cursor-pointer transition-colors hover:border-primary/50;
 }

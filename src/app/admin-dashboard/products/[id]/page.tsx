@@ -67,8 +67,8 @@ export default function EditProductPage() {
                 <Input {...register('stock')} type='number' placeholder='موجودی' />
                 <Input {...register('categoryId')} placeholder='دسته‌بندی (id)' />
 
-                <div className='w-full rounded border border-gray-200 p-4 space-y-3'>
-                    <div className='font-medium text-sm'>ویژگی‌های محصول</div>
+                <div className='w-full rounded-xl border border-border bg-muted/30 p-4 space-y-3'>
+                    <div className='font-medium text-sm text-foreground'>ویژگی‌های محصول</div>
                     {attributesFieldArray.fields.map((field, index) => (
                         <div key={field.id} className='grid gap-2 md:grid-cols-[1fr_1fr_auto] items-end'>
                             <Input {...register(`attributes.${index}.key` as const)} placeholder='کلید' />
@@ -91,29 +91,29 @@ export default function EditProductPage() {
                 </div>
 
                 <div className='w-full'>
-                    <div className='border-2 border-dashed rounded p-4 text-center'>
+                    <div className='rounded-xl border-2 border-dashed border-border p-6 text-center hover:border-primary/40 transition-colors'>
                         <input type='file' multiple accept='image/*' onChange={handleImageSelect} className='hidden' id='image-input' />
                         <label htmlFor='image-input' className='cursor-pointer'>
-                            <div className='text-sm text-gray-600'>عکس‌ها را انتخاب کنید یا اینجا بکشید و رها کنید</div>
+                            <div className='text-sm text-muted-foreground'>عکس‌ها را انتخاب کنید یا اینجا بکشید و رها کنید</div>
                         </label>
-
-                        {imagePreviews.length > 0 && (
-                            <div className='grid grid-cols-4 gap-4 mt-4'>
-                                {imagePreviews.map((preview, index) => (
-                                    <div key={index} className='relative'>
-                                        <img src={preview} alt={`Preview ${index}`} className='size-24  object-cover rounded' />
-                                        <button
-                                            type='button'
-                                            onClick={() => removeImage(index)}
-                                            className='absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs'
-                                        >
-                                            ✕
-                                        </button>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
                     </div>
+
+                    {imagePreviews.length > 0 && (
+                        <div className='grid grid-cols-4 gap-4 mt-4'>
+                            {imagePreviews.map((preview, index) => (
+                                <div key={index} className='relative'>
+                                    <img src={preview} alt={`Preview ${index}`} className='size-24 object-cover rounded-xl' />
+                                    <button
+                                        type='button'
+                                        onClick={() => removeImage(index)}
+                                        className='absolute top-1 right-1 bg-destructive text-destructive-foreground rounded-full w-6 h-6 flex items-center justify-center text-xs'
+                                    >
+                                        ✕
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    )}
 
                     <div className={styles['form_wrapper--submit_wrapper']}>
                         <Button type='submit' disabled={isUpdating}>

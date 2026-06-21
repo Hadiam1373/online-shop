@@ -1,5 +1,5 @@
 'use client';
-import { OrderModel } from '@/app/admin-dashboard/orders/orders.model';
+import { OrderModel, OrderStatusBadge } from '@/app/admin-dashboard/orders/orders.model';
 import { HeaderTitle } from '@/components';
 import { Button } from '@/components/ui/button';
 import {
@@ -11,7 +11,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { DesktopTable } from '@/components/ui/table/desktop-table';
 import { MobileCardTable } from '@/components/ui/table/mobile-table';
-import { currentOrderStatus } from '@/hooks/useCurrentStatus';
 import styles from '../admin-dashboard.module.css';
 
 export default function OrdersPage() {
@@ -28,10 +27,12 @@ export default function OrdersPage() {
                 body={
                     <tbody>
                         {orders?.data.map(o => (
-                            <tr key={o.id} className='border-t'>
+                            <tr key={o.id} className='border-t border-border'>
                                 <td className='py-2'>{o.id}</td>
                                 <td className='py-2'>{o.total}</td>
-                                <td className='py-2'>{currentOrderStatus(o.status)}</td>
+                                <td className='py-2'>
+                                    <OrderStatusBadge status={o.status} />
+                                </td>
                                 <td className='py-2'>
                                     <DropdownMenu>
                                         <DropdownMenuTrigger asChild>
