@@ -21,10 +21,10 @@ export const CtaBanner = () => {
 
                 <Headset className='mx-auto size-10' />
                 <Typography as='h2' variant='subtitle1' md-variant='h5' weight='bold' className='mt-4'>
-                    هنوز قطعه مورد نظرتون رو پیدا نکردید؟
+                    هنوز محصول مورد نظرتون رو پیدا نکردید؟
                 </Typography>
                 <Typography variant='body2' className='mx-auto mt-2 max-w-md text-primary-foreground/80'>
-                    کارشناسان فنی ما کمکتون می‌کنن دقیق‌ترین قطعه رو برای خودروتون پیدا کنید
+                    متخصصان نگار بیوتی کمکتون می‌کنن بهترین محصول برای پوست‌تون انتخاب کنید
                 </Typography>
 
                 <Link href='/products'>

@@ -29,7 +29,7 @@ export const FeaturedProducts = () => {
                         محصولات پرفروش
                     </Typography>
                     <Typography variant='body2' className='mt-2 text-muted-foreground'>
-                        پرطرفدارترین قطعات این هفته
+                        محصولات برتر و محبوب این هفته
                     </Typography>
                 </div>
                 <Link href='/products'>
@@ -80,7 +80,12 @@ export const FeaturedProducts = () => {
                             ) : (
                                 <div className='aspect-square w-full rounded-xl bg-muted' />
                             )}
-                            <Typography variant='body2' md-variant='body1' weight='bold' className='mt-3 line-clamp-2 min-h-10 text-foreground'>
+                            <Typography
+                                variant='body2'
+                                md-variant='body1'
+                                weight='bold'
+                                className='mt-3 line-clamp-2 min-h-10 text-foreground'
+                            >
                                 {product.name}
                             </Typography>
                             <Typography variant='body1' weight='bold' className='mt-1 text-primary'>

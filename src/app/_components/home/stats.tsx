@@ -5,10 +5,10 @@ import { motion, useInView } from 'motion/react';
 import { Typography } from '@/components/ui/typography';
 
 const STATS = [
-    { value: 12000, suffix: '+', label: 'قطعه موجود در انبار' },
-    { value: 8500, suffix: '+', label: 'مشتری راضی' },
-    { value: 15, suffix: ' سال', label: 'تجربه در صنعت خودرو' },
-    { value: 98, suffix: '٪', label: 'رضایت مشتریان' },
+    { value: 8000, suffix: '+', label: 'محصول در کاتالوگ' },
+    { value: 25000, suffix: '+', label: 'مشتری راضی' },
+    { value: 12, suffix: ' سال', label: 'تجربه در صنعت آرایش' },
+    { value: 99, suffix: '٪', label: 'رضایت مشتریان' },
 ];
 
 const CountUp = ({ value }: { value: number }) => {

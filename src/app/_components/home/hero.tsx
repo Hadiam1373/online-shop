@@ -4,9 +4,9 @@ import { Button } from '@/components/ui/button';
 import { motion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, ChevronDown, ShieldCheck, Truck } from 'lucide-react';
+import { ArrowLeft, ChevronDown, ShieldCheck, Sparkles } from 'lucide-react';
 
-const HEADLINE_WORDS = ['قطعه', 'موتور', 'خودروت', 'رو', 'با', 'خاطرجمعی', 'پیدا', 'کن'];
+const HEADLINE_WORDS = ['زیبایی', 'و', 'درخشش', 'خود', 'رو', 'دوباره', 'پیدا', 'کن'];
 
 const container = {
     hidden: {},
@@ -38,7 +38,7 @@ export const Hero = () => {
                         transition={{ duration: 0.4 }}
                         className='rounded-full bg-accent px-4 py-1 text-sm font-medium text-accent-foreground'
                     >
-                        فروشگاه آنلاین قطعات یدکی موتور
+                        فروشگاه لوازم آرایشی و بهداشتی
                     </motion.span>
 
                     <motion.h1
@@ -60,7 +60,7 @@ export const Hero = () => {
                         transition={{ duration: 0.5, delay: 0.7 }}
                         className='max-w-md text-muted-foreground'
                     >
-                        بیش از ده‌ها هزار قطعه اصلی و باکیفیت برای انواع خودروهای ایرانی و خارجی، با ضمانت اصالت و ارسال سریع به سراسر کشور.
+                        بیش از هزار محصول اصلی و معتبر آرایشی و بهداشتی، از برندهای معروف جهانی تا ایرانی، با مشاوره فنی و ضمانت اصالت.
                     </motion.p>
 
                     <motion.div
@@ -77,11 +77,11 @@ export const Hero = () => {
                         </Link>
                         <div className='flex items-center gap-2 text-sm text-muted-foreground'>
                             <ShieldCheck className='size-4 text-primary' />
-                            ضمانت اصالت کالا
+                            ضمانت اصالت محصول
                         </div>
                         <div className='flex items-center gap-2 text-sm text-muted-foreground'>
-                            <Truck className='size-4 text-primary' />
-                            ارسال سریع
+                            <Sparkles className='size-4 text-primary' />
+                            مشاوره متخصص
                         </div>
                     </motion.div>
                 </div>
@@ -97,7 +97,7 @@ export const Hero = () => {
                         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
                         className='flex size-56 items-center justify-center rounded-4xl bg-card shadow-md ring-1 ring-foreground/5 md:size-72'
                     >
-                        <Image src='/image/logo.webp' alt='موتوپارت' width={200} height={200} className='h-auto w-2/3 object-contain' />
+                        <Image src='/image/hero.webp' alt='موتوپارت' width={300} height={200} className='object-contain' />
                     </motion.div>
                 </motion.div>
             </div>

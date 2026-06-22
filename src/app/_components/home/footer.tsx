@@ -15,9 +15,9 @@ export const HomeFooter = () => {
         <footer className='border-t border-border bg-muted/30'>
             <div className='mx-auto grid max-w-[1280px] grid-cols-1 gap-8 px-4 py-10 sm:grid-cols-3 lg:px-8'>
                 <div className='flex flex-col items-start gap-3'>
-                    <Image src='/image/logo.webp' alt='موتوپارت' width={90} height={90} className='h-10 w-auto object-contain' />
+                    <Image src='/image/logo.webp' alt='نگار بیوتی' width={90} height={90} className='h-10 w-auto object-contain' />
                     <Typography variant='body2' className='text-muted-foreground'>
-                        فروشگاه آنلاین قطعات یدکی موتور، عرضه‌کننده قطعات اصلی و باکیفیت برای انواع خودرو.
+                        فروشگاه آنلاین لوازم آرایشی و پوست‌شناسی، عرضه‌کننده محصولات اصلی و معتبر برای پوست و آرایش.
                     </Typography>
                 </div>
 
@@ -42,11 +42,11 @@ export const HomeFooter = () => {
                     </Typography>
                     <span className='flex items-center gap-2 text-sm text-muted-foreground'>
                         <Phone className='size-4 text-primary' />
-                        ۰۲۱-۱۲۳۴۵۶۷۸
+                        ۰۲۱-۹۸۷۶۵۴۳۲
                     </span>
                     <span className='flex items-center gap-2 text-sm text-muted-foreground'>
                         <Mail className='size-4 text-primary' />
-                        support@kavir-yadak.ir
+                        info@beautyhub.ir
                     </span>
                     <span className='flex items-center gap-2 text-sm text-muted-foreground'>
                         <MapPin className='size-4 text-primary' />
@@ -57,7 +57,7 @@ export const HomeFooter = () => {
 
             <div className='border-t border-border py-4 text-center'>
                 <Typography variant='caption' className='text-muted-foreground'>
-                    © {new Date().getFullYear()} موتوپارت — تمامی حقوق محفوظ است
+                    © {new Date().getFullYear()} نگار بیوتی — تمامی حقوق محفوظ است
                 </Typography>
             </div>
         </footer>

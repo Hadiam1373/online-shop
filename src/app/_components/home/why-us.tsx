@@ -3,14 +3,15 @@
 import { motion } from 'motion/react';
 import { Typography } from '@/components/ui/typography';
 import { ShieldCheck, Truck, Headset, Wallet, RotateCcw, Sparkles } from 'lucide-react';
+import Image from 'next/image';
 
 const FEATURES = [
-    { icon: ShieldCheck, title: 'ضمانت اصالت کالا', description: 'تمام محصولات دارای ضمانت اصالت و سلامت فیزیکی هستند' },
-    { icon: Truck, title: 'ارسال سریع', description: 'ارسال به سراسر کشور با پست و باربری معتبر' },
-    { icon: Headset, title: 'مشاوره فنی رایگان', description: 'پیش از خرید با کارشناسان فنی ما مشورت کنید' },
-    { icon: Wallet, title: 'پرداخت امن', description: 'پرداخت آنلاین از طریق درگاه‌های معتبر بانکی' },
-    { icon: RotateCcw, title: 'بازگشت آسان کالا', description: 'بازگشت کالا تا ۷ روز طبق شرایط مرجوعی' },
-    { icon: Sparkles, title: 'تنوع بی‌نظیر', description: 'پوشش قطعات برای انواع خودروهای ایرانی و خارجی' },
+    { icon: ShieldCheck, title: 'ضمانت اصالت محصول', description: 'تمام محصولات دارای ضمانت اصالت و سلامت بسته‌بندی هستند' },
+    { icon: Truck, title: 'ارسال سریع و ایمن', description: 'ارسال در سریع‌ترین زمان با بسته‌بندی ایمن در سراسر کشور' },
+    { icon: Headset, title: 'مشاوره متخصص رایگان', description: 'پیش از خرید با متخصصان پوست‌شناسی ما مشورت کنید' },
+    { icon: Wallet, title: 'پرداخت امن و مطمئن', description: 'پرداخت آنلاین از طریق درگاه‌های معتبر بانکی' },
+    { icon: RotateCcw, title: 'بازگشت آسان کالا', description: 'بازگشت محصول تا ۱۰ روز بدون شرط' },
+    { icon: Sparkles, title: 'برندهای معروف جهانی', description: 'دسترسی به بهترین و مطمئن‌ترین برندهای جهان' },
 ];
 
 export const WhyUs = () => {
@@ -25,12 +26,13 @@ export const WhyUs = () => {
                     className='mb-10 text-center'
                 >
                     <Typography as='h2' variant='subtitle1' md-variant='h5' weight='bold' className='text-foreground'>
-                        چرا موتوپارت؟
+                        چرا نگار بیوتی؟
                     </Typography>
                     <Typography variant='body2' className='mt-2 text-muted-foreground'>
-                        خریدی راحت، مطمئن و بدون دردسر
+                        خریدی ایمن، متخصصانه و بدون دردسر
                     </Typography>
                 </motion.div>
+                <Image src='/image/banner.webp' alt='چرا نگار بیوتی؟' width={600} height={400} className='w-auto mx-auto my-10' />
 
                 <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
                     {FEATURES.map((feature, i) => {

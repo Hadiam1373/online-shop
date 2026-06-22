@@ -1,6 +1,6 @@
 import { Typography } from '@/components/ui/typography';
 
-const BRANDS = ['پراید', 'پژو ۲۰۶', 'سمند', 'تیبا', 'دنا', 'رانا', 'L90', 'پژو ۴۰۵', 'تویوتا', 'هیوندای', 'کیا', 'مزدا'];
+const BRANDS = ['لانکوم', 'استی لودر', 'شیسیدو', 'نیوسین', 'ساتین پروتکت', 'داکس می', 'انیت', 'کلینیک', 'سپائسیا', 'آینه ترکیبی'];
 
 export const BrandsMarquee = () => {
     const items = [...BRANDS, ...BRANDS];
@@ -8,7 +8,7 @@ export const BrandsMarquee = () => {
     return (
         <section className='border-y border-border bg-muted/30 py-8'>
             <Typography variant='caption' className='mb-4 block text-center text-muted-foreground'>
-                قطعات متناسب با بیشتر خودروهای داخلی و خارجی
+                برندهای معروف و معتبر جهانی و محلی
             </Typography>
             <div className='relative overflow-hidden'>
                 <div className='flex w-max gap-3 animate-marquee'>

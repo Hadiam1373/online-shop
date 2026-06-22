@@ -5,17 +5,17 @@ import Link from 'next/link';
 import { Typography } from '@/components/ui/typography';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useGetCategories } from '@/lib/api/categories/categories.query';
-import { Cog, Disc3, Battery, Gauge, Wind, Wrench } from 'lucide-react';
+import { Palette, Droplet, Wind, Heart, Eye, Sparkles } from 'lucide-react';
 
-const ICONS = [Cog, Disc3, Battery, Gauge, Wind, Wrench];
+const ICONS = [Palette, Droplet, Wind, Heart, Eye, Sparkles];
 
 const FALLBACK_CATEGORIES = [
-    { id: 'engine', name: 'موتور و گیربکس' },
-    { id: 'brake', name: 'سیستم ترمز' },
-    { id: 'electrical', name: 'برقی و باطری' },
-    { id: 'suspension', name: 'تعلیق و فرمان' },
-    { id: 'cooling', name: 'رادیاتور و خنک‌کننده' },
-    { id: 'filters', name: 'فیلتر و روغن' },
+    { id: 'makeup', name: 'آرایش صورت' },
+    { id: 'skincare', name: 'مراقبت پوست' },
+    { id: 'haircare', name: 'مراقبت موی سر' },
+    { id: 'fragrances', name: 'عطر و ادکلن' },
+    { id: 'eyecare', name: 'مراقبت چشم' },
+    { id: 'supplements', name: 'مکمل‌های زیبایی' },
 ];
 
 export const CategoriesSection = () => {
@@ -32,10 +32,10 @@ export const CategoriesSection = () => {
                 className='mb-8 text-center'
             >
                 <Typography as='h2' variant='subtitle1' md-variant='h5' weight='bold' className='text-foreground'>
-                    دسته‌بندی قطعات
+                    دسته‌بندی محصولات
                 </Typography>
                 <Typography variant='body2' className='mt-2 text-muted-foreground'>
-                    هر قطعه‌ای که برای خودروی خودت لازم داری، اینجا پیدا می‌کنی
+                    محصولات مورد نیاز خودت رو براحتی پیدا کن
                 </Typography>
             </motion.div>
 

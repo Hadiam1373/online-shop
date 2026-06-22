@@ -19,8 +19,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: 'موتوپارت | فروشگاه آنلاین',
-    description: 'فروشگاه آنلاین موتوپارت',
+    title: 'نگار بیوتی | فروشگاه آنلاین لوازم آرایشی و پوست‌شناسی',
+    description: 'فروشگاه آنلاین لوازم آرایشی و پوست‌شناسی معتبر با محصولات اصل و با ضمانت',
 };
 
 export default function RootLayout({

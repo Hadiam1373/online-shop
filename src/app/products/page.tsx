@@ -4,7 +4,7 @@ import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/
 import { Pagination } from '@/components/ui/pagination';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Typography } from '@/components/ui/typography';
-import { PackageSearch, Wrench } from 'lucide-react';
+import { PackageSearch, Sparkles } from 'lucide-react';
 import { motion } from 'motion/react';
 import { ProductCart, ProductFilters } from './_components';
 import { useProducts } from './products.model';
@@ -44,7 +44,7 @@ const Products = () => {
                 <div className='absolute -top-10 -right-10 size-40 rounded-full bg-white/10' aria-hidden />
                 <div className='absolute -bottom-12 -left-12 size-48 rounded-full bg-white/10' aria-hidden />
 
-                <Wrench className='size-9' />
+                <Sparkles className='size-9' />
                 <Typography as='h1' variant='subtitle1' md-variant='h5' weight='bold' className='mt-3'>
                     محصولات
                 </Typography>
