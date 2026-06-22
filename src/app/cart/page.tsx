@@ -8,8 +8,8 @@ import { BookOpen, MinusIcon, Plus, Trash } from 'lucide-react';
 import styles from './cart.module.css';
 import { Empty, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty';
 
-const Cart = () => {
-    const { cartData, updateCartItemHandler, removeCart } = useCart();
+const Cart = () => {``
+    const { cartData, updateCartItemHandler, removeCart , createOrderHandler } = useCart();
     if (cartData?.itemCount.toString() && cartData?.itemCount === 0) {
         return (
             <div className='min-h-[calc(100vh-100px)] flex justify-center items-center'>
@@ -107,7 +107,7 @@ const Cart = () => {
                         </Typography>
                     </div>
 
-                    <Button size='lg'>تسویه حساب</Button>
+                    <Button size='lg' onClick={() => createOrderHandler()}>تسویه حساب</Button>
                 </Card>
             ) : null}
         </div>
