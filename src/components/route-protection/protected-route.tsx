@@ -21,17 +21,13 @@ interface ProtectedRouteProps {
  * مثال: <ProtectedRoute allowedRoles={['ADMIN']}>محتوا</ProtectedRoute>
  */
 export const ProtectedRoute = ({ children, allowedRoles, fallback, isLoading }: ProtectedRouteProps) => {
-    const { canAccess, isAuthenticated } = useAuthGuard(allowedRoles);
+    const { canAccess, isAuthenticated, isInitialized } = useAuthGuard(allowedRoles);
     const router = useRouter();
     const [redirecting, setRedirecting] = useState(false);
 
-    if (isLoading) {
-        return fallback || <Skeleton className='w-full h-screen' />;
-    }
-
     // Do not trigger navigation during render — use effect instead
     useEffect(() => {
-        if (isLoading) return;
+        if (!isInitialized || isLoading) return;
 
         const hasCookie = !!cookieWrapper.get('accessToken');
 
@@ -42,7 +38,11 @@ export const ProtectedRoute = ({ children, allowedRoles, fallback, isLoading }: 
         } else {
             setRedirecting(false);
         }
-    }, [isLoading, isAuthenticated, router]);
+    }, [isInitialized, isLoading, isAuthenticated, router]);
+
+    if (!isInitialized || isLoading) {
+        return fallback || <Skeleton className='w-full h-screen' />;
+    }
 
     if (redirecting) {
         return fallback || <Skeleton className='w-full h-screen' />;

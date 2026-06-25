@@ -2,6 +2,7 @@ import { useCreateReview, useDeleteReview, useEditReview, useGetMyReviews } from
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 export const useComments = ({
     comment,
@@ -41,12 +42,17 @@ export const useComments = ({
                 payload: { comment: data.comment, rating: data.rating, productId: productId ? productId : '' },
             });
         }
+        if (!ratingValue) {
+            toast.error('لطفا امتیاز به این محصول را وارد کنید!');
+            return;
+        }
         await createReview({
             comment: data.comment,
             rating: data.rating,
             productId: productId ? productId : '',
         });
         await queryClient.invalidateQueries({ queryKey: ['my-reviews'] });
+        toast.success('نظر شما ثبت و پس از تایید نمایش داده میشود');
         setOpenModal(false);
     };
 

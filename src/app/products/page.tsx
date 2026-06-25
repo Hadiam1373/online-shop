@@ -49,7 +49,7 @@ const Products = () => {
                     محصولات
                 </Typography>
                 <Typography variant='body2' className='mt-2 max-w-md text-primary-foreground/80'>
-                    بهترین قطعات اصلی و باکیفیت خودرو، با جستجو و فیلتر دقیق پیدا کنید
+                    بهترین محصولات آرایشی و بهداشتی را از فروشگاه ما خریداری کنید و تجربه‌ای بی‌نظیر از خرید آنلاین داشته باشید.
                 </Typography>
             </motion.div>
 
@@ -87,7 +87,9 @@ const Products = () => {
                         <EmptyMedia variant='icon'>
                             <PackageSearch />
                         </EmptyMedia>
-                        <EmptyTitle>محصولی پیدا نشد</EmptyTitle>
+                        <EmptyTitle>
+                            <Typography>محصولی پیدا نشد</Typography>
+                        </EmptyTitle>
                         <EmptyDescription>با فیلترهای دیگری دوباره جستجو کنید</EmptyDescription>
                     </EmptyHeader>
                 </Empty>

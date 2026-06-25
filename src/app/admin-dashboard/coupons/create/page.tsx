@@ -12,9 +12,11 @@ export default function CreateCouponPage() {
     return (
         <div className={styles['form_wrapper']}>
             <HeaderTitle title='ایجاد کوپن' />
-            <form onSubmit={handleSubmit(onSubmit)} className={styles['form_wrapper--inputs']}>
-                <Input {...register('code')} placeholder='کد کوپن' />
-                <Input {...register('value')} type='number' placeholder='مقدار تخفیف' />
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className='w-full grid grid-cols-2 gap-5'>
+                    <Input label='کد کوپن' {...register('code')} placeholder='کد کوپن' />
+                </div>
+                <Input label='مقدار تخفیف' className='w-full col-span-2' {...register('value')} type='number' placeholder='مقدار تخفیف' />
                 <div className={styles['form_wrapper--submit_wrapper']}>
                     <Button type='submit' disabled={isCreating}>
                         ایجاد

@@ -15,9 +15,9 @@ export const HomeFooter = () => {
         <footer className='border-t border-border bg-muted/30'>
             <div className='mx-auto grid max-w-[1280px] grid-cols-1 gap-8 px-4 py-10 sm:grid-cols-3 lg:px-8'>
                 <div className='flex flex-col items-start gap-3'>
-                    <Image src='/image/logo.webp' alt='نگار بیوتی' width={90} height={90} className='h-10 w-auto object-contain' />
+                    <Image src='/image/logo.webp' alt='نگار بیوتی' width={150} height={150} className='object-contain' />
                     <Typography variant='body2' className='text-muted-foreground'>
-                        فروشگاه آنلاین لوازم آرایشی و پوست‌شناسی، عرضه‌کننده محصولات اصلی و معتبر برای پوست و آرایش.
+                        فروشگاه آنلاین لوازم آرایشی و بهداشتی، عرضه‌کننده محصولات اصلی و معتبر برای پوست و آرایش.
                     </Typography>
                 </div>
 

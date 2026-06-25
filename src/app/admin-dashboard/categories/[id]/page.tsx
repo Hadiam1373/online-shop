@@ -19,9 +19,11 @@ export default function EditCategoryPage() {
     return (
         <div className={styles['form_wrapper']}>
             <HeaderTitle title='ویرایش دسته' />
-            <form onSubmit={handleSubmit(onSubmit)} className={styles['form_wrapper--inputs']}>
-                <Input {...register('name')} placeholder='نام دسته' />
-                <Textarea {...register('description')} placeholder='توضیحات' />
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className='w-full grid grid-cols-2 gap-5'>
+                    <Input label='نام دسته' {...register('name')} placeholder='نام دسته' />
+                </div>
+                <Textarea label='توضیحات' className='col-span-2 w-full' {...register('description')} placeholder='توضیحات' />
                 <div className={styles['form_wrapper--submit_wrapper']}>
                     <Button type='submit' disabled={isUpdating}>
                         ذخیره

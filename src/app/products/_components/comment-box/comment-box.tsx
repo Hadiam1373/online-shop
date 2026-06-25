@@ -4,7 +4,7 @@ import { useComments } from '@/app/user-dashboard/comments/comments.model';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Empty, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty';
+import { Empty, EmptyContent, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty';
 import Rating from '@/components/ui/rating';
 import { Textarea } from '@/components/ui/textarea';
 import { Typography } from '@/components/ui/typography';
@@ -51,6 +51,9 @@ export const CommentBox = () => {
                             <Typography>دیدگاهی جهت نمایش وجود ندارد!</Typography>
                         </EmptyTitle>
                     </EmptyHeader>
+                    <EmptyContent>
+                        <CreateCommentModal productId={comments?.product?.id} />
+                    </EmptyContent>
                 </Empty>
             )}
         </Card>

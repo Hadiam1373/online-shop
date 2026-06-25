@@ -20,7 +20,7 @@ const FALLBACK_CATEGORIES = [
 
 export const CategoriesSection = () => {
     const { data, isLoading } = useGetCategories();
-    const categories = data && data.length > 0 ? data : FALLBACK_CATEGORIES;
+    const categories = data?.data && data?.data?.length > 0 ? data?.data : FALLBACK_CATEGORIES;
 
     return (
         <section className='mx-auto max-w-[1280px] px-4 py-16 lg:px-8'>
@@ -47,7 +47,7 @@ export const CategoriesSection = () => {
                 </div>
             ) : (
                 <div className='grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6'>
-                    {categories.slice(0, 6).map((cat, i) => {
+                    {categories?.slice(0, 6).map((cat, i) => {
                         const Icon = ICONS[i % ICONS.length];
                         return (
                             <motion.div

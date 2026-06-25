@@ -1,17 +1,20 @@
 'use client';
-import React, { useState, useEffect } from 'react';
-import { useRouter, useParams } from 'next/navigation';
-import { useEditProductModel } from '../products.model';
 import { HeaderTitle } from '@/components';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import styles from '../../admin-dashboard.module.css';
+import { Input } from '@/components/ui/input';
 import { Spinner } from '@/components/ui/spinner';
+import { Textarea } from '@/components/ui/textarea';
+import { useParams } from 'next/navigation';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import React, { useEffect, useState } from 'react';
+import styles from '../../admin-dashboard.module.css';
+import { useEditProductModel } from '../products.model';
+import { useGetAdminCategories } from '@/lib/api/admin/admin.query.categories';
 
 export default function EditProductPage() {
     const params = useParams() as { id?: string };
     const id = params?.id || '';
+    const { data: categories } = useGetAdminCategories();
     const { register, handleSubmit, onSubmit, isUpdating, isLoading, watch, setValue, attributesFieldArray } = useEditProductModel(id);
     const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 
@@ -60,19 +63,32 @@ export default function EditProductPage() {
     return (
         <div className={styles['form_wrapper']}>
             <HeaderTitle title='ویرایش محصول' />
-            <form onSubmit={handleSubmit(onSubmit)} className={styles['form_wrapper--inputs']}>
-                <Input {...register('name')} placeholder='نام محصول' />
-                <Textarea {...register('description')} placeholder='توضیحات' />
-                <Input {...register('price')} type='number' placeholder='قیمت' />
-                <Input {...register('stock')} type='number' placeholder='موجودی' />
-                <Input {...register('categoryId')} placeholder='دسته‌بندی (id)' />
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className='grid grid-cols-3 gap-5'>
+                    <Input label='نام محصول' {...register('name')} placeholder='نام محصول' />
+                    <Input label='قیمت' {...register('price')} type='number' placeholder='قیمت' />
+                    <Input label='موجودی' {...register('stock')} type='number' placeholder='موجودی' />
+                    <Select onValueChange={e => setValue('categoryId', e)} {...register('categoryId')} required>
+                        <SelectTrigger className='h-9 w-full rounded-lg border border-transparent bg-input/50 px-3 text-sm text-foreground outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30'>
+                            <SelectValue placeholder='انتخاب دسته‌بندی' />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {categories?.data?.map(category => (
+                                <SelectItem key={category.id} value={category.id}>
+                                    {category.name}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                </div>
+                <Textarea label='توضیحات' className='w-full cols-span-3' {...register('description')} placeholder='توضیحات' />
 
-                <div className='w-full rounded-xl border border-border bg-muted/30 p-4 space-y-3'>
+                <div className='w-full col-span-3 rounded-xl border border-border bg-muted/30 p-4 space-y-3'>
                     <div className='font-medium text-sm text-foreground'>ویژگی‌های محصول</div>
                     {attributesFieldArray.fields.map((field, index) => (
                         <div key={field.id} className='grid gap-2 md:grid-cols-[1fr_1fr_auto] items-end'>
-                            <Input {...register(`attributes.${index}.key` as const)} placeholder='کلید' />
-                            <Input {...register(`attributes.${index}.value` as const)} placeholder='مقدار' />
+                            <Input label='کلید' {...register(`attributes.${index}.key` as const)} placeholder='کلید' />
+                            <Input label='مقدار' {...register(`attributes.${index}.value` as const)} placeholder='مقدار' />
                             <Button
                                 type='button'
                                 variant='outline'
@@ -90,7 +106,7 @@ export default function EditProductPage() {
                     </Button>
                 </div>
 
-                <div className='w-full'>
+                <div className='w-full col-span-3'>
                     <div className='rounded-xl border-2 border-dashed border-border p-6 text-center hover:border-primary/40 transition-colors'>
                         <input type='file' multiple accept='image/*' onChange={handleImageSelect} className='hidden' id='image-input' />
                         <label htmlFor='image-input' className='cursor-pointer'>

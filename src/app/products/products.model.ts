@@ -16,7 +16,7 @@ export const useProducts = () => {
     const [categoryId, setCategoryId] = useState('');
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
-    const [sort, setSort] = useState<TProductsSort>('newest');
+    const [sort, setSort] = useState<TProductsSort>('createdAt_desc');
 
     const params = useParams() as { id?: string };
     const id = params?.id || '';
@@ -51,7 +51,7 @@ export const useProducts = () => {
         setCategoryId('');
         setMinPrice('');
         setMaxPrice('');
-        setSort('newest');
+        setSort('createdAt_desc');
     };
 
     const { data: products, isLoading: isProductsLoading } = useGetAdminProducts(page, 12, filters);

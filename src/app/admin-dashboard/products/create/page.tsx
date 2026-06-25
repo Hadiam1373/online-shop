@@ -1,16 +1,19 @@
 'use client';
 import { HeaderTitle } from '@/components';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import { useGetAdminCategories } from '@/lib/api/admin/admin.query.categories';
+import { useState } from 'react';
 import styles from '../../admin-dashboard.module.css';
 import { useCreateProductModel } from '../products.model';
-import { useEffect, useState } from 'react';
 
 export default function CreateProductPage() {
     const { form, onSubmit, isCreating, watch, setValue, attributesFieldArray } = useCreateProductModel();
     const { register, handleSubmit } = form;
     const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+    const { data: categories } = useGetAdminCategories();
 
     const images = watch('images');
 
@@ -49,19 +52,32 @@ export default function CreateProductPage() {
     return (
         <div className={styles['form_wrapper']}>
             <HeaderTitle title='ایجاد محصول' />
-            <form onSubmit={handleSubmit(onSubmit)} className={styles['form_wrapper--inputs']}>
-                <Input {...register('name')} placeholder='نام محصول' required />
-                <Textarea {...register('description')} placeholder='توضیحات' />
-                <Input {...register('price')} type='number' placeholder='قیمت' required />
-                <Input {...register('stock')} type='number' placeholder='موجودی' required />
-                <Input {...register('categoryId')} placeholder='دسته‌بندی (id)' required />
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className='w-full grid grid-cols-3 gap-5'>
+                    <Input label='نام محصول' {...register('name')} placeholder='نام محصول' required />
+                    <Input label='قیمت' {...register('price')} type='number' placeholder='قیمت' required />
+                    <Input label='موجودی' {...register('stock')} type='number' placeholder='موجودی' required />
+                    <Select onValueChange={e => setValue('categoryId', e)} {...register('categoryId')} required>
+                        <SelectTrigger className='h-9 w-full rounded-lg border border-transparent bg-input/50 px-3 text-sm text-foreground outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30'>
+                            <SelectValue placeholder='انتخاب دسته‌بندی' />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {categories?.data?.map(category => (
+                                <SelectItem key={category.id} value={category.id}>
+                                    {category.name}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                </div>
+                <Textarea label='توضیحات' className='w-full cols-span-3' {...register('description')} placeholder='توضیحات' />
 
                 <div className='w-full rounded-xl border border-border bg-muted/30 p-4 space-y-3'>
                     <div className='font-medium text-sm text-foreground'>ویژگی‌های محصول</div>
                     {attributesFieldArray.fields.map((field, index) => (
                         <div key={field.id} className='grid gap-2 md:grid-cols-[1fr_1fr_auto] items-end'>
-                            <Input {...register(`attributes.${index}.key` as const)} placeholder='کلید' />
-                            <Input {...register(`attributes.${index}.value` as const)} placeholder='مقدار' />
+                            <Input label='کلید' {...register(`attributes.${index}.key` as const)} placeholder='کلید' />
+                            <Input label='مقدار' {...register(`attributes.${index}.value` as const)} placeholder='مقدار' />
                             <Button
                                 type='button'
                                 variant='outline'

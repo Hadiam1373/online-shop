@@ -10,9 +10,15 @@ import { cn } from '@/lib/utils';
 import { Search, SlidersHorizontal, X } from 'lucide-react';
 
 const SORT_OPTIONS: { value: TProductsSort; label: string }[] = [
-    { value: 'newest', label: 'جدیدترین' },
-    { value: 'price-asc', label: 'ارزان‌ترین' },
-    { value: 'price-desc', label: 'گران‌ترین' },
+    { value: 'createdAt_desc', label: 'جدیدترین' },
+    { value: 'price_asc', label: 'ارزان‌ترین' },
+    { value: 'price_desc', label: 'گران‌ترین' },
+    { value: 'name_desc', label: 'نام (نزولی)' },
+    { value: 'name_asc', label: 'نام (صعودی)' },
+    { value: 'stock_desc', label: 'موجودی (نزولی)' },
+    { value: 'stock_asc', label: 'موجودی (صعودی)' },
+    { value: 'discount_desc', label: 'تخفیف (نزولی)' },
+    { value: 'discount_asc', label: 'تخفیف (صعودی)' },
 ];
 
 const SelectClassName =

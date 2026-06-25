@@ -11,6 +11,7 @@ export type UserRole = 'USER' | 'ADMIN' | 'OPERATOR';
 interface AuthContextType {
     user: IUserProfileResponse | null;
     isLoading: boolean;
+    isInitialized: boolean;
     isAuthenticated: boolean;
     role: UserRole | null;
     // دسترسی‌ها
@@ -25,6 +26,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [hasToken, setHasToken] = useState(false);
+    const [isInitialized, setIsInitialized] = useState(false);
     const navigate = useRouter();
 
     // بررسی توکن در هنگام mount
@@ -33,6 +35,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         const tokenExists = !!accessToken;
         setHasToken(tokenExists);
         setIsAuthenticated(tokenExists);
+        setIsInitialized(true);
     }, []);
 
     // گوش دادن به تغییرات احراز هویت که توسط لاگین/لاگ‌آوت منتشر می‌شود
@@ -97,6 +100,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const value: AuthContextType = {
         user,
         isLoading: profileLoading,
+        isInitialized,
         isAuthenticated,
         role,
         canAccessAdminDashboard,
@@ -121,13 +125,14 @@ export const useAuth = () => {
  * مثال: const { canAccess } = useAuthGuard(['ADMIN']); // فقط ADMIN‌ها
  */
 export const useAuthGuard = (allowedRoles?: UserRole[]) => {
-    const { isAuthenticated, role } = useAuth();
+    const { isAuthenticated, role, isInitialized } = useAuth();
 
     const canAccess = isAuthenticated && (!allowedRoles || !allowedRoles.length || (role && allowedRoles.includes(role)));
 
     return {
         canAccess,
         isAuthenticated,
+        isInitialized,
         role,
     };
 };

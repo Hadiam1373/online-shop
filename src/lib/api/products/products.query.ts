@@ -1,25 +1,20 @@
 import { queryOptions, useMutation, useQuery, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
 import { getProducts, getProduct, createProduct, updateProduct, deleteProduct } from './products.api';
-import { IProduct, IProductInput, IProductsResponse } from './products.dto';
+import { IProduct, IProductInput, IProductParams, IProductsResponse } from './products.dto';
 
 type ListResponse = IProductsResponse;
 type ItemResponse = IProduct;
 
-export const getProductsOptions = (props?: {
-    page?: number;
-    limit?: number;
-    queryOptions?: Omit<UseQueryOptions<ListResponse>, 'queryKey'>;
-}) => {
+export const getProductsOptions = (props?: { params?: IProductParams; queryOptions?: Omit<UseQueryOptions<ListResponse>, 'queryKey'> }) => {
     return queryOptions({
         queryKey: ['products'] as const,
-        queryFn: () => getProducts(),
+        queryFn: () => getProducts(props?.params || {}),
         ...(props?.queryOptions || {}),
     });
 };
 
-export const useGetProducts = ( page?: number,
-    limit?: number,props?: { queryOptions?: Omit<UseQueryOptions<ListResponse>, 'queryKey'> }) => {
-    return useQuery(getProductsOptions({ page, limit, queryOptions: props?.queryOptions }));
+export const useGetProducts = (props?: { params?: IProductParams; queryOptions?: Omit<UseQueryOptions<ListResponse>, 'queryKey'> }) => {
+    return useQuery(getProductsOptions(props));
 };
 
 export const getProductOptions = (
