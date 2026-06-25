@@ -97,7 +97,14 @@ export const Hero = () => {
                         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
                         className='flex size-56 items-center justify-center rounded-4xl bg-card shadow-md ring-1 ring-foreground/5 md:size-72'
                     >
-                        <Image src='/image/hero.webp' alt='موتوپارت' width={300} height={200} className='object-contain' />
+                        <Image
+                            loading='eager'
+                            src='/image/hero.webp'
+                            alt='نگار بیوتی'
+                            width={300}
+                            height={200}
+                            className='object-contain'
+                        />
                     </motion.div>
                 </motion.div>
             </div>

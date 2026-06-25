@@ -32,7 +32,14 @@ export const WhyUs = () => {
                         خریدی ایمن، متخصصانه و بدون دردسر
                     </Typography>
                 </motion.div>
-                <Image src='/image/banner.webp' alt='چرا نگار بیوتی؟' width={600} height={400} className='w-auto mx-auto my-10' />
+                <Image
+                    loading='eager'
+                    src='/image/banner.webp'
+                    alt='چرا نگار بیوتی؟'
+                    width={600}
+                    height={400}
+                    className='w-auto mx-auto my-10'
+                />
 
                 <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
                     {FEATURES.map((feature, i) => {

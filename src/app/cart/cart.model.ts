@@ -9,7 +9,7 @@ export const useCart = () => {
     const { mutateAsync: clearCartMutate } = useClearCart();
     const { mutateAsync: createOrder } = useCreateOrder();
     const queryClient = useQueryClient();
-    const { mutateAsync: createZarinPal } = useStartZarinpalPayment();
+    const { mutateAsync: createZarinPal, isPending: loadingPayment } = useStartZarinpalPayment();
     const updateCartItemHandler = async (data: { productId: string; type: string }) => {
         try {
             await updateCartItem({ id: data.productId, payload: { type: data.type } });
@@ -25,8 +25,8 @@ export const useCart = () => {
                 { couponCode: 'MYCOUPON' },
                 {
                     onSuccess: r => {
-                        console.log(r);
                         createZarinPal({ orderId: r.order.id });
+                        queryClient.invalidateQueries({ queryKey: ['cart'] });
                     },
                 },
             );
@@ -44,5 +44,5 @@ export const useCart = () => {
         }
     };
 
-    return { cartData, updateCartItemHandler, removeCart, createOrderHandler };
+    return { cartData, updateCartItemHandler, removeCart, createOrderHandler, loadingPayment };
 };

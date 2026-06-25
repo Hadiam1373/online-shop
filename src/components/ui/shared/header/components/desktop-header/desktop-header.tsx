@@ -21,7 +21,7 @@ export const DesktopHeader: React.FC = () => {
         <header className='w-full h-20 bg-background/80 backdrop-blur-md border-b border-border grid grid-cols-2 items-center px-6 lg:px-12 supports-backdrop-blur:bg-background/60'>
             <div className='flex items-center gap-10'>
                 <Link href='/' className='flex items-center'>
-                    <Image width={80} src='/image/logo.webp' alt='Logo' height={80} className='h-auto object-contain' />
+                    <Image loading='eager' width={80} src='/image/logo.webp' alt='Logo' height={80} className='h-auto object-contain' />
                 </Link>
                 <nav className='hidden md:flex items-center gap-1'>
                     {NAV_LINKS.map(link => {

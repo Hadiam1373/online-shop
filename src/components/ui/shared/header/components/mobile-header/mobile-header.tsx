@@ -24,7 +24,7 @@ export const MobileHeader: React.FC = () => {
     return (
         <header className='w-full px-4 h-16 bg-background/90 backdrop-blur-md border-b border-border flex items-center justify-between'>
             <Link href='/'>
-                <Image width={80} src='/image/logo.webp' alt='Logo' height={80} className=' object-contain' />
+                <Image loading='eager' width={80} src='/image/logo.webp' alt='Logo' height={80} className=' object-contain' />
             </Link>
 
             <div className='flex items-center gap-1'>
