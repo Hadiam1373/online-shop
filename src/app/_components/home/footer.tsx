@@ -1,11 +1,10 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { Typography } from '@/components/ui/typography';
-import { Phone, MapPin, Mail } from 'lucide-react';
+import { Phone, MapPin, Mail, Flower2 } from 'lucide-react';
 
 const LINKS = [
     { href: '/', label: 'صفحه اصلی' },
-    { href: '/products', label: 'محصولات' },
+    { href: '/products', label: 'گل‌ها و هدیه‌ها' },
     { href: '/cart', label: 'سبد خرید' },
     { href: '/user-dashboard', label: 'حساب کاربری' },
 ];
@@ -15,9 +14,12 @@ export const HomeFooter = () => {
         <footer className='border-t border-border bg-muted/30'>
             <div className='mx-auto grid max-w-[1280px] grid-cols-1 gap-8 px-4 py-10 sm:grid-cols-3 lg:px-8'>
                 <div className='flex flex-col items-start gap-3'>
-                    <Image loading='eager' src='/image/logo.webp' alt='نگار بیوتی' width={150} height={150} className='object-contain' />
+                    <span className='flex items-center gap-2 text-2xl font-black text-primary'>
+                        <Flower2 className='size-7' />
+                        گل‌نوش
+                    </span>
                     <Typography variant='body2' className='text-muted-foreground'>
-                        فروشگاه آنلاین لوازم آرایشی و بهداشتی، عرضه‌کننده محصولات اصلی و معتبر برای پوست و آرایش.
+                        گل‌های تازه و چیدمان‌های دست‌ساز برای زیباتر کردن روزهای معمولی و مناسبت‌های خاص.
                     </Typography>
                 </div>
 
@@ -42,11 +44,11 @@ export const HomeFooter = () => {
                     </Typography>
                     <span className='flex items-center gap-2 text-sm text-muted-foreground'>
                         <Phone className='size-4 text-primary' />
-                        ۰۲۱-۹۸۷۶۵۴۳۲
+                        ۰۲۱-۱۲۳۴۵۶۷۸
                     </span>
                     <span className='flex items-center gap-2 text-sm text-muted-foreground'>
                         <Mail className='size-4 text-primary' />
-                        info@beautyhub.ir
+                        hello@golnoosh.ir
                     </span>
                     <span className='flex items-center gap-2 text-sm text-muted-foreground'>
                         <MapPin className='size-4 text-primary' />
@@ -57,7 +59,7 @@ export const HomeFooter = () => {
 
             <div className='border-t border-border py-4 text-center'>
                 <Typography variant='caption' className='text-muted-foreground'>
-                    © {new Date().getFullYear()} نگار بیوتی — تمامی حقوق محفوظ است
+                    © {new Date().getFullYear()} گل‌نوش — با عشق برای لحظه‌های قشنگ
                 </Typography>
             </div>
         </footer>

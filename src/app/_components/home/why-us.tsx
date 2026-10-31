@@ -2,16 +2,15 @@
 
 import { motion } from 'motion/react';
 import { Typography } from '@/components/ui/typography';
-import { ShieldCheck, Truck, Headset, Wallet, RotateCcw, Sparkles } from 'lucide-react';
-import Image from 'next/image';
+import { Flower2, Truck, HandHeart, Sprout, Heart, Sparkles } from 'lucide-react';
 
 const FEATURES = [
-    { icon: ShieldCheck, title: 'ضمانت اصالت محصول', description: 'تمام محصولات دارای ضمانت اصالت و سلامت بسته‌بندی هستند' },
-    { icon: Truck, title: 'ارسال سریع و ایمن', description: 'ارسال در سریع‌ترین زمان با بسته‌بندی ایمن در سراسر کشور' },
-    { icon: Headset, title: 'مشاوره متخصص رایگان', description: 'پیش از خرید با متخصصان پوست‌شناسی ما مشورت کنید' },
-    { icon: Wallet, title: 'پرداخت امن و مطمئن', description: 'پرداخت آنلاین از طریق درگاه‌های معتبر بانکی' },
-    { icon: RotateCcw, title: 'بازگشت آسان کالا', description: 'بازگشت محصول تا ۱۰ روز بدون شرط' },
-    { icon: Sparkles, title: 'برندهای معروف جهانی', description: 'دسترسی به بهترین و مطمئن‌ترین برندهای جهان' },
+    { icon: Flower2, title: 'تازگی، اولویت ماست', description: 'گل‌ها روزانه تهیه می‌شوند تا با طراوت به دستت برسند.' },
+    { icon: Truck, title: 'ارسال با دقت و عشق', description: 'بسته‌بندی ایمن و زیبا، مناسب هدیه دادن و غافلگیر کردن.' },
+    { icon: HandHeart, title: 'چیدمان دست‌ساز', description: 'هر دسته‌گل با سلیقه‌ی گل‌آراها و توجه به جزئیات آماده می‌شود.' },
+    { icon: Sprout, title: 'راهنمای نگهداری گل', description: 'همراه سفارش، نکته‌های ساده برای ماندگاری بیشتر گل‌ها می‌گیری.' },
+    { icon: Heart, title: 'هدیه‌ای از طرف تو', description: 'پیام دلخواهت را به کارت هدیه اضافه کن و لحظه‌ای ماندگار بساز.' },
+    { icon: Sparkles, title: 'برای هر بودجه و مناسبت', description: 'از یک شاخه‌ی مینیمال تا چیدمان‌های ویژه و باشکوه.' },
 ];
 
 export const WhyUs = () => {
@@ -26,21 +25,12 @@ export const WhyUs = () => {
                     className='mb-10 text-center'
                 >
                     <Typography as='h2' variant='subtitle1' md-variant='h5' weight='bold' className='text-foreground'>
-                        چرا نگار بیوتی؟
+                        چرا گل‌نوش؟
                     </Typography>
                     <Typography variant='body2' className='mt-2 text-muted-foreground'>
-                        خریدی ایمن، متخصصانه و بدون دردسر
+                        گل تازه، چیدمان هنرمندانه و هدیه‌ای به‌یادماندنی
                     </Typography>
                 </motion.div>
-                <Image
-                    loading='eager'
-                    src='/image/banner.webp'
-                    alt='چرا نگار بیوتی؟'
-                    width={600}
-                    height={400}
-                    className='w-auto mx-auto my-10'
-                />
-
                 <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
                     {FEATURES.map((feature, i) => {
                         const Icon = feature.icon;

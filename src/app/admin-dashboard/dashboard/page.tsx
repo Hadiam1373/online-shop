@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { HeaderTitle } from '@/components';
-import styles from '../../admin-dashboard.module.css';
+import styles from '../admin-dashboard.module.css';
 import { useGetDashboardStats } from '@/lib/api/admin/admin.query';
 import { Spinner } from '@/components/ui/spinner';
 import { Typography } from '@/components/ui/typography';

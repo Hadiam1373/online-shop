@@ -1,39 +1,14 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { motion, useInView } from 'motion/react';
+import { motion } from 'motion/react';
 import { Typography } from '@/components/ui/typography';
 
 const STATS = [
-    { value: 8000, suffix: '+', label: 'محصول در کاتالوگ' },
-    { value: 25000, suffix: '+', label: 'مشتری راضی' },
-    { value: 12, suffix: ' سال', label: 'تجربه در صنعت آرایش' },
-    { value: 99, suffix: '٪', label: 'رضایت مشتریان' },
+    { value: 'تازه', label: 'گل‌هایی برای حال خوب' },
+    { value: 'دست‌ساز', label: 'چیدمان با سلیقه‌ی تو' },
+    { value: 'هدیه', label: 'پیامی از طرف تو' },
+    { value: 'آسان', label: 'سفارش در چند قدم' },
 ];
-
-const CountUp = ({ value }: { value: number }) => {
-    const ref = useRef<HTMLSpanElement>(null);
-    const inView = useInView(ref, { once: true, amount: 0.6 });
-    const [display, setDisplay] = useState(0);
-
-    useEffect(() => {
-        if (!inView) return;
-        const duration = 1200;
-        const start = performance.now();
-
-        let frame: number;
-        const tick = (now: number) => {
-            const progress = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            setDisplay(Math.round(eased * value));
-            if (progress < 1) frame = requestAnimationFrame(tick);
-        };
-        frame = requestAnimationFrame(tick);
-        return () => cancelAnimationFrame(frame);
-    }, [inView, value]);
-
-    return <span ref={ref}>{display.toLocaleString('fa')}</span>;
-};
 
 export const Stats = () => {
     return (
@@ -49,8 +24,7 @@ export const Stats = () => {
                         className='flex flex-col items-center gap-1 text-center'
                     >
                         <Typography variant='h6' weight='bold' className='text-primary'>
-                            <CountUp value={stat.value} />
-                            {stat.suffix}
+                            {stat.value}
                         </Typography>
                         <Typography variant='body2' className='text-muted-foreground'>
                             {stat.label}

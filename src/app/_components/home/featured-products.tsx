@@ -11,7 +11,7 @@ import { useGetProducts } from '@/lib/api/products/products.query';
 import { ArrowLeft, PackageSearch } from 'lucide-react';
 
 export const FeaturedProducts = () => {
-    const { data, isLoading } = useGetProducts(1, 8);
+    const { data, isLoading } = useGetProducts({ params: { page: 1, limit: 8 } });
     const router = useRouter();
     const products = data?.products?.slice(0, 8) ?? [];
 
@@ -26,10 +26,10 @@ export const FeaturedProducts = () => {
             >
                 <div>
                     <Typography as='h2' variant='subtitle1' md-variant='h5' weight='bold' className='text-foreground'>
-                        محصولات پرفروش
+                        انتخاب‌های محبوب گل‌نوش
                     </Typography>
                     <Typography variant='body2' className='mt-2 text-muted-foreground'>
-                        محصولات برتر و محبوب این هفته
+                        دسته‌گل‌هایی که این روزها بیشتر به دل می‌نشینند
                     </Typography>
                 </div>
                 <Link href='/products'>
@@ -43,7 +43,7 @@ export const FeaturedProducts = () => {
             {isLoading ? (
                 <div className='grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6 lg:grid-cols-4'>
                     {Array.from({ length: 4 }).map((_, i) => (
-                        <Skeleton key={i} className='aspect-[3/4] rounded-2xl' />
+                        <Skeleton key={i} className='aspect-3/4 rounded-2xl' />
                     ))}
                 </div>
             ) : products.length === 0 ? (

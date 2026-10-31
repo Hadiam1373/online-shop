@@ -19,8 +19,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: 'نگار بیوتی | فروشگاه آنلاین لوازم آرایشی و پوست‌شناسی',
-    description: 'فروشگاه آنلاین لوازم آرایشی و پوست‌شناسی معتبر با محصولات اصل و با ضمانت',
+    title: 'گل‌نوش | گل‌های تازه برای لحظه‌های خاص',
+    description: 'دسته‌گل‌های تازه، گل‌های مناسبتی و گیاهان آپارتمانی را با بسته‌بندی زیبا و ارسال سریع سفارش دهید.',
 };
 
 export default function RootLayout({
@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
     return (
         <html
-            lang='en'
+            lang='fa'
             dir='rtl'
             className={cn('h-full', 'antialiased', geistSans.variable, geistMono.variable, 'font-sans', inter.variable)}
         >

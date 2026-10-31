@@ -5,17 +5,17 @@ import Link from 'next/link';
 import { Typography } from '@/components/ui/typography';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useGetCategories } from '@/lib/api/categories/categories.query';
-import { Palette, Droplet, Wind, Heart, Eye, Sparkles } from 'lucide-react';
+import { Flower2, Flower, Gift, Heart, Leaf, Sprout } from 'lucide-react';
 
-const ICONS = [Palette, Droplet, Wind, Heart, Eye, Sparkles];
+const ICONS = [Flower2, Flower, Gift, Heart, Leaf, Sprout];
 
 const FALLBACK_CATEGORIES = [
-    { id: 'makeup', name: 'آرایش صورت' },
-    { id: 'skincare', name: 'مراقبت پوست' },
-    { id: 'haircare', name: 'مراقبت موی سر' },
-    { id: 'fragrances', name: 'عطر و ادکلن' },
-    { id: 'eyecare', name: 'مراقبت چشم' },
-    { id: 'supplements', name: 'مکمل‌های زیبایی' },
+    { id: 'bouquets', name: 'دسته‌گل‌های خاص' },
+    { id: 'roses', name: 'رزهای عاشقانه' },
+    { id: 'gift', name: 'گل‌های هدیه' },
+    { id: 'seasonal', name: 'گل‌های فصلی' },
+    { id: 'plants', name: 'گیاهان آپارتمانی' },
+    { id: 'custom', name: 'سفارش گل‌آرایی' },
 ];
 
 export const CategoriesSection = () => {
@@ -32,10 +32,10 @@ export const CategoriesSection = () => {
                 className='mb-8 text-center'
             >
                 <Typography as='h2' variant='subtitle1' md-variant='h5' weight='bold' className='text-foreground'>
-                    دسته‌بندی محصولات
+                    گل برای هر مناسبت
                 </Typography>
                 <Typography variant='body2' className='mt-2 text-muted-foreground'>
-                    محصولات مورد نیاز خودت رو براحتی پیدا کن
+                    از یک شاخه‌ی ساده تا دسته‌گل‌های چشم‌نواز، انتخاب با توست
                 </Typography>
             </motion.div>
 

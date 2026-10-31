@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { HeaderTitle } from '@/components';
-import styles from '../../admin-dashboard.module.css';
+import styles from '../admin-dashboard.module.css';
 import { cookieWrapper } from '@/lib/cookie';
 import axiosInstance from '@/lib/axios';
 

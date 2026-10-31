@@ -1,6 +1,5 @@
 'use client';
-import { Home, LayoutGrid, MenuIcon, ShoppingCart, UserRound } from 'lucide-react';
-import Image from 'next/image';
+import { Home, LayoutGrid, MenuIcon, ShoppingCart, UserRound, Flower2 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
@@ -12,7 +11,7 @@ import { Login } from '@/components/ui/shared/header/components/desktop-header/c
 
 const NAV_LINKS = [
     { href: '/', label: 'صفحه اصلی', icon: Home },
-    { href: '/products', label: 'محصولات', icon: LayoutGrid },
+    { href: '/products', label: 'گل‌ها و هدیه‌ها', icon: LayoutGrid },
     { href: '/cart', label: 'سبد خرید', icon: ShoppingCart },
     { href: '/user-dashboard', label: 'حساب کاربری', icon: UserRound },
 ];
@@ -23,8 +22,11 @@ export const MobileHeader: React.FC = () => {
 
     return (
         <header className='w-full px-4 h-16 bg-background/90 backdrop-blur-md border-b border-border flex items-center justify-between'>
-            <Link href='/'>
-                <Image loading='eager' width={80} src='/image/logo.webp' alt='Logo' height={80} className=' object-contain' />
+            <Link href='/' className='flex items-center gap-2 text-primary'>
+                <span className='flex size-9 items-center justify-center rounded-xl bg-accent'>
+                    <Flower2 className='size-5' />
+                </span>
+                <span className='text-lg font-black'>گل‌نوش</span>
             </Link>
 
             <div className='flex items-center gap-1'>
@@ -47,7 +49,7 @@ export const MobileHeader: React.FC = () => {
                     <SheetContent side='right' className='flex flex-col'>
                         <SheetHeader>
                             <SheetTitle>منو</SheetTitle>
-                            <SheetDescription>موتوپارت</SheetDescription>
+                            <SheetDescription>گل‌فروشی آنلاین گل‌نوش</SheetDescription>
                         </SheetHeader>
 
                         <nav className='mt-2 flex flex-col gap-1 px-4'>

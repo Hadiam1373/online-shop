@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'motion/react';
-import { Cog, LoaderPinwheel } from 'lucide-react';
+import { Flower2 } from 'lucide-react';
 
 export const ScrollGear = () => {
     const { scrollYProgress } = useScroll();
@@ -13,7 +13,7 @@ export const ScrollGear = () => {
             className='pointer-events-none fixed -left-10 bottom-10 z-0 hidden text-primary/10 md:block lg:-left-6'
             aria-hidden
         >
-            <LoaderPinwheel className='size-40 lg:size-56' strokeWidth={1} />
+            <Flower2 className='size-40 lg:size-56' strokeWidth={1} />
         </motion.div>
     );
 };

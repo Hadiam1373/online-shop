@@ -46,10 +46,10 @@ const Products = () => {
 
                 <Sparkles className='size-9' />
                 <Typography as='h1' variant='subtitle1' md-variant='h5' weight='bold' className='mt-3'>
-                    محصولات
+                    گل‌ها و هدیه‌ها
                 </Typography>
                 <Typography variant='body2' className='mt-2 max-w-md text-primary-foreground/80'>
-                    بهترین محصولات آرایشی و بهداشتی را از فروشگاه ما خریداری کنید و تجربه‌ای بی‌نظیر از خرید آنلاین داشته باشید.
+                    دسته‌گل تازه، گل مناسبتی و گیاه آپارتمانی دلخواهت را پیدا کن؛ ما با عشق آماده و ارسال می‌کنیم.
                 </Typography>
             </motion.div>
 

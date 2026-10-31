@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Typography } from '@/components/ui/typography';
-import { Headset, ArrowLeft } from 'lucide-react';
+import { Flower2, ArrowLeft } from 'lucide-react';
 
 export const CtaBanner = () => {
     return (
@@ -19,17 +19,17 @@ export const CtaBanner = () => {
                 <div className='absolute -top-10 -right-10 size-40 rounded-full bg-white/10' aria-hidden />
                 <div className='absolute -bottom-12 -left-12 size-48 rounded-full bg-white/10' aria-hidden />
 
-                <Headset className='mx-auto size-10' />
+                <Flower2 className='mx-auto size-10' />
                 <Typography as='h2' variant='subtitle1' md-variant='h5' weight='bold' className='mt-4'>
-                    هنوز محصول مورد نظرتون رو پیدا نکردید؟
+                    برای مناسبت تو، گل مخصوص می‌چینیم
                 </Typography>
                 <Typography variant='body2' className='mx-auto mt-2 max-w-md text-primary-foreground/80'>
-                    متخصصان نگار بیوتی کمکتون می‌کنن بهترین محصول برای پوست‌تون انتخاب کنید
+                    ترکیب رنگ و گل‌ها را انتخاب کن؛ گل‌آراهای ما یک دسته‌گل منحصربه‌فرد برایت آماده می‌کنند.
                 </Typography>
 
                 <Link href='/products'>
                     <Button size='lg' className='mt-6 rounded-full bg-background px-8 text-primary gap-2 hover:bg-background/90'>
-                        مشاهده محصولات
+                        سفارش گل دلخواه
                         <ArrowLeft className='size-4' />
                     </Button>
                 </Link>

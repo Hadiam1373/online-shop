@@ -6,10 +6,10 @@ import { Typography } from '@/components/ui/typography';
 import { Search, ShoppingCart, CreditCard, Truck } from 'lucide-react';
 
 const STEPS = [
-    { icon: Search, title: 'جستجو و انتخاب', description: 'بین هزاران محصول اصل جستجو کنید و انتخاب کنید' },
-    { icon: ShoppingCart, title: 'افزودن به سبد', description: 'محصول مورد نظر‌تون رو سبد خریدتون اضافه کنید' },
-    { icon: CreditCard, title: 'پرداخت امن', description: 'پرداخت آنلاین از طریق درگاه‌های معتبر بانکی' },
-    { icon: Truck, title: 'ارسال و تحویل', description: 'دریافت بسته‌تون در کمترین زمان' },
+    { icon: Search, title: 'گل دلخواهت را پیدا کن', description: 'از میان دسته‌گل‌ها، گل‌های فصلی و گیاهان انتخاب کن.' },
+    { icon: ShoppingCart, title: 'پیامت را اضافه کن', description: 'برای هدیه، یک یادداشت کوتاه و دوست‌داشتنی بنویس.' },
+    { icon: CreditCard, title: 'سفارش را ثبت کن', description: 'پرداخت امن و انتخاب زمان مناسب برای تحویل.' },
+    { icon: Truck, title: 'لبخند را هدیه بده', description: 'ما گل‌ها را تازه و با بسته‌بندی زیبا به مقصد می‌رسانیم.' },
 ];
 
 const StepRow = ({ step, index, progress }: { step: (typeof STEPS)[number]; index: number; progress: MotionValue<number> }) => {
@@ -53,10 +53,10 @@ export const ProcessSteps = () => {
                 className='mb-12 text-center'
             >
                 <Typography as='h2' variant='subtitle1' md-variant='h5' weight='bold' className='text-foreground'>
-                    خرید در ۴ قدم ساده
+                    هدیه دادن، ساده‌تر از همیشه
                 </Typography>
                 <Typography variant='body2' className='mt-2 text-muted-foreground'>
-                    از انتخاب محصول تا تحویل درب منزل
+                    چند قدم کوتاه تا رسیدن یک دسته‌گل دوست‌داشتنی
                 </Typography>
             </motion.div>
 
