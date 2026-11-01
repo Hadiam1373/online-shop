@@ -1,29 +1,19 @@
 import type { Metadata } from 'next';
 import { API_BASE_URL, absoluteSiteUrl, SITE_URL } from '@/lib/seo';
+import type { IProduct } from '@/lib/api/products/products.dto';
 import ProductDetailClient from './product-detail-client';
-
-type ProductForSeo = {
-    id: string;
-    name: string;
-    description?: string | null;
-    images?: string[];
-    price: number;
-    stock: number;
-    categoryId?: string;
-    category?: { name?: string } | null;
-};
 
 type ProductPageProps = {
     params: Promise<{ id: string }>;
 };
 
-const getProductForSeo = async (id: string): Promise<ProductForSeo | null> => {
+const getProductForSeo = async (id: string): Promise<IProduct | null> => {
     try {
         const response = await fetch(`${API_BASE_URL}/api/products/${encodeURIComponent(id)}`, {
             next: { revalidate: 600 },
         });
         if (!response.ok) return null;
-        return (await response.json()) as ProductForSeo;
+        return (await response.json()) as IProduct;
     } catch {
         return null;
     }
@@ -142,7 +132,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }}
                 />
             )}
-            <ProductDetailClient key={id} />
+            <ProductDetailClient key={id} initialProduct={product} />
         </>
     );
 }

@@ -26,6 +26,7 @@ export const getProductOptions = (
     return queryOptions({
         queryKey: ['product', id] as const,
         queryFn: () => getProduct(id),
+        enabled: Boolean(id),
         ...(props?.queryOptions || {}),
     });
 };

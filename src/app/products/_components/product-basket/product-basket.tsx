@@ -1,10 +1,37 @@
 import { Button } from '@/components/ui/button';
 import { Typography } from '@/components/ui/typography';
+import type { IProduct } from '@/lib/api/products/products.dto';
+import { useAddToCart } from '@/lib/api/cart/cart.query';
+import { useAddToWishlist } from '@/lib/api/wishlist';
+import { useQueryClient } from '@tanstack/react-query';
 import { PackageCheck, ShieldCheck } from 'lucide-react';
-import { useProducts } from '../../products.model';
+import { toast } from 'sonner';
 
-export const ProductBasket = () => {
-    const { product, addProductToWhishloist, addToCartHandler } = useProducts();
+export const ProductBasket = ({ product }: { product: IProduct }) => {
+    const queryClient = useQueryClient();
+    const { mutateAsync: addToCart } = useAddToCart();
+    const { mutateAsync: addToWishlist } = useAddToWishlist();
+
+    const addToCartHandler = async () => {
+        try {
+            await addToCart({ productId: product.id, quantity: 1 });
+            await queryClient.invalidateQueries({ queryKey: ['cart'] });
+            toast.success('محصول با موفقیت به سبد خرید شما اضافه شد .');
+        } catch {
+            toast.error('افزودن محصول به سبد خرید ناموفق بود. دوباره تلاش کنید.');
+        }
+    };
+
+    const addProductToWishlist = async () => {
+        try {
+            await addToWishlist({ productId: product.id });
+            await queryClient.invalidateQueries({ queryKey: ['wishlist'] });
+            toast.success('محصول با موفقیت به لیست مورد علاقه شما اضافه شد .');
+        } catch {
+            toast.error('افزودن محصول به فهرست علاقه‌مندی‌ها ناموفق بود. دوباره تلاش کنید.');
+        }
+    };
+
     return (
         <>
             <div>
@@ -15,15 +42,10 @@ export const ProductBasket = () => {
                     {product?.price.toLocaleString('fa')} تومان
                 </Typography>
 
-                <Button
-                    onClick={() => addToCartHandler({ productId: product!.id, quantity: 1 })}
-                    variant='default'
-                    size='lg'
-                    className='w-full mt-4'
-                >
+                <Button onClick={addToCartHandler} variant='default' size='lg' className='w-full mt-4'>
                     افزودن به سبد خرید
                 </Button>
-                <Button onClick={() => addProductToWhishloist()} variant='outline' className='mt-2 w-full'>
+                <Button onClick={addProductToWishlist} variant='outline' className='mt-2 w-full'>
                     افزودن به لیست مورد علاقه ها
                 </Button>
             </div>

@@ -13,11 +13,13 @@ export const ProductImageGallery = ({ images, productName = 'محصول گل‌�
             <Image
                 src={getProductImageSrc(selectedImage || images[0])}
                 alt={`${productName} - تصویر محصول`}
-                width={250}
-                height={250}
+                width={750}
+                height={1000}
+                sizes='(min-width: 1024px) 33vw, 100vw'
+                priority
                 unoptimized
                 onError={handleProductImageError}
-                className='lg:w-full object-cover rounded-md mx-auto'
+                className='h-auto w-full object-cover rounded-md mx-auto'
             />
 
             <div className={styles['product-image-gallery__item']}>

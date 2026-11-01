@@ -1,9 +1,8 @@
 import { Typography } from '@/components/ui/typography';
+import type { IProduct } from '@/lib/api/products/products.dto';
 import styles from './product-info.module.css';
-import { useProducts } from '../../products.model';
 
-export const ProductInfo = () => {
-    const { product } = useProducts();
+export const ProductInfo = ({ product }: { product: IProduct }) => {
     return (
         <div className={styles['product-detail__info']}>
             <Typography variant='caption' className='text-muted-foreground'>

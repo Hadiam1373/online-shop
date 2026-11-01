@@ -5,7 +5,6 @@ import { Pagination } from '@/components/ui/pagination';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Typography } from '@/components/ui/typography';
 import { PackageSearch, Sparkles } from 'lucide-react';
-import { motion } from 'motion/react';
 import { Suspense } from 'react';
 import { ProductCart, ProductFilters } from './_components';
 import { useProducts } from './products.model';
@@ -37,12 +36,7 @@ const ProductsContent = () => {
 
     return (
         <div className={styles['products']}>
-            <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className={styles['products__header']}
-            >
+            <div className={styles['products__header']}>
                 <div className='absolute -top-10 -right-10 size-40 rounded-full bg-white/10' aria-hidden />
                 <div className='absolute -bottom-12 -left-12 size-48 rounded-full bg-white/10' aria-hidden />
 
@@ -53,7 +47,7 @@ const ProductsContent = () => {
                 <Typography variant='body2' className='mt-2 max-w-md text-primary-foreground/80'>
                     دسته‌گل تازه، گل مناسبتی و گیاه آپارتمانی دلخواهت را پیدا کن؛ ما با عشق آماده و ارسال می‌کنیم.
                 </Typography>
-            </motion.div>
+            </div>
 
             <ProductFilters
                 categories={categories?.data}

@@ -10,17 +10,22 @@ export const useComments = ({
     productId,
     reviewId,
     mode = 'edit',
+    loadMyReviews = true,
 }: {
     comment?: string;
     rating?: number;
     productId?: string;
     reviewId?: string;
     mode?: 'edit' | 'create';
+    loadMyReviews?: boolean;
 }) => {
     const [page, setPage] = useState(1);
     const [openModal, setOpenModal] = useState(false);
     const [openRemoveModal, setOpenRemoveModal] = useState(false);
-    const { data: comments, isPending } = useGetMyReviews({ params: { page, limit: 5 } });
+    const { data: comments, isPending } = useGetMyReviews({
+        params: { page, limit: 5 },
+        queryOptions: { enabled: loadMyReviews },
+    });
     const queryClient = useQueryClient();
     const { mutateAsync: editReview } = useEditReview();
     const { mutateAsync: deleteReview } = useDeleteReview();

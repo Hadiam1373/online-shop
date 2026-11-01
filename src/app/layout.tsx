@@ -2,7 +2,6 @@ import Header from '@/components/ui/shared/header/header';
 import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import { Toaster } from 'sonner';
-import { connection } from 'next/server';
 import { Providers } from '../providers';
 import { absoluteSiteUrl, METADATA_BASE, SITE_URL } from '@/lib/seo';
 import './globals.css';
@@ -49,8 +48,6 @@ export default async function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    await connection();
-
     return (
         <html lang='fa' dir='rtl' className={cn('h-full', 'antialiased', 'font-sans')}>
             <head>

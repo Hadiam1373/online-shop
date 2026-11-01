@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Typography } from '@/components/ui/typography';
 import { IAdminProductResponse } from '@/lib/api/admin/admin.products.dto';
-import { motion } from 'motion/react';
 import { useRouter } from 'next/dist/client/components/navigation';
 import { getProductImageSrc, handleProductImageError } from '@/lib/utils';
 import styles from './product-cart.module.css';
@@ -14,22 +13,24 @@ export const ProductCart = ({ products }: ProductCartProps) => {
     const router = useRouter();
     return (
         <>
-            {products?.map((product, index) => {
+            {products?.map(product => {
                 const hasDiscount = Boolean(product.discountPrice && product.discountPrice < product.price);
                 const discountPercent = hasDiscount ? Math.round(((product.price - product.discountPrice!) / product.price) * 100) : 0;
                 const outOfStock = product.stock <= 0;
 
                 return (
-                    <motion.div
+                    <div
                         key={product.id}
-                        initial={{ opacity: 0, y: 16 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.3 }}
-                        transition={{ duration: 0.35, delay: (index % 12) * 0.04 }}
-                        whileHover={{ y: -4 }}
                         onClick={() => router.push(`/products/${product.id}`)}
-                        className={styles['products__item']}
+                        className={`${styles['products__item']} transition-transform hover:-translate-y-1`}
                         role='button'
+                        tabIndex={0}
+                        onKeyDown={event => {
+                            if (event.key === 'Enter' || event.key === ' ') {
+                                event.preventDefault();
+                                router.push(`/products/${product.id}`);
+                            }
+                        }}
                     >
                         <div className='relative'>
                             <img
@@ -83,7 +84,7 @@ export const ProductCart = ({ products }: ProductCartProps) => {
                         >
                             خرید
                         </Button>
-                    </motion.div>
+                    </div>
                 );
             })}
         </>

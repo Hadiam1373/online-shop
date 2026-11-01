@@ -18,7 +18,7 @@ export default function ProductsLayout({ children }: { children: React.ReactNode
     return (
         <div>
             <Header />
-            {children}
+            <main id='main-content'>{children}</main>
         </div>
     );
 }

@@ -64,6 +64,7 @@ const CreateCommentModal = ({ productId }: { productId: string | undefined }) =>
     const { openModal, setOpenModal, methods, ratingValue, onSubmit } = useComments({
         mode: 'create',
         productId,
+        loadMyReviews: false,
     });
 
     return (

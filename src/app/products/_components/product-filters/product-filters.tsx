@@ -89,7 +89,7 @@ export const ProductFilters = ({
                 </div>
 
                 <Select value={categoryId} onValueChange={e => setCategoryId(e === '__all__' ? '' : e)}>
-                    <SelectTrigger className={cn(SelectClassName, 'sm:w-44')}>
+                    <SelectTrigger aria-label='دسته‌بندی محصولات' className={cn(SelectClassName, 'sm:w-44')}>
                         <SelectValue placeholder='همه دسته‌بندی‌ها' />
                     </SelectTrigger>
                     <SelectContent>
@@ -125,7 +125,7 @@ export const ProductFilters = ({
                 </div>
 
                 <Select value={sort} onValueChange={e => setSort(e as TProductsSort)}>
-                    <SelectTrigger className={cn(SelectClassName, 'sm:w-32')}>
+                    <SelectTrigger aria-label='مرتب‌سازی محصولات' className={cn(SelectClassName, 'sm:w-32')}>
                         <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
