@@ -6,13 +6,13 @@ import { useState } from 'react';
 import { IProductImageGalleryProps } from './product-image-gallery.dto';
 import { getProductImageSrc, handleProductImageError } from '@/lib/utils';
 
-export const ProductImageGallery = ({ images }: IProductImageGalleryProps) => {
+export const ProductImageGallery = ({ images, productName = 'محصول گل‌نوش' }: IProductImageGalleryProps) => {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     return (
         <div className={styles['product-image-gallery']}>
             <Image
                 src={getProductImageSrc(selectedImage || images[0])}
-                alt='تصویر محصول'
+                alt={`${productName} - تصویر محصول`}
                 width={250}
                 height={250}
                 unoptimized
@@ -25,7 +25,7 @@ export const ProductImageGallery = ({ images }: IProductImageGalleryProps) => {
                     <Image
                         onClick={() => setSelectedImage(image)}
                         src={getProductImageSrc(image)}
-                        alt={`تصویر محصول ${index + 1}`}
+                        alt={`${productName} - تصویر ${index + 1}`}
                         width={100}
                         height={100}
                         unoptimized

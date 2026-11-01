@@ -23,7 +23,7 @@ export const Stats = () => {
                         transition={{ duration: 0.5, delay: i * 0.1 }}
                         className='flex flex-col items-center gap-1 text-center'
                     >
-                        <Typography variant='h6' weight='bold' className='text-primary'>
+                        <Typography as='p' variant='h6' weight='bold' className='text-primary'>
                             {stat.value}
                         </Typography>
                         <Typography variant='body2' className='text-muted-foreground'>

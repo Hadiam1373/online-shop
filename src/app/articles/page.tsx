@@ -2,9 +2,10 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft, BookOpen, Flower2, Leaf, Droplets } from 'lucide-react';
 import Header from '@/components/ui/shared/header/header';
+import { absoluteSiteUrl, SITE_URL } from '@/lib/seo';
 
 export const metadata: Metadata = {
-    title: 'مقالات گل و گیاه | راهنمای نگهداری گل طبیعی و گیاه آپارتمانی | گل‌نوش',
+    title: 'مقالات گل و گیاه؛ راهنمای نگهداری گل طبیعی و گیاه آپارتمانی',
     description:
         'راهنمای جامع گل‌نوش برای نگهداری گل طبیعی، افزایش ماندگاری گل شاخه‌بریده، انتخاب و مراقبت از گیاهان آپارتمانی و انتخاب دسته‌گل مناسب هدیه.',
     keywords: [
@@ -15,12 +16,13 @@ export const metadata: Metadata = {
         'انتخاب دسته گل هدیه',
         'گل مناسب مناسبت‌ها',
     ],
-    alternates: { canonical: '/articles' },
+    ...(SITE_URL ? { alternates: { canonical: absoluteSiteUrl('/articles') } } : {}),
     openGraph: {
         title: 'مقالات و راهنمای گل و گیاه | گل‌نوش',
         description: 'راهنمای کاربردی نگهداری گل طبیعی و گیاه آپارتمانی و انتخاب دسته‌گل برای هدیه.',
         locale: 'fa_IR',
         type: 'website',
+        ...(SITE_URL ? { url: SITE_URL + '/articles' } : {}),
     },
 };
 
@@ -31,9 +33,40 @@ const CONTENTS = [
 ];
 
 export default function ArticlesPage() {
+    const articleListStructuredData = SITE_URL
+        ? {
+              '@context': 'https://schema.org',
+              '@type': 'CollectionPage',
+              name: 'مقالات و راهنمای گل و گیاه گل‌نوش',
+              description: 'راهنماهای انتخاب و نگهداری گل طبیعی و گیاه آپارتمانی.',
+              url: absoluteSiteUrl('/articles'),
+              inLanguage: 'fa-IR',
+              mainEntity: {
+                  '@type': 'ItemList',
+                  itemListElement: CONTENTS.map((item, index) => ({
+                      '@type': 'ListItem',
+                      position: index + 1,
+                      item: {
+                          '@type': 'Article',
+                          headline: item.label,
+                          url: absoluteSiteUrl(`/articles#${item.id}`),
+                      },
+                  })),
+              },
+          }
+        : null;
+
     return (
         <>
             <Header />
+            {articleListStructuredData && (
+                <script
+                    type='application/ld+json'
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify(articleListStructuredData).replace(/</g, '\\u003c'),
+                    }}
+                />
+            )}
             <main className='mx-auto flex max-w-[1080px] flex-col gap-8 px-4 py-8 md:gap-10 md:py-12 lg:px-8'>
                 <header className='rounded-3xl bg-primary px-6 py-10 text-primary-foreground md:px-10 md:py-14'>
                     <span className='mb-4 inline-flex size-12 items-center justify-center rounded-2xl bg-white/15'>

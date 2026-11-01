@@ -67,12 +67,19 @@ export const FlowerKnowledge = () => (
                 })}
             </div>
 
-            <div className='mt-8 flex justify-center'>
+            <div className='mt-8 flex flex-wrap justify-center gap-3'>
                 <Link
                     href='/products'
                     className='inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90'
                 >
                     دیدن گل‌ها و گیاهان
+                    <ArrowLeft className='size-4' aria-hidden='true' />
+                </Link>
+                <Link
+                    href='/articles'
+                    className='inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:border-primary/40 hover:text-primary'
+                >
+                    مطالعه همه مقاله‌ها
                     <ArrowLeft className='size-4' aria-hidden='true' />
                 </Link>
             </div>

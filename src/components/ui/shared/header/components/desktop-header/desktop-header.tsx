@@ -30,7 +30,7 @@ export const DesktopHeader: React.FC = () => {
                         <Flower2 className='size-6' />
                     </span>
                     <span className='flex flex-col leading-tight'>
-                        <strong className='text-lg font-black'>گل‌نوش</strong>
+                        <strong className='text-lg font-bold'>گل‌نوش</strong>
                         <small className='text-[10px] text-muted-foreground'>تازه از طبیعت</small>
                     </span>
                 </Link>

@@ -35,6 +35,8 @@ export const ProductCart = ({ products }: ProductCartProps) => {
                             <img
                                 src={getProductImageSrc(product.images?.[0])}
                                 alt={product.name}
+                                loading='lazy'
+                                decoding='async'
                                 onError={handleProductImageError}
                                 className='aspect-square w-full object-cover rounded-xl bg-muted'
                             />

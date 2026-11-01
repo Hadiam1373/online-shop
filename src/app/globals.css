@@ -157,15 +157,6 @@
     src: url('/shared/fonts/anjoman/Anjoman-Bold.ttf') format('truetype');
 }
 
-@font-face {
-    font-family: 'Anjoman';
-    font-style: normal;
-    font-weight: 900;
-    font-display: swap;
-    /* Black */
-    src: url('/shared/fonts/anjoman/Anjoman-Black.ttf') format('truetype');
-}
-
 /* Hurricane */
 
 @font-face {

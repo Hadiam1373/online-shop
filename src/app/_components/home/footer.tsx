@@ -14,7 +14,7 @@ export const HomeFooter = () => {
         <footer className='border-t border-border bg-muted/30'>
             <div className='mx-auto grid max-w-[1280px] grid-cols-1 gap-8 px-4 py-10 sm:grid-cols-3 lg:px-8'>
                 <div className='flex flex-col items-start gap-3'>
-                    <span className='flex items-center gap-2 text-2xl font-black text-primary'>
+                    <span className='flex items-center gap-2 text-2xl font-bold text-primary'>
                         <Flower2 className='size-7' />
                         گل‌نوش
                     </span>

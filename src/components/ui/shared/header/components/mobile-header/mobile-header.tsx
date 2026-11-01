@@ -32,7 +32,7 @@ export const MobileHeader: React.FC = () => {
                     <span className='flex size-9 items-center justify-center rounded-xl bg-accent'>
                         <Flower2 className='size-5' />
                     </span>
-                    <span className='text-lg font-black'>گل‌نوش</span>
+                    <span className='text-lg font-bold'>گل‌نوش</span>
                 </Link>
 
                 <div className='flex items-center gap-1'>

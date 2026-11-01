@@ -75,6 +75,8 @@ export const FeaturedProducts = () => {
                             <img
                                 src={getProductImageSrc(product.images?.[0])}
                                 alt={product.name}
+                                loading='lazy'
+                                decoding='async'
                                 onError={handleProductImageError}
                                 className='aspect-square w-full rounded-xl bg-muted object-cover'
                             />

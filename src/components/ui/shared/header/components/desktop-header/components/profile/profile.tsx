@@ -21,7 +21,11 @@ export const Profile: React.FC = () => {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <button className='rounded-full p-2 text-foreground transition-colors hover:bg-accent hover:text-primary cursor-pointer'>
+                <button
+                    type='button'
+                    aria-label='باز کردن منوی حساب کاربری'
+                    className='rounded-full p-2 text-foreground transition-colors hover:bg-accent hover:text-primary cursor-pointer'
+                >
                     <User className='size-5 md:size-6' />
                 </button>
             </DropdownMenuTrigger>
