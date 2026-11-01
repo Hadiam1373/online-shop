@@ -29,7 +29,7 @@
 }
 
 .product-detail--price {
-    @apply border border-border rounded-2xl bg-card shadow-sm p-6 flex flex-col justify-between col-span-3 lg:col-span-1 order-3 md:col-span-1 h-fit lg:sticky lg:top-28;
+    @apply border border-border rounded-2xl bg-card shadow-sm p-6 flex flex-col justify-between col-span-3 lg:col-span-1 order-3 md:col-span-1 h-fit;
 }
 
 .product-detail--comments {

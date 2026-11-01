@@ -6,11 +6,12 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Typography } from '@/components/ui/typography';
 import { PackageSearch, Sparkles } from 'lucide-react';
 import { motion } from 'motion/react';
+import { Suspense } from 'react';
 import { ProductCart, ProductFilters } from './_components';
 import { useProducts } from './products.model';
 import styles from './products.module.css';
 
-const Products = () => {
+const ProductsContent = () => {
     const {
         products,
         isProductsLoading,
@@ -31,6 +32,7 @@ const Products = () => {
         clearFilters,
     } = useProducts();
 
+    const selectedCategory = categories?.data?.find(category => category.id === categoryId);
     const total = products?.pagination?.total ?? 0;
 
     return (
@@ -46,7 +48,7 @@ const Products = () => {
 
                 <Sparkles className='size-9' />
                 <Typography as='h1' variant='subtitle1' md-variant='h5' weight='bold' className='mt-3'>
-                    گل‌ها و هدیه‌ها
+                    {selectedCategory?.name ?? 'گل‌ها و هدیه‌ها'}
                 </Typography>
                 <Typography variant='body2' className='mt-2 max-w-md text-primary-foreground/80'>
                     دسته‌گل تازه، گل مناسبتی و گیاه آپارتمانی دلخواهت را پیدا کن؛ ما با عشق آماده و ارسال می‌کنیم.
@@ -105,5 +107,23 @@ const Products = () => {
         </div>
     );
 };
+
+const Products = () => (
+    <Suspense
+        fallback={
+            <div className={styles['products']}>
+                <Skeleton className='h-40 rounded-3xl' />
+                <Skeleton className='h-24 rounded-2xl' />
+                <div className={styles['products__list']}>
+                    {Array.from({ length: 8 }).map((_, index) => (
+                        <Skeleton key={index} className='aspect-[3/4.2] rounded-2xl' />
+                    ))}
+                </div>
+            </div>
+        }
+    >
+        <ProductsContent />
+    </Suspense>
+);
 
 export default Products;

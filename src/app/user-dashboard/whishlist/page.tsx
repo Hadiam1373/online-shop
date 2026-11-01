@@ -10,6 +10,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Pagination } from '@/components/ui/pagination';
 import { Empty, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty';
 import { BookOpen } from 'lucide-react';
+import { getProductImageSrc, handleProductImageError } from '@/lib/utils';
 
 const Whishlist = () => {
     const { wishlist, isPending, handleremoveWishlist, openModal, setOpenModal, page, setPage } = useWishlist();
@@ -47,8 +48,9 @@ const Whishlist = () => {
                         <Card className='p-4' key={item.id}>
                             <div className='flex gap-4 items-center'>
                                 <img
-                                    src={item.product.images[0]}
+                                    src={getProductImageSrc(item.product.images?.[0])}
                                     alt={item.product.name}
+                                    onError={handleProductImageError}
                                     className='size-16 shrink-0 rounded-xl object-cover border border-border'
                                 />
                                 <div className='flex flex-col gap-1 items-start text-start'>

@@ -7,6 +7,7 @@ import {
     CategoriesSection,
     WhyUs,
     FeaturedProducts,
+    FlowerKnowledge,
     ProcessSteps,
     BrandsMarquee,
     Testimonials,
@@ -25,6 +26,7 @@ export default function Home() {
             <CategoriesSection />
             <WhyUs />
             <FeaturedProducts />
+            <FlowerKnowledge />
             <ProcessSteps />
             <BrandsMarquee />
             <Testimonials />

@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Typography } from '@/components/ui/typography';
-import { CalendarSync, ShieldCheck } from 'lucide-react';
+import { PackageCheck, ShieldCheck } from 'lucide-react';
 import { useProducts } from '../../products.model';
 
 export const ProductBasket = () => {
@@ -31,11 +31,11 @@ export const ProductBasket = () => {
             <div className='mt-6 flex flex-col gap-3 border-t border-border pt-4'>
                 <Typography variant='body2' as='div' className='flex items-center gap-2 text-muted-foreground'>
                     <ShieldCheck className='size-4 text-primary' />
-                    ضمانت اصالت و سلامت کالا
+                    تضمین تازگی و کیفیت گل‌ها
                 </Typography>
                 <Typography variant='body2' as='div' className='flex items-center gap-2 text-muted-foreground'>
-                    <CalendarSync className='size-4 text-primary' />
-                    بازگشت کالا تا ۷ روز طبق شرایط مرجوعی
+                    <PackageCheck className='size-4 text-primary' />
+                    بسته‌بندی ویژه برای حفظ طراوت گل‌ها
                 </Typography>
             </div>
         </>

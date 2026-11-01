@@ -58,7 +58,7 @@ export const CategoriesSection = () => {
                                 transition={{ duration: 0.4, delay: i * 0.06 }}
                             >
                                 <Link
-                                    href='/products'
+                                    href={`/products?categoryId=${encodeURIComponent(cat.id)}`}
                                     className='group flex h-28 flex-col items-center justify-center gap-2 rounded-2xl border border-border bg-card p-3 text-center transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-md'
                                 >
                                     <span className='flex size-10 items-center justify-center rounded-xl bg-accent text-primary transition-transform group-hover:scale-110'>

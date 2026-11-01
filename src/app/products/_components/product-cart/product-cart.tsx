@@ -3,6 +3,7 @@ import { Typography } from '@/components/ui/typography';
 import { IAdminProductResponse } from '@/lib/api/admin/admin.products.dto';
 import { motion } from 'motion/react';
 import { useRouter } from 'next/dist/client/components/navigation';
+import { getProductImageSrc, handleProductImageError } from '@/lib/utils';
 import styles from './product-cart.module.css';
 
 interface ProductCartProps {
@@ -15,9 +16,7 @@ export const ProductCart = ({ products }: ProductCartProps) => {
         <>
             {products?.map((product, index) => {
                 const hasDiscount = Boolean(product.discountPrice && product.discountPrice < product.price);
-                const discountPercent = hasDiscount
-                    ? Math.round(((product.price - product.discountPrice!) / product.price) * 100)
-                    : 0;
+                const discountPercent = hasDiscount ? Math.round(((product.price - product.discountPrice!) / product.price) * 100) : 0;
                 const outOfStock = product.stock <= 0;
 
                 return (
@@ -33,15 +32,12 @@ export const ProductCart = ({ products }: ProductCartProps) => {
                         role='button'
                     >
                         <div className='relative'>
-                            {product.images?.length > 0 ? (
-                                <img
-                                    src={product.images[0]}
-                                    alt={product.name}
-                                    className='aspect-square w-full object-cover rounded-xl bg-muted'
-                                />
-                            ) : (
-                                <div className='aspect-square w-full bg-muted rounded-xl' />
-                            )}
+                            <img
+                                src={getProductImageSrc(product.images?.[0])}
+                                alt={product.name}
+                                onError={handleProductImageError}
+                                className='aspect-square w-full object-cover rounded-xl bg-muted'
+                            />
 
                             {hasDiscount && (
                                 <span className='absolute top-2 right-2 rounded-full bg-destructive px-2 py-1 text-xs font-bold text-white shadow-sm'>
@@ -83,7 +79,7 @@ export const ProductCart = ({ products }: ProductCartProps) => {
                             disabled={outOfStock}
                             className='w-full mt-3'
                         >
-                            مشاهده جزئیات
+                            خرید
                         </Button>
                     </motion.div>
                 );

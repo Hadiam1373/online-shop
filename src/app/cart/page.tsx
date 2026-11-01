@@ -8,6 +8,7 @@ import { BookOpen, MinusIcon, Plus, Trash } from 'lucide-react';
 import styles from './cart.module.css';
 import { Empty, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty';
 import { Spinner } from '@/components/ui/spinner';
+import { getProductImageSrc, handleProductImageError } from '@/lib/utils';
 
 const Cart = () => {
     ``;
@@ -51,8 +52,9 @@ const Cart = () => {
                     <Card key={card?.id} className='p-4'>
                         <div className='flex gap-4'>
                             <img
-                                src={card?.product?.images[0]}
+                                src={getProductImageSrc(card?.product?.images?.[0])}
                                 alt={card?.product?.name}
+                                onError={handleProductImageError}
                                 className='size-24 md:size-28 rounded-xl object-cover bg-muted shrink-0'
                             />
                             <div className='flex flex-1 flex-col justify-between'>

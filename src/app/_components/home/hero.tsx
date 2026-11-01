@@ -97,14 +97,7 @@ export const Hero = () => {
                         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
                         className='relative h-[330px] w-full max-w-[470px] overflow-hidden rounded-[48%_48%_24px_24px] shadow-2xl shadow-primary/15 ring-8 ring-white/70 md:h-[490px]'
                     >
-                        <Image
-                            loading='eager'
-                            src='https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1200&q=85'
-                            alt='دسته‌گلی رنگارنگ و تازه'
-                            fill
-                            unoptimized
-                            className='object-cover'
-                        />
+                        <Image loading='eager' src='/image/hero.jpg' alt='دسته‌گلی رنگارنگ و تازه' fill className='object-cover' />
                         <div className='absolute bottom-5 right-5 rounded-2xl bg-white/90 px-4 py-3 shadow-lg backdrop-blur'>
                             <p className='text-sm font-bold text-foreground'>هدیه‌ای از دل طبیعت</p>
                             <p className='mt-1 text-xs text-muted-foreground'>با عشق، برای عزیزانت</p>

@@ -5,6 +5,7 @@ export * from './stats';
 export * from './categories-section';
 export * from './why-us';
 export * from './featured-products';
+export * from './flower-knowledge';
 export * from './process-steps';
 export * from './brands-marquee';
 export * from './testimonials';

@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Empty, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty';
 import { useGetProducts } from '@/lib/api/products/products.query';
+import { getProductImageSrc, handleProductImageError } from '@/lib/utils';
 import { ArrowLeft, PackageSearch } from 'lucide-react';
 
 export const FeaturedProducts = () => {
@@ -71,15 +72,12 @@ export const FeaturedProducts = () => {
                             role='button'
                             className='cursor-pointer rounded-2xl border border-border bg-card p-3 transition-shadow hover:shadow-md md:p-4'
                         >
-                            {product.images?.length > 0 ? (
-                                <img
-                                    src={product.images[0]}
-                                    alt={product.name}
-                                    className='aspect-square w-full rounded-xl bg-muted object-cover'
-                                />
-                            ) : (
-                                <div className='aspect-square w-full rounded-xl bg-muted' />
-                            )}
+                            <img
+                                src={getProductImageSrc(product.images?.[0])}
+                                alt={product.name}
+                                onError={handleProductImageError}
+                                className='aspect-square w-full rounded-xl bg-muted object-cover'
+                            />
                             <Typography
                                 variant='body2'
                                 md-variant='body1'

@@ -5,7 +5,7 @@ import { useGetCategories } from '@/lib/api/categories/categories.query';
 import { useGetProduct } from '@/lib/api/products/products.query';
 import { useAddToWishlist } from '@/lib/api/wishlist';
 import { useQueryClient } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
+import { useParams, useSearchParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -17,6 +17,11 @@ export const useProducts = () => {
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
     const [sort, setSort] = useState<TProductsSort>('createdAt_desc');
+    const searchParams = useSearchParams();
+
+    useEffect(() => {
+        setCategoryId(searchParams.get('categoryId') ?? '');
+    }, [searchParams]);
 
     const params = useParams() as { id?: string };
     const id = params?.id || '';
