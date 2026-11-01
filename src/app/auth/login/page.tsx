@@ -11,8 +11,8 @@ import Image from 'next/image';
 const LoginPage = () => {
     const { methods, onSubmit, loginStep } = useLogin();
     return (
-        <div className='relative grid grid-cols-1 md:grid-cols-2 justify-center items-center min-h-screen w-full max-w-[1280px] mx-auto px-6 md:px-10 lg:px-20 box-border overflow-hidden'>
-            <div className='absolute inset-0 -z-10 bg-linear-to-bl from-primary/10 via-background to-background' />
+        <div className='grid grid-cols-1  justify-center items-center min-h-screen w-full max-w-[1280px] mx-auto px-6 md:px-10 lg:px-20 box-border overflow-hidden'>
+            {/* <div className='absolute inset-0 -z-10 bg-linear-to-bl from-primary/10 via-background to-background' /> */}
 
             <Card className='col-span-1 mx-auto w-full max-w-md'>
                 <CardHeader>
@@ -59,7 +59,7 @@ const LoginPage = () => {
                     </form>
                 </CardContent>
             </Card>
-            <div className='col-span-1 hidden md:flex items-center justify-center'>
+            {/* <div className='col-span-1 hidden md:flex items-center justify-center'>
                 <Image
                     loading='eager'
                     src='/image/logo.webp'
@@ -68,7 +68,7 @@ const LoginPage = () => {
                     alt=''
                     className='h-auto w-2/3 object-contain opacity-90'
                 />
-            </div>
+            </div> */}
         </div>
     );
 };
