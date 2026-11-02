@@ -3,7 +3,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useGetCart } from '@/lib/api/cart/cart.query';
 import { useCreateOrder } from '@/lib/api/orders/orders.query';
@@ -22,7 +22,7 @@ const formatPrice = (price: number) => `${price.toLocaleString('fa-IR')} توم�
 
 const CheckoutPage = () => {
     const { data: cartData, isLoading: isCartLoading, isError: isCartError } = useGetCart();
-    const { data: profile } = useGetProfile();
+    const { data: profile, isLoading: isProfileLoading, isError: isProfileError, refetch: refetchProfile } = useGetProfile();
     const { mutateAsync: createOrder, isPending: isCreatingOrder } = useCreateOrder();
     const { mutateAsync: startPayment, isPending: isStartingPayment } = useStartZarinpalPayment();
     const queryClient = useQueryClient();
@@ -41,6 +41,23 @@ const CheckoutPage = () => {
             deliveryNotes: '',
         },
     });
+    const { reset } = methods;
+    const hasPrefilledProfile = useRef(false);
+
+    useEffect(() => {
+        if (!profile || hasPrefilledProfile.current) return;
+
+        reset({
+            firstName: profile.firstName || '',
+            lastName: profile.lastName || '',
+            province: profile.province || '',
+            city: profile.city || '',
+            address: profile.address || '',
+            postalCode: profile.postalCode || '',
+            deliveryNotes: profile.deliveryNotes || '',
+        });
+        hasPrefilledProfile.current = true;
+    }, [profile, reset]);
 
     const onSubmit = async (values: CheckoutFormValues) => {
         setSubmitError(null);
@@ -84,6 +101,26 @@ const CheckoutPage = () => {
                 <Typography className='mt-2 text-muted-foreground'>لطفاً دوباره تلاش کنید یا به سبد خرید برگردید.</Typography>
                 <Button asChild className='mt-4'>
                     <Link href='/cart'>بازگشت به سبد خرید</Link>
+                </Button>
+            </div>
+        );
+    }
+
+    if (isProfileLoading) {
+        return (
+            <div className='flex min-h-[50vh] items-center justify-center'>
+                <Spinner />
+            </div>
+        );
+    }
+
+    if (isProfileError || !profile) {
+        return (
+            <div className='mx-auto mt-12 max-w-xl px-4 text-center'>
+                <Typography variant='subtitle1' weight='bold'>دریافت اطلاعات پروفایل ممکن نشد</Typography>
+                <Typography className='mt-2 text-muted-foreground'>برای پر شدن خودکار مشخصات ارسال، دوباره تلاش کنید.</Typography>
+                <Button className='mt-4' onClick={() => refetchProfile()}>
+                    تلاش دوباره
                 </Button>
             </div>
         );

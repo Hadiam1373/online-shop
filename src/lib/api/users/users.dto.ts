@@ -3,6 +3,12 @@ export interface IUserProfileResponse {
   email: string | null;
   phone: string;
   address: string | null;
+  firstName: string | null;
+  lastName: string | null;
+  province: string | null;
+  city: string | null;
+  postalCode: string | null;
+  deliveryNotes: string | null;
   role: "USER" | "ADMIN" | "OPERATOR";
   createdAt: string;
   updatedAt: string;
@@ -18,7 +24,13 @@ export interface IUpdateProfileParams {
 
 export interface IUpdateUserProfile {
   email?: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
+  province?: string | null;
+  city?: string | null;
   address?: string | null;
+  postalCode?: string | null;
+  deliveryNotes?: string | null;
 }
 
 export interface IChangePasswordParams {

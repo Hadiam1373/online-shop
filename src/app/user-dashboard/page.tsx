@@ -16,6 +16,7 @@ const UserDashboard: React.FC = () => {
                     <Input
                         {...methods.register('email')}
                         type='email'
+                        label='ایمیل (اختیاری)'
                         placeholder='ایمیل'
                         error={methods.formState.errors.email?.message}
                         autoComplete='email'
@@ -23,16 +24,61 @@ const UserDashboard: React.FC = () => {
                     <Input
                         {...methods.register('phone')}
                         type='text'
+                        label='شماره تلفن'
                         placeholder='تلفن'
                         error={methods.formState.errors.phone?.message}
                         autoComplete='tel'
                         disabled
                     />
+                    <Input
+                        {...methods.register('firstName')}
+                        label='نام'
+                        placeholder='نام گیرنده'
+                        autoComplete='given-name'
+                        error={methods.formState.errors.firstName?.message}
+                    />
+                    <Input
+                        {...methods.register('lastName')}
+                        label='نام خانوادگی'
+                        placeholder='نام خانوادگی گیرنده'
+                        autoComplete='family-name'
+                        error={methods.formState.errors.lastName?.message}
+                    />
+                    <Input
+                        {...methods.register('province')}
+                        label='استان'
+                        placeholder='استان'
+                        autoComplete='address-level1'
+                        error={methods.formState.errors.province?.message}
+                    />
+                    <Input
+                        {...methods.register('city')}
+                        label='شهر'
+                        placeholder='شهر'
+                        autoComplete='address-level2'
+                        error={methods.formState.errors.city?.message}
+                    />
                     <Textarea
                         {...methods.register('address')}
+                        label='آدرس کامل'
                         placeholder='آدرس'
                         error={methods.formState.errors.address?.message}
-                        autoComplete='address'
+                        autoComplete='street-address'
+                    />
+                    <Input
+                        {...methods.register('postalCode')}
+                        label='کد پستی'
+                        placeholder='۱۰ رقم'
+                        inputMode='numeric'
+                        autoComplete='postal-code'
+                        maxLength={10}
+                        error={methods.formState.errors.postalCode?.message}
+                    />
+                    <Textarea
+                        {...methods.register('deliveryNotes')}
+                        label='توضیحات تحویل (اختیاری)'
+                        placeholder='زمان یا نکتهٔ موردنظر برای تحویل'
+                        error={methods.formState.errors.deliveryNotes?.message}
                     />
                     <div className={styles['form_wrapper--submit_wrapper']}>
                         <Button
@@ -41,7 +87,7 @@ const UserDashboard: React.FC = () => {
                             type='submit'
                             disabled={methods.formState.isSubmitting}
                         >
-                            ثبت
+                            {methods.formState.isSubmitting ? 'در حال ذخیره...' : 'ذخیره اطلاعات'}
                         </Button>
                     </div>
                 </div>
