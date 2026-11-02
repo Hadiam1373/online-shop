@@ -67,7 +67,10 @@ const CheckoutPage = () => {
         try {
             const result = await createOrder(values);
             orderCreated = true;
-            await queryClient.invalidateQueries({ queryKey: ['orders'] });
+            await Promise.all([
+                queryClient.invalidateQueries({ queryKey: ['orders'] }),
+                queryClient.invalidateQueries({ queryKey: ['user-profile'] }),
+            ]);
 
             const payment = await startPayment({ orderId: result.order.id });
             if (!payment.paymentUrl) {

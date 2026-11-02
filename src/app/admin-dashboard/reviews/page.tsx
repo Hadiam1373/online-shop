@@ -23,7 +23,7 @@ export default function ReviewsPage() {
         pending?.data?.map(review => ({
             id: review.id,
             fields: [
-                { label: 'کاربر', value: review.user?.email ?? review.userId },
+                { label: 'کاربر', value: [review.user?.firstName, review.user?.lastName].filter(Boolean).join(' ') || 'کاربر بدون نام' },
                 { label: 'نظر', value: review.comment ?? '—' },
                 { label: 'تاریخ', value: review.createdAt },
             ],
@@ -51,7 +51,7 @@ export default function ReviewsPage() {
                     <tbody>
                         {pending?.data?.map(r => (
                             <tr key={r.id} className='border-t border-border'>
-                                <td className='py-3 text-foreground'>{r.user?.email ?? r.userId}</td>
+                                <td className='py-3 text-foreground'>{[r.user?.firstName, r.user?.lastName].filter(Boolean).join(' ') || 'کاربر بدون نام'}</td>
                                 <td className='py-3 max-w-[200px] overflow-auto text-foreground'>{r.comment ?? '—'}</td>
                                 <td className='py-3 text-muted-foreground'>{r.createdAt}</td>
                                 <td className='py-3 flex gap-2'>

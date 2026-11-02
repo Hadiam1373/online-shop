@@ -15,7 +15,8 @@ export interface IReview {
     updatedAt: string;
     user?: {
         id: string;
-        email?: string;
+        firstName: string | null;
+        lastName: string | null;
     };
     product?: {
         id: string;

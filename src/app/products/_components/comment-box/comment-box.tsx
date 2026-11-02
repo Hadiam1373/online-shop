@@ -12,6 +12,7 @@ import { useGetProductReview } from '@/lib/api/reviews/reviews.query';
 import { useGetProfile } from '@/lib/api/users/users.query';
 import { BookOpen } from 'lucide-react';
 import { useParams } from 'next/navigation';
+import Link from 'next/link';
 
 export const CommentBox = () => {
     const params = useParams() as { id?: string };
@@ -19,20 +20,44 @@ export const CommentBox = () => {
     const { data: comments } = useGetProductReview({ params: { productId: id } });
     const { data: currentUser } = useGetProfile();
     const haveUserComment = comments?.data?.find(co => co?.user?.id === currentUser?.id);
+    const profileComplete = !!currentUser && [
+        currentUser.firstName,
+        currentUser.lastName,
+        currentUser.province,
+        currentUser.city,
+        currentUser.address,
+        currentUser.postalCode,
+    ].every(value => typeof value === 'string' && value.trim().length > 0);
+    const reviewAction = haveUserComment ? null : profileComplete ? (
+        <CreateCommentModal productId={comments?.product?.id ?? id} />
+    ) : currentUser ? (
+        <div className='flex flex-col gap-2'>
+            <Typography variant='caption' className='text-muted-foreground'>
+                برای ثبت دیدگاه، ابتدا اطلاعات پروفایل و نشانی خود را کامل کنید.
+            </Typography>
+            <Button asChild variant='outline' className='max-w-[180px]'>
+                <Link href='/user-dashboard'>تکمیل پروفایل</Link>
+            </Button>
+        </div>
+    ) : (
+        <Button asChild variant='outline' className='max-w-[180px]'>
+            <Link href='/auth/login'>برای ثبت دیدگاه وارد شوید</Link>
+        </Button>
+    );
     return (
         <Card className='mb-8'>
             {comments?.data?.length ? (
                 <>
                     <CardHeader className='w-full flex items-center justify-between py-2'>
                         <Typography weight='bold'>دیدگاه کاربران</Typography>
-                        {!haveUserComment && <CreateCommentModal productId={comments?.product?.id} />}
+                        {reviewAction}
                     </CardHeader>
                     <CardContent className='flex flex-col gap-3'>
                         {comments?.data?.map(co => (
                             <div key={co.id} className='flex flex-col gap-2 border border-border rounded-xl p-4 bg-muted/30'>
                                 <div className='flex flex-wrap w-full justify-between items-center'>
                                     <Typography className='text-secondary' variant='body2'>
-                                        {co.user?.email}
+                                        {[co.user?.firstName, co.user?.lastName].filter(Boolean).join(' ') || 'کاربر'}
                                     </Typography>
                                     <Rating value={co?.rating} />
                                 </div>
@@ -52,7 +77,7 @@ export const CommentBox = () => {
                         </EmptyTitle>
                     </EmptyHeader>
                     <EmptyContent>
-                        <CreateCommentModal productId={comments?.product?.id} />
+                        {reviewAction}
                     </EmptyContent>
                 </Empty>
             )}
