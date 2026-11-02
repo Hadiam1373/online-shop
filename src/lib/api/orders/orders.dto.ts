@@ -1,5 +1,22 @@
 export interface IOrderCreate {
     couponCode?: string;
+    firstName: string;
+    lastName: string;
+    province: string;
+    city: string;
+    address: string;
+    postalCode: string;
+    deliveryNotes?: string;
+}
+
+export interface IOrderCreateResponse {
+    order: IOrder;
+    calculation: {
+        subtotal: number;
+        discount: number;
+        tax: number;
+        total: number;
+    };
 }
 
 export interface IOrderItem {
@@ -34,6 +51,14 @@ export interface IOrder {
     status: string;
     createdAt: string;
     updatedAt: string;
+    recipientFirstName: string | null;
+    recipientLastName: string | null;
+    recipientPhone: string | null;
+    province: string | null;
+    city: string | null;
+    address: string | null;
+    postalCode: string | null;
+    deliveryNotes: string | null;
     orderItems?: IOrderItem[];
     payment?: IOrderPayment;
 }

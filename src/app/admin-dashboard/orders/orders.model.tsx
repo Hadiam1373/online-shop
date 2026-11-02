@@ -40,6 +40,12 @@ export const OrderModel = () => {
             id: order.id,
             fields: [
                 { label: 'شماره سفارش', value: order.id },
+                { label: 'گیرنده', value: [order.recipientFirstName, order.recipientLastName].filter(Boolean).join(' ') || '---' },
+                { label: 'شماره تماس', value: order.recipientPhone || '---' },
+                {
+                    label: 'نشانی تحویل',
+                    value: [order.province, order.city, order.address, order.postalCode].filter(Boolean).join('، ') || '---',
+                },
                 { label: 'مبلغ', value: order.total },
                 { label: 'وضعیت', value: <OrderStatusBadge status={order.status} /> },
             ],

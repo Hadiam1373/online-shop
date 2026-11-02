@@ -9,40 +9,51 @@ import styles from '../user-dashboard.module.css';
 import { useOrders } from './orders.model';
 
 const Orders = () => {
-    const { orders, isPending, currentOrderStatus, handleCancelOrder, openModal, setOpenModal, page, setPage } = useOrders();
+    const { orders, isPending, currentOrderStatus, handleCancelOrder, handleStartPayment, openModal, setOpenModal } = useOrders();
 
     const rows =
         orders?.data.map(order => ({
             id: order.id,
             fields: [
                 { label: 'شماره سفارش', value: order.id },
+                { label: 'گیرنده', value: [order.recipientFirstName, order.recipientLastName].filter(Boolean).join(' ') || '---' },
+                { label: 'شماره تماس', value: order.recipientPhone || '---' },
+                {
+                    label: 'نشانی تحویل',
+                    value: [order.province, order.city, order.address, order.postalCode].filter(Boolean).join('، ') || '---',
+                },
                 { label: 'مبلغ', value: order.total },
                 { label: 'وضعیت', value: currentOrderStatus(order.status) },
             ],
             actions:
                 order?.status === 'PENDING' ? (
-                    <Dialog open={openModal} onOpenChange={setOpenModal}>
-                        <DialogTrigger asChild>
-                            <Button variant='destructive' size='sm'>
-                                لغو سفارش
-                            </Button>
-                        </DialogTrigger>
-                        <DialogContent>
-                            <DialogHeader>
-                                <DialogTitle>
-                                    <Typography>آیا از لغو این سفارش مطمئن هستید؟</Typography>
-                                </DialogTitle>
-                            </DialogHeader>
-                            <div className='flex gap-2'>
-                                <Button variant='destructive' onClick={() => handleCancelOrder(order.id)}>
-                                    بلی
+                    <div className='flex flex-wrap gap-2'>
+                        <Button size='sm' onClick={() => handleStartPayment(order.id)}>
+                            پرداخت سفارش
+                        </Button>
+                        <Dialog open={openModal} onOpenChange={setOpenModal}>
+                            <DialogTrigger asChild>
+                                <Button variant='destructive' size='sm'>
+                                    لغو سفارش
                                 </Button>
-                                <Button variant='secondary' onClick={() => setOpenModal(false)}>
-                                    خیر
-                                </Button>
-                            </div>
-                        </DialogContent>
-                    </Dialog>
+                            </DialogTrigger>
+                            <DialogContent>
+                                <DialogHeader>
+                                    <DialogTitle>
+                                        <Typography>آیا از لغو این سفارش مطمئن هستید؟</Typography>
+                                    </DialogTitle>
+                                </DialogHeader>
+                                <div className='flex gap-2'>
+                                    <Button variant='destructive' onClick={() => handleCancelOrder(order.id)}>
+                                        بلی
+                                    </Button>
+                                    <Button variant='secondary' onClick={() => setOpenModal(false)}>
+                                        خیر
+                                    </Button>
+                                </div>
+                            </DialogContent>
+                        </Dialog>
+                    </div>
                 ) : null,
         })) ?? [];
 
@@ -51,7 +62,7 @@ const Orders = () => {
             <HeaderTitle title='سفارشات کاربر' />
 
             <DesktopTable
-                head={['ردیف', 'نام محصول', 'قیمت', 'تعداد', 'وضعیت سفارش', 'تاریخ خرید', 'عملیات']}
+                head={['ردیف', 'نام محصول', 'قیمت', 'تعداد', 'گیرنده', 'شماره تماس', 'نشانی تحویل', 'وضعیت سفارش', 'تاریخ خرید', 'عملیات']}
                 isLoading={isPending}
                 isShowEmptyState={!orders?.data?.length}
                 body={
@@ -63,32 +74,40 @@ const Orders = () => {
                                     <td>{order?.product?.name}</td>
                                     <td>{order.price.toLocaleString()}</td>
                                     <td>{order.quantity}</td>
+                                    <td>{[item.recipientFirstName, item.recipientLastName].filter(Boolean).join(' ') || '---'}</td>
+                                    <td>{item.recipientPhone || '---'}</td>
+                                    <td>{[item.province, item.city, item.address, item.postalCode].filter(Boolean).join('، ') || '---'}</td>
                                     <td>{currentOrderStatus(item.status)}</td>
                                     <td>{new Date(item.createdAt).toLocaleDateString('fa-IR')}</td>
                                     <td>
                                         {item?.status === 'PENDING' ? (
-                                            <Dialog open={openModal} onOpenChange={setOpenModal}>
-                                                <DialogTrigger asChild>
-                                                    <Button variant='destructive' size='sm'>
-                                                        لغو سفارش
-                                                    </Button>
-                                                </DialogTrigger>
-                                                <DialogContent>
-                                                    <DialogHeader>
-                                                        <DialogTitle>
-                                                            <Typography>آیا از لغو این سفارش مطمئن هستید؟</Typography>
-                                                        </DialogTitle>
-                                                    </DialogHeader>
-                                                    <div className='flex gap-2'>
-                                                        <Button variant='destructive' onClick={() => handleCancelOrder(item.id)}>
-                                                            بلی
+                                            <div className='flex flex-wrap gap-2'>
+                                                <Button size='sm' onClick={() => handleStartPayment(item.id)}>
+                                                    پرداخت
+                                                </Button>
+                                                <Dialog open={openModal} onOpenChange={setOpenModal}>
+                                                    <DialogTrigger asChild>
+                                                        <Button variant='destructive' size='sm'>
+                                                            لغو سفارش
                                                         </Button>
-                                                        <Button variant='secondary' onClick={() => setOpenModal(false)}>
-                                                            خیر
-                                                        </Button>
-                                                    </div>
-                                                </DialogContent>
-                                            </Dialog>
+                                                    </DialogTrigger>
+                                                    <DialogContent>
+                                                        <DialogHeader>
+                                                            <DialogTitle>
+                                                                <Typography>آیا از لغو این سفارش مطمئن هستید؟</Typography>
+                                                            </DialogTitle>
+                                                        </DialogHeader>
+                                                        <div className='flex gap-2'>
+                                                            <Button variant='destructive' onClick={() => handleCancelOrder(item.id)}>
+                                                                بلی
+                                                            </Button>
+                                                            <Button variant='secondary' onClick={() => setOpenModal(false)}>
+                                                                خیر
+                                                            </Button>
+                                                        </div>
+                                                    </DialogContent>
+                                                </Dialog>
+                                            </div>
                                         ) : (
                                             <Typography variant='body2' className='text-muted-foreground'>
                                                 ---

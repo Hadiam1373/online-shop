@@ -45,6 +45,14 @@ export interface IAdminOrder {
     status: AdminOrderStatus;
     createdAt: string;
     updatedAt: string;
+    recipientFirstName?: string | null;
+    recipientLastName?: string | null;
+    recipientPhone?: string | null;
+    province?: string | null;
+    city?: string | null;
+    address?: string | null;
+    postalCode?: string | null;
+    deliveryNotes?: string | null;
     user?: IAdminOrderUser;
     orderItems?: IAdminOrderItem[];
     payment?: IAdminOrderPayment;

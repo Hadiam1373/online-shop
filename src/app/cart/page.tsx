@@ -9,10 +9,10 @@ import styles from './cart.module.css';
 import { Empty, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty';
 import { Spinner } from '@/components/ui/spinner';
 import { getProductImageSrc, handleProductImageError } from '@/lib/utils';
+import Link from 'next/link';
 
 const Cart = () => {
-    ``;
-    const { cartData, updateCartItemHandler, removeCart, createOrderHandler, loadingPayment } = useCart();
+    const { cartData, updateCartItemHandler, removeCart } = useCart();
     if (cartData?.itemCount.toString() && cartData?.itemCount === 0) {
         return (
             <div className='min-h-[calc(100vh-100px)] flex justify-center items-center'>
@@ -93,7 +93,7 @@ const Cart = () => {
                     </Card>
                 ))}
             </div>
-            {cartData?.itemCount && cartData?.itemCount > 0 && !loadingPayment ? (
+            {cartData?.itemCount && cartData?.itemCount > 0 ? (
                 <Card className='p-5 col-span-2 md:col-span-1 h-fit md:sticky md:top-28 gap-4'>
                     <Typography variant='body1' weight='bold' className='text-foreground'>
                         خلاصه سفارش
@@ -116,8 +116,8 @@ const Cart = () => {
                         </Typography>
                     </div>
 
-                    <Button size='lg' onClick={() => createOrderHandler()}>
-                        تسویه حساب
+                    <Button size='lg' asChild>
+                        <Link href='/cart/checkout'>ادامه و ثبت اطلاعات ارسال</Link>
                     </Button>
                 </Card>
             ) : (

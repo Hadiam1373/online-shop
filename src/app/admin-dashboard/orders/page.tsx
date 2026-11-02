@@ -21,7 +21,7 @@ export default function OrdersPage() {
             <HeaderTitle title='سفارشات' />
 
             <DesktopTable
-                head={['شماره سفارش', 'مبلغ', 'وضعیت', 'اقدامات']}
+                head={['شماره سفارش', 'گیرنده', 'شماره تماس', 'نشانی تحویل', 'مبلغ', 'وضعیت', 'اقدامات']}
                 isLoading={isLoading}
                 isShowEmptyState={!orders?.data.length}
                 body={
@@ -29,6 +29,11 @@ export default function OrdersPage() {
                         {orders?.data.map(o => (
                             <tr key={o.id} className='border-t border-border'>
                                 <td className='py-2'>{o.id}</td>
+                                <td className='py-2'>{[o.recipientFirstName, o.recipientLastName].filter(Boolean).join(' ') || '---'}</td>
+                                <td className='py-2'>{o.recipientPhone || '---'}</td>
+                                <td className='max-w-64 py-2'>
+                                    {[o.province, o.city, o.address, o.postalCode].filter(Boolean).join('، ') || '---'}
+                                </td>
                                 <td className='py-2'>{o.total}</td>
                                 <td className='py-2'>
                                     <OrderStatusBadge status={o.status} />

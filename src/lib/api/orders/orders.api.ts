@@ -1,10 +1,10 @@
 import axiosInstance from '@/lib/axios';
-import { IOrderCreate, IOrder, IOrderListResponse, IGetOrdersParams } from './orders.dto';
+import { IOrderCreate, IOrderCreateResponse, IOrder, IOrderListResponse, IGetOrdersParams } from './orders.dto';
 
 const Base = '/api/orders';
 
-export const createOrder = async (payload: IOrderCreate): Promise<any> => {
-    const res = await axiosInstance.post(Base, payload);
+export const createOrder = async (payload: IOrderCreate): Promise<IOrderCreateResponse> => {
+    const res = await axiosInstance.post<IOrderCreateResponse>(Base, payload);
     return res.data;
 };
 
