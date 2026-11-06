@@ -55,7 +55,7 @@ export default async function RootLayout({
                 <link rel='preload' href='/shared/fonts/anjoman/Anjoman-Bold.ttf' as='font' type='font/ttf' crossOrigin='anonymous' />
             </head>
             <Providers>
-                <body className='min-h-full' dir='rtl'>
+                <body className='min-h-full pb-[calc(4rem+env(safe-area-inset-bottom))] md:pb-0' dir='rtl'>
                     <Toaster />
                     {SITE_URL && (
                         <script

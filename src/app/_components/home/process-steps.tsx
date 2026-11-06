@@ -27,10 +27,10 @@ const StepRow = ({ step, index, progress }: { step: (typeof STEPS)[number]; inde
                 <Icon className='size-6' />
             </motion.span>
             <motion.div style={{ opacity }} className='pt-2'>
-                <Typography variant='body1' weight='bold' className='text-[#243d2f]'>
+                <Typography variant='body1' weight='bold' className='text-foreground'>
                     {step.title}
                 </Typography>
-                <Typography variant='body2' className='mt-1 text-[#4b5563]'>
+                <Typography variant='body2' className='mt-1 text-muted-foreground'>
                     {step.description}
                 </Typography>
             </motion.div>

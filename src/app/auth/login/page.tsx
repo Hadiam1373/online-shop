@@ -6,7 +6,6 @@ import { Input } from '@/components/ui/input';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 import { Typography } from '@/components/ui/typography';
 import { REGEXP_ONLY_DIGITS } from 'input-otp';
-import Image from 'next/image';
 
 const LoginPage = () => {
     const { methods, onSubmit, loginStep } = useLogin();
